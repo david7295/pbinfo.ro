@@ -1,6 +1,6 @@
 int fact (int n) {
-    int p = 1, i;
-    for (i = 1; i <= n; i++)
-        p = p * i;
-     return p;
+    int p = 1;
+    for (int i = 1; i <= n; i++)
+        p *= i;
+    return p;
 }
