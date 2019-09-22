@@ -1,13 +1,11 @@
 int nrmaxim (int n) {
     int nrc = 0, p = 1, m = n; 
-    do {
-        
+    do {   
         nrc++, p *= 10, m /= 10; 
  } while (m > 0); 
       int max = 0; 
          p /= 10;  
      while (nrc) {
-         
          if (n > max) 
            max = n; 
            n = n % p * 10 + n / p;
