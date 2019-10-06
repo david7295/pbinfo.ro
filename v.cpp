@@ -1,25 +1,20 @@
 #include <iostream>
-#include <fstream>
 
 using namespace std;
 
-int main() {
-   ifstream f("af.in");
-   ofstream g("af.out");
-   char semn, egal;
-   long long int a, b, c, i, n, ok;
-   f >> n;
-   for (i=1; i<=n; ++i) {
-      ok=0;
-      f >> a >> semn >> b >> egal >> c;
-      if (ok==0 && semn=='+' && a+b==c) ok=1;
-      if (ok==0 && semn=='-' && a-b==c) ok=1;
-      if (ok==0 && semn=='x' && a*b==c) ok=1;
-      if (ok==0 && semn==':') {
-           if (b==0) ok=0;
-           else if (a/b==c) ok=1;}
-       if (ok) g << "Adevarat" << "\n";
-       else g << "Fals" << "\n";
-   }
-   return 0;
+long long int n, m, nrcif, z=1, primajum, douajum;
+int main(){
+   cin >> n;
+   m=n;
+   while (m>9){
+       ++nrcif; m/=10;
+       z*=10;
+ }
+   int k=nrcif/2;
+   for (m=1; m<=k; ++m) z/=10;
+   douajum=n%z;
+   primajum=n/(z*10);
+   m=primajum*z+douajum;
+   cout<<m;
+  return 0;
 }
