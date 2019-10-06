@@ -1,24 +1,27 @@
 #include <iostream>
-
-#include <math.h>
-
+#include <cmath>
 using namespace std;
 
+int main()
 
-int main(){
+{
 
-    int n, k, i;
+long long v[50];
 
-    cin>>n;
+int n,i;
 
-    for(i = 0; i < n; i++){
+cin>>n;
 
-        cin>>k;
+for(i=1;i<=n;i++)
 
-        if(sqrt(k) == int(sqrt(k))) cout<<"DA"<<endl;
+cin>>v[i];
 
-        else cout<<"NU"<<endl;
+for(i=1;i<=n;i++){
 
-    }
+if(float(cbrt(v[i]))*float(cbrt(v[i]))*float(cbrt(v[i]))==v[i])
 
+cout<<"DA"<
+else
+
+cout<<"NU"<
 }
