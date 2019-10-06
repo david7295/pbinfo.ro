@@ -1,35 +1,33 @@
-#include<iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
-const int dim=50; //lungimea registrului
-char avansare(char cifra){
-if(cifra==’Q’) return ’R’;
-if(cifra==’R’) return ’S’;
-if(cifra==’S’) return ’T’;
-return ’Q’; //Q este cifra zero
-}
-int incrementare(char reg[]){
-int i;
-for(i=0; i<dim; i++){
-reg[i]=avansare(reg[i]);
-if(reg[i]!=’Q’) break;
-}
-return i; //i==dim <--> registrul nul
-}
-void afisare(char reg[]){
-int i;
-for(i=dim-1;i>=0; i--)
-cout<<reg[i];
-cout<<endl;
-return;
-}
-int main(){
-char registru[dim];
-int i;
-for(i=0;i<dim; i++){ // registrul nul initial
-registru[i]=’Q’;
-}
-do{ // numararea propriu-zisa
-afisare(registru);
-}while(incrementare(registru)<dim);
-return 0;
+
+ifstream fin("arhitectura2.in");
+ofstream fout("arhitectura2.out");
+
+int n,a[2000001];
+
+int main()
+{
+
+    fin >> n;
+    
+    for(int i=1;i<=n;i++)    
+        fin >> a[i];     
+    
+    sort(a+1,a+1+n,greater<int>());
+
+    for(int i=1;i<=n;i++)    
+        fout << a[i] << " ";     
+
+    fout << endl;
+
+    for(int i=1;i<=n;i++)    
+        if((a[i-1]+a[i+1])%2==0 and (a[i-1]+a[i+1])/2==a[i])        
+            fout << 1 << " ";    
+        else        
+            fout << 0 << " ";
+    
+    return 0;
+
 }
