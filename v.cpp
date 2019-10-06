@@ -1,17 +1,30 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
-int main()
-{
-    int n, k;
-    cin >> n >> k;
-    if(2 * k < n)
-        for(int i=1; i<=n; i++) {
-            for(int j=1; j<=n; j++)
-                if( ( (i + k >= j) && (j + k >= i) ) || ( (k + n + 1 >= i + j) && (n - k < i + j) )  ) cout << 1 << ' ';
-                else cout << 2 << ' ';
-            cout << '\n';
+int v[10001];
+
+int main() {
+    int n, a, x, y;
+    cin >> n >> a >> x >> y;
+    queue <int> c;
+    c.push(a);
+    v[a] = true;
+    while(!c.empty()) {
+        int val = c.front();
+        if(val + x <= n && !v[val + x])  {
+          c.push(val + x);
+          v[val + x] = true;
         }
-    else cout << "Dublul lui k nu este mai mic decat n.\n";
+        
+        if(val + y <= n && !v[val + y]) {
+          c.push(val + y);
+          v[val + y] = true;
+        }
+        c.pop();
+    }
+    for(int i = 0; i <= n; i++)
+      if(v[i] == true)
+        cout << i <<" ";
     return 0;
 }
