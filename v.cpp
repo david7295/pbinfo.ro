@@ -1,23 +1,25 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
 int main() {
-   short n, i, j;
-   cin >> n;
-   for (i=1; i<n; ++i) {
-       for (j=1; j<=2*n-1; ++j) {
-           if (j<i || j>2*n-i) cout << "#";
-           else cout << "*";
-       }
-       cout << "\n";
-   }
-   for (i=n+1; i<=2*n; ++i) {
-       for (j=1; j<=2*n-1; ++j) {
-           if (j<i && j>2*n-i) cout << "*";
-           else cout << "#";
-       }
-       cout << "\n";
+   ifstream f("af.in");
+   ofstream g("af.out");
+   char semn, egal;
+   long long int a, b, c, i, n, ok;
+   f >> n;
+   for (i=1; i<=n; ++i) {
+      ok=0;
+      f >> a >> semn >> b >> egal >> c;
+      if (ok==0 && semn=='+' && a+b==c) ok=1;
+      if (ok==0 && semn=='-' && a-b==c) ok=1;
+      if (ok==0 && semn=='x' && a*b==c) ok=1;
+      if (ok==0 && semn==':') {
+           if (b==0) ok=0;
+           else if (a/b==c) ok=1;}
+       if (ok) g << "Adevarat" << "\n";
+       else g << "Fals" << "\n";
    }
    return 0;
 }
