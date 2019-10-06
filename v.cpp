@@ -1,27 +1,17 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 int main()
-
 {
-
-long long v[50];
-
-int n,i;
-
-cin>>n;
-
-for(i=1;i<=n;i++)
-
-cin>>v[i];
-
-for(i=1;i<=n;i++){
-
-if(float(cbrt(v[i]))*float(cbrt(v[i]))*float(cbrt(v[i]))==v[i])
-
-cout<<"DA"<
-else
-
-cout<<"NU"<
+    int n, k;
+    cin >> n >> k;
+    if(2 * k < n)
+        for(int i=1; i<=n; i++) {
+            for(int j=1; j<=n; j++)
+                if( ( (i + k >= j) && (j + k >= i) ) || ( (k + n + 1 >= i + j) && (n - k < i + j) )  ) cout << 1 << ' ';
+                else cout << 2 << ' ';
+            cout << '\n';
+        }
+    else cout << "Dublul lui k nu este mai mic decat n.\n";
+    return 0;
 }
