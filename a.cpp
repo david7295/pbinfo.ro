@@ -1,33 +1,25 @@
-#include <bits/stdc++.h>
-
+#include <fstream>
+#include <cmath>
 using namespace std;
-
-ifstream fin("arhitectura2.in");
-ofstream fout("arhitectura2.out");
-
-int n,a[2000001];
-
-int main()
-{
-
-    fin >> n;
-    
-    for(int i=1;i<=n;i++)    
-        fin >> a[i];     
-    
-    sort(a+1,a+1+n,greater<int>());
-
-    for(int i=1;i<=n;i++)    
-        fout << a[i] << " ";     
-
-    fout << endl;
-
-    for(int i=1;i<=n;i++)    
-        if((a[i-1]+a[i+1])%2==0 and (a[i-1]+a[i+1])/2==a[i])        
-            fout << 1 << " ";    
-        else        
-            fout << 0 << " ";
-    
-    return 0;
-
+ifstream f("numere18.in");
+ofstream f("numere18.out");
+int C;
+long long n,m,poz,pt,ut,s;
+int main() {
+  f>>C;
+  if(C==1) {
+    f>>n;
+    pt=n*(n-1)/2+1;
+    ut=pt+n-1;
+    s=(pt+ut)*n/2;
+    g<<s;
+  }
+  if(C==2) {
+    f>>m;
+    n=(1+int(sqrt(8*m-7)))/2;
+    pt=n*(n-1)/2+1;
+    poz=m-pt+1;
+    g<<n<<" "<<poz;
+  }
+  return 0;
 }
