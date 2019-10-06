@@ -1,43 +1,24 @@
 #include <iostream>
-#include <cmath>
+
+#include <math.h>
 
 using namespace std;
 
 
-int main()
+int main(){
 
-{
+    int n, k, i;
 
-int r, g, b;
+    cin>>n;
 
-cin >> r >> g >> b;
+    for(i = 0; i < n; i++){
 
-int max1 = max(r, g);
+        cin>>k;
 
-max1 = max(max1, b);
+        if(sqrt(k) == int(sqrt(k))) cout<<"DA"<<endl;
 
-int min1 = min(r, g);
+        else cout<<"NU"<<endl;
 
-min1 = min(min1, b);
-
-if ( min1 < 0 || max1 > 255 )
-
-cout << "NU ESTE CULOARE";
-
-else
-
-{
-
-if ( max1 - min1 <= 10 )
-
-cout << "GRI";
-
-else
-
-cout << "CULOARE";
-
-}
-
-return 0;
+    }
 
 }
