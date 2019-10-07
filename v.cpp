@@ -1,26 +1,37 @@
 #include <iostream>
+
 #include <cstring>
 
 using namespace std;
 
-char s[100], acr[100];
+char s[101], *p;
 
-short i, n, j=-1;
+int n,exista;
 
 int main()
 
 {
-    cin.getline(s,100);
-    n=strlen(s);
-    acr[0]=0;
-    if (s[0]>='A' && s[0]<='Z')
 
-        { ++j; acr[j]=s[0]; }
+   cin.getline(s,101);
 
-    for (i=1; i<n; ++i) {
-        if (s[i-1]==' ' && s[i]>='A' && s[i]<='Z') { ++j; acr[j]=s[i]; }
-    }
-    ++j; acr[j]='\0';
-    cout << "Acronimul este: " << acr;
+   cin >> n;
+
+   p=strtok(s," ");
+
+   while (p)
+
+   {
+
+       if (strlen(p)==n)
+
+           { cout << p << "\n"; exista=1;}
+
+       p=strtok(NULL, " ");
+
+   }
+
+   if (!exista) cout << "nu exista" << endl;
+
+   return 0;
 
 }
