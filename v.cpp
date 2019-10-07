@@ -1,37 +1,23 @@
 #include <iostream>
-
-#include <cstring>
+#include <string.h>
 
 using namespace std;
 
-char s[101], *p;
+char c[100], b[100];
 
-int n,exista;
+int nr, i;
 
-int main()
+int main(){
 
-{
+    cin.getline(c, 100);  
+    for (i = 0; i < strlen(c); i++)
 
-   cin.getline(s,101);
+     if ((c[i] >= 'A' && c[i] <= 'Z') && ((c[i - 1] == ' ') || i == 0))  
 
-   cin >> n;
+         b[nr++] = c[i];  
 
-   p=strtok(s," ");
+    cout << b;    
 
-   while (p)
-
-   {
-
-       if (strlen(p)==n)
-
-           { cout << p << "\n"; exista=1;}
-
-       p=strtok(NULL, " ");
-
-   }
-
-   if (!exista) cout << "nu exista" << endl;
-
-   return 0;
+    return 0;
 
 }
