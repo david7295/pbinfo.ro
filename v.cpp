@@ -1,15 +1,31 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-short n, num, i, v[102], perechi;
+ifstream f("intervale5.in");
+ofstream g("intervale5.out");
+
+int v[102], i, x, y, gasit, num;
 
 int main(){
-   cin >> n;
-   for (i=1; i<=n; ++i)  {
-       cin >> num; ++v[num];
+   while (f >> num)
+       ++v[num];
+   i=0; while (v[i]==0) ++i;
+   while (i<99) {
+      while (v[i]!=0 && i<99) ++i;
+      if (i<100)  {
+          x=i-1;
+          while (v[i]==0 && i<101) ++i;
+          if (i<101)  {
+              y=i;
+              if (y-x>=2)  {
+                g << x << " " << y << "\n";
+              gasit=1;}
+          }
+      }
+
    }
-   for (i=1; i<=100; ++i)
-       perechi=perechi+v[i]/2;
-   cout << perechi;
+   if (gasit==0) g << "nu exista";
+
 }
