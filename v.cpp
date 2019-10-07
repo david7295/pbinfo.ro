@@ -1,31 +1,30 @@
-#include <iostream>
-#include <fstream>
-
-using namespace std;
-
-ifstream f("intervale5.in");
-ofstream g("intervale5.out");
-
-int v[102], i, x, y, gasit, num;
-
-int main(){
-   while (f >> num)
-       ++v[num];
-   i=0; while (v[i]==0) ++i;
-   while (i<99) {
-      while (v[i]!=0 && i<99) ++i;
-      if (i<100)  {
-          x=i-1;
-          while (v[i]==0 && i<101) ++i;
-          if (i<101)  {
-              y=i;
-              if (y-x>=2)  {
-                g << x << " " << y << "\n";
-              gasit=1;}
-          }
-      }
-
-   }
-   if (gasit==0) g << "nu exista";
-
+#include <bits/stdc++.h>
+using namespace std;
+int n, i, j, v[205], x, y, s1, s2, ct;
+int main()
+{
+    cin >> n;
+    for(i = 1; i <= n; i ++)
+     cin >> v[i];
+    for(i = 1; i < n; i ++)
+     for(j = i + 1; j <= n; j ++)
+      {
+          s1 = 0;
+          x = v[i];
+          while(x != 0)
+          {
+              s1 = s1 + x % 10;
+              x = x / 10;
+          }
+          s2 = 0;
+          y = v[j];
+          while(y != 0)
+          {
+              s2 = s2 + y % 10;
+              y = y / 10;
+          }
+          if(s1 == s2) ct ++;
+      }
+      cout << ct;
+    return 0;
 }
