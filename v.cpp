@@ -1,30 +1,26 @@
-#include <bits/stdc++.h>
-using namespace std;
-int n, i, j, v[205], x, y, s1, s2, ct;
-int main()
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+char s[100], acr[100];
+
+short i, n, j=-1;
+
+int main()
+
 {
-    cin >> n;
-    for(i = 1; i <= n; i ++)
-     cin >> v[i];
-    for(i = 1; i < n; i ++)
-     for(j = i + 1; j <= n; j ++)
-      {
-          s1 = 0;
-          x = v[i];
-          while(x != 0)
-          {
-              s1 = s1 + x % 10;
-              x = x / 10;
-          }
-          s2 = 0;
-          y = v[j];
-          while(y != 0)
-          {
-              s2 = s2 + y % 10;
-              y = y / 10;
-          }
-          if(s1 == s2) ct ++;
-      }
-      cout << ct;
-    return 0;
+    cin.getline(s,100);
+    n=strlen(s);
+    acr[0]=0;
+    if (s[0]>='A' && s[0]<='Z')
+
+        { ++j; acr[j]=s[0]; }
+
+    for (i=1; i<n; ++i) {
+        if (s[i-1]==' ' && s[i]>='A' && s[i]<='Z') { ++j; acr[j]=s[i]; }
+    }
+    ++j; acr[j]='\0';
+    cout << "Acronimul este: " << acr;
+
 }
