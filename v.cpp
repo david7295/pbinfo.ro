@@ -1,30 +1,26 @@
-#include <iostream>
+#include<bits/stdc++.h>
+
 using namespace std;
-int main()
-{
-    int n,m,v[100][100],C=0;
-    cin>>n>>m;
-     for(int i=1;i<=n;i++)
-     for(int j=1;j<=m;j++)
-     {
-       cout<<"v["<<i<<"]["<<j<<"]=";
-       cin>>v[i][j];
-     }
-   for(int i=1;i<n;i++)
-     for(int j=i+1;j<=n;j++)
-     {    
-         bool ok=true;
-         int k=1;
-         while(k<=m && ok)
-         {
-             if(v[i][k]!=v[j][k] )
-                ok=false;
-             else
-                k++;
-         }
-         if(ok)
-            C++;
-     }
-     cout<<C;
-     return 0;
+
+int main(){
+   int n,v[100001],mst[100001],mdr[100001],aux=0,w=0;
+   cin>>n;
+   for(int i=1;i<=n;i++){
+
+       cin>>v[i];
+       if(v[i]>aux)
+           aux=v[i];
+       mst[i]=aux; }
+   aux=0;
+   for(int i=n;i>=1;i--)
+   {
+       if(v[i]>aux)
+           aux=v[i];
+       mdr[i]=aux; }
+   for(int i=2;i<n;i++)
+       if(v[i]<min(mst[i],mdr[i])) {
+       w+=(min(mst[i],mdr[i])-v[i]);
+       v[i]=min(mst[i],mdr[i]); }
+   cout<<w;
+   return 0;
 }
