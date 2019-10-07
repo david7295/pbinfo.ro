@@ -1,24 +1,43 @@
-#include <bits/stdc++.h>
-using namespace std;
-int n, i, k, nr, lu;
-char s[256], c[25], *p;
-string v[256];
-int main()
+#include <iostream>
+using namespace std;
+
+
+
+void sumaMinMax (int v[50],int n)
 {
-   ifstream f("prosir.in");
-   ofstream g("prosir.out");
-   f.getline(s, sizeof(s));
-   p = strtok(s, " .");
-   while(p)
-{
-strcpy(c, p);
-lu = strlen(c);
-c[lu - 1] = '5';
-v[++ k] = c;
-p = strtok(NULL, " .");
+    int i,min=v[0],max=v[0],a[2];
+    a[0]=0;
+    a[1]=0;
+    for(i=0; i<n; i++)
+        if(v[i]<min)
+            min=v[i];
+    for(i=0; i<n; i++)
+        if(v[i]>max)
+            max=v[i];
+
+    for(i=0; i<n; i++)
+        if(v[i]!=max)
+            a[0]=a[0]+v[i];
+
+    for(i=0; i<n; i++)
+        if(v[i]!=min)
+            a[1]=a[1]+v[i];
+
+    cout<<a[0]<<" "<<a[1];
+
 }
-for(i = 1; i < k; i ++)
- g << v[i] << " ";
-g << v[k] << ".";
-    return 0;
+
+
+
+int main()
+{
+    int n,v[50],nr,i;
+    cin>>n;
+    for(i=0; i<n; i++)
+    {
+        cin>>nr;
+        v[i]=nr;
+    }
+   sumaMinMax(v,n);
+
 }
