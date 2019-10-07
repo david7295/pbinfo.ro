@@ -1,23 +1,17 @@
 #include <iostream>
-#include <string.h>
-
+#include <fstream>
+#include <cstring>
 using namespace std;
-
-char c[100], b[100];
-
-int nr, i;
-
-int main(){
-
-    cin.getline(c, 100);  
-    for (i = 0; i < strlen(c); i++)
-
-     if ((c[i] >= 'A' && c[i] <= 'Z') && ((c[i - 1] == ' ') || i == 0))  
-
-         b[nr++] = c[i];  
-
-    cout << b;    
-
-    return 0;
-
+int main()
+{    char char s[201];
+     int i;
+     ifstream in("prosir.in");
+     ofstream out("prosir.out");
+     in.get(s,201);
+     for(i=1;s[i];i++)
+       if(s[i]==' ' and isalpha(s[i-1]))
+         s[i-1]='5';
+     s[strlen(s)-2]='5';
+     cout<<s;
+     return 0;
 }
