@@ -1,25 +1,44 @@
-#include <fstream>
-#include <cmath>
-using namespace std;
-ifstream f("numere18.in");
-ofstream f("numere18.out");
-int C;
-long long n,m,poz,pt,ut,s;
-int main() {
-  f>>C;
-  if(C==1) {
-    f>>n;
-    pt=n*(n-1)/2+1;
-    ut=pt+n-1;
-    s=(pt+ut)*n/2;
-    g<<s;
-  }
-  if(C==2) {
-    f>>m;
-    n=(1+int(sqrt(8*m-7)))/2;
-    pt=n*(n-1)/2+1;
-    poz=m-pt+1;
-    g<<n<<" "<<poz;
-  }
-  return 0;
+#include <iostream>
+#define Nmax 100005
+using namespace std;
+int a[Nmax], n, k;
+
+void poz(int li, int ls, int &k, int a[])
+{
+    int i = li, j = ls, c, i1 = 0, j1 = -1;
+    while(i < j)
+    {
+        if(a[i] > a[j])
+        {
+            c = a[j];
+            a[j] = a[i];
+            a[i] = c;
+            c = i1;
+            i1 = - j1;
+            j1 = - c;
+        }
+        i = i + i1;
+        j = j + j1;
+    }
+    k = i;
+}
+void quick(int li, int ls)
+{
+    if (li < ls)
+    {
+        poz(li, ls, k, a);
+        quick(li, k - 1);
+        quick(k + 1, ls);
+    }
+}
+int main()
+{
+    int i;
+    cin >> n;
+    for(i = 1; i <= n; i ++)
+        cin >> a[i];
+    quick(1, n);
+    for(i = 1; i <= n; i ++)
+        cout << a[i] << " ";
+    return 0;
 }
