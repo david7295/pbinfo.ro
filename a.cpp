@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 
 using namespace std;
@@ -6,21 +5,78 @@ using namespace std;
 ifstream fin("clase.in");
 ofstream fout("clase.out");
 
-int nr,n,m,i,j,a,b;
+inline long long CautareBinara(long long x);
 
-int main(){
+const int MaxN = 10001;
 
-cin>>n>>m;
+long long a[MaxN];
 
-for(i=1;i<=n;i++){
+long long  n, m, pachet, sol, cnt;
 
-cin>>a;
-for(j=1;j<m;j++)
- cin>>b;
-if(a==b) nr++
+int main()
+
+{
+
+   fin >> n;
+
+   for(int i = 1; i <= n; ++i)
+
+       fin >> a[i];
+
+   fin >> m;
+
+   for(int i = 1; i <= m; ++i)
+
+   {
+
+       fin >> pachet;
+
+       sol = CautareBinara(pachet);
+
+       if(sol != -1)
+
+           ++cnt;
+
+   }
+
+   fout << cnt;
+
+   return 0;
+
 }
 
-cout<<nr;
-   return 0;
+inline long long  CautareBinara(long long x)
+
+{
+
+   long long Sol = -1, Left = 0, Right = n;
+
+   while(Left <= Right)
+
+   {
+
+       int Mid = (Left+Right) / 2;
+
+       if(a[Mid] == x)
+
+       {
+
+           Sol = Mid;
+
+           break;
+
+       }
+
+       if(a[Mid] > x)
+
+           Right = Mid - 1;
+
+       if(a[Mid] < x)
+
+           Left = Mid + 1;
+
+   }
+
+   return Sol;
 
 }
