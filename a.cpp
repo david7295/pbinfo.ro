@@ -1,22 +1,25 @@
 #include <iostream>
-#include <algorithm>
+
 using namespace std;
-const int NMAX = 100000;
 
-int v[NMAX], n, nr;
+short c[1001], i, n, pal;
 
-int main()
-{
-    cin >> n;
-    for(int i=1; i<=n; i++) cin >> v[i];
-    sort(v + 1, v + n + 1);
+int main() {
 
-    for(int i=1; i<=n-2; i++)
-        for(int j=i+1; j<=n-1; j++)
-            for(int k=j+1; k<=n; k++)
-                if(v[i] + v[j] > v[k])
-                    nr++;
+  cin >> n;
 
-    cout << nr << '\n';
-    return 0;
+  for (i=0; i<n; ++i)
+
+  {
+
+      cin >> c[i]; 
+  }
+  for (i=0; i<n; ++i)
+     cout << c[i];
+  cout << "\n";
+  pal=1;
+  for (i=0; i<n/2; ++i)
+       if (c[i]!=c[n-i-1]) { pal=0; break; }
+  if (pal) cout << "DA";
+  else cout << "NU";
 }
