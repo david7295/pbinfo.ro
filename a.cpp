@@ -1,18 +1,10 @@
 #include<iostream>
-using namespace std;
+#include<string>
 
 int main()
 {
-int numar, nr_cifre = 0;
-
-cin >> numar;
-
-while(numar != 0) {
-numar /= 10;
-nr_cifre++;
-}
-
-cout << nr_cifre << '\n';
-
-return 0;
+    std::string n;
+    std::cin >> n;
+    std::cout << n.length();
+    return 0;
 }
