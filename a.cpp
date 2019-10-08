@@ -1,44 +1,16 @@
-#include <iostream>
-using namespace std;
-
-int main()
-
+#include <iostream>
+using namespace std;
+int d, x, s, ct = 0;
+int main()
 {
+    cin >> x;
+    s = 0;
+    for(d = 1; d * d < x; d ++)
+        if(x % d == 0)
+          s = s + d + x / d;
+    if(d * d == x) s = s + d;
+    if(s - x == x)  cout << x << " este perfect";
+               else cout << x << " nu este perfect";
 
-    int n, perechi=0, ucp, ucc;
-
-    cin >> n;
-
-    if (n<0) n=-n;
-
-    ucp = n % 10;
-
-    while (n)
-
-    {
-
-        cin >> n;
-
-        if (n)
-
-        {
-
-          if (n<0) n=-n;
-
-          ucc = n % 10;
-
-          if (ucp==ucc) ++ perechi;
-
-          ucp=ucc;
-
-        }
-
-
-
-    }
-
-    cout << perechi << endl;
-
-    return 0;
-
+    return 0;
 }
