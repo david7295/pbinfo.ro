@@ -1,32 +1,26 @@
-#include <iostream>
-#include <fstream>
-
-using namespace std;
-
-ifstream f("nrdiv.in");
-ofstream g("nrdiv.out");
-
-int main(){
-
-   int n, x;
-   f >> n;
-   x=n;
-   long long d, nd=0;
-    for (d=1; d*d<x; ++d)
-
-   {
-
-       if (x%d==0)
-
-       {
-
-           ++nd;  if (x/d!=d ) ++nd;
-
-       }
-
-   }
-
-   if (d*d==x) ++nd;
-
-   g << nd;
+#include <bits/stdc++.h>
+using namespace std;
+int n, i, x, j, a, b;
+bool prim;
+double s, ma, k;
+int main()
+{
+    cin >> a >> b;
+    if(a > b) swap(a, b);
+    for (i = a; i <= b; i ++)
+    {
+        x = i;
+        prim = true;
+        if(x == 0 || x == 1) prim = false;
+        for (j = 2; j * j <= x; j++)
+            if (x % j == 0)
+        {
+            prim = false;
+            break;
+        }
+        if (prim)
+           k ++;
+    }
+    cout << k;
+    return 0;
 }
