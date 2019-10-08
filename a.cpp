@@ -1,16 +1,21 @@
-#include <iostream>
-using namespace std;
-int d, x, s, ct = 0;
-int main()
-{
-    cin >> x;
-    s = 0;
-    for(d = 1; d * d < x; d ++)
-        if(x % d == 0)
-          s = s + d + x / d;
-    if(d * d == x) s = s + d;
-    if(s - x == x)  cout << x << " este perfect";
-               else cout << x << " nu este perfect";
-
-    return 0;
+#include <iostream>
+ using namespace std;
+  int main()
+ {
+int n, c, produs = 1, ok;
+cin >> n;
+ok=false;
+ while (n)
+ {
+ c = n % 10;
+ if ( c % 2 == 1 )
+ {
+          produs = produs * c;
+          ok=true;
 }
+ n /= 10;
+ }
+ if (ok) cout << produs;
+        else cout << -1;
+ return 0;
+ }
