@@ -1,21 +1,26 @@
-#include <fstream>
+#include <iostream>
+#include <cstring>
+
 using namespace std;
-ifstream f("distanta.in");
-ofstream g("distanta.out");
-int a[1001],b[1001]; // vectori de frecventa
-int main(){   int x,pozitie=1; //pozitie retine pozitia fiecarui element din sir   
-    while(f>>x)    {      
-        if(a[x]==0) // daca nu exista elementul in vector pun indicele lui         
-      a[x]=pozitie;   
-       b[x]=pozitie;
-        pozitie++; // maresc pozitie pentru a respecta pozitia din sirul initial
-    }   
-      int distMaxima=0, d,i;  
-           for(i=1;i<=1000;i++) {   
-               d=b[i]-a[i];     
-               if(d>distMaxima)        
-                   distMaxima=d;  
-   }    
-           g<<distMaxima;    
-           return 0;
+
+int main(){
+   char s[101];
+
+   cin>>s;
+
+   int i, n, OK = 1;  // considerăm că șirul conține doar consoane
+
+   n=strlen(s)   
+
+   for (i = 0; i <= strlen(s); i ++)
+
+          {  if( strchr ( "aeou", s[i] ) == 1 )  // dacă găsim vocală ( fără i )
+
+                     OK=0; // OK e zero deci am găsit vocala și urmează "NU"
+
+            if( OK == 1)
+                    cout << " DA ";
+             else
+                    cout<< " NU "; }
+return 0; 
 }
