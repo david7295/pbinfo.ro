@@ -1,47 +1,52 @@
-#include <fstream>
-#include <cassert>
- 
-using namespace std;
- 
-int main() {
-    ifstream fin("egale.in");
-    ofstream fout("egale.out");
- 
-    int op;
-    fin >> op;
-    assert(op == 1 || op == 2);
- 
-    if (op == 1) {
-        long long a, b;
-        fin >> a >> b;
- 
-        assert(a <= b);
-        //assert(a <= 100000000000000000LL && b <= 100000000000000000LL && a > 1000000000 && b > 1000000000);
- 
-        long long curr = 1;
-        while (curr <= b) {
-            for (int i = 1; i <= 9; ++i)
-                if (a <= i*curr && i*curr <= b)
-                    fout << i*curr << " ";
-            curr = curr*10 + 1;
-        }
-        fout << "\n";
-    }
-    else {
-        int x;
-        fin >> x;
-        assert(x <= 100);
- 
-        for (int nrCif = 1; nrCif <= x; ++nrCif) {
-            for (int cif = 1; cif <= 9; ++cif) {
-                for (int i = 1; i <= nrCif; ++i)
-                    fout << cif;
-                fout << " ";
-            }
-        }
- 
-        fout << "\n";
-    }
- 
-    return 0;
+#include <iostream>
+
+#include <fstream>
+
+using namespace std;
+
+int main()
+
+{
+
+   ifstream fin("biti.in");
+
+   ofstream fout("biti.out");
+
+   int n,x,ct=0;
+
+   bool ok;
+
+   fin>>n;
+
+   for(int i=1;i<=n;i++)
+
+   {
+
+       fin>>x;
+
+       ok=true;
+
+       while(x)
+
+       {
+
+           if(x%2!=1)
+
+           {
+
+               ok=false;
+
+               break;
+
+           }
+
+           x=x/2;
+
+       }
+
+       if(ok)ct++;
+
+   }
+   fout<<ct;
+   return 0;
 }
