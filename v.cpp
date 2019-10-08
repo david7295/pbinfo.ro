@@ -1,43 +1,47 @@
-#include <iostream>
-using namespace std;
-
-
-
-void sumaMinMax (int v[50],int n)
-{
-    int i,min=v[0],max=v[0],a[2];
-    a[0]=0;
-    a[1]=0;
-    for(i=0; i<n; i++)
-        if(v[i]<min)
-            min=v[i];
-    for(i=0; i<n; i++)
-        if(v[i]>max)
-            max=v[i];
-
-    for(i=0; i<n; i++)
-        if(v[i]!=max)
-            a[0]=a[0]+v[i];
-
-    for(i=0; i<n; i++)
-        if(v[i]!=min)
-            a[1]=a[1]+v[i];
-
-    cout<<a[0]<<" "<<a[1];
-
-}
-
-
-
-int main()
-{
-    int n,v[50],nr,i;
-    cin>>n;
-    for(i=0; i<n; i++)
-    {
-        cin>>nr;
-        v[i]=nr;
-    }
-   sumaMinMax(v,n);
-
+#include <fstream>
+#include <cassert>
+ 
+using namespace std;
+ 
+int main() {
+    ifstream fin("egale.in");
+    ofstream fout("egale.out");
+ 
+    int op;
+    fin >> op;
+    assert(op == 1 || op == 2);
+ 
+    if (op == 1) {
+        long long a, b;
+        fin >> a >> b;
+ 
+        assert(a <= b);
+        //assert(a <= 100000000000000000LL && b <= 100000000000000000LL && a > 1000000000 && b > 1000000000);
+ 
+        long long curr = 1;
+        while (curr <= b) {
+            for (int i = 1; i <= 9; ++i)
+                if (a <= i*curr && i*curr <= b)
+                    fout << i*curr << " ";
+            curr = curr*10 + 1;
+        }
+        fout << "\n";
+    }
+    else {
+        int x;
+        fin >> x;
+        assert(x <= 100);
+ 
+        for (int nrCif = 1; nrCif <= x; ++nrCif) {
+            for (int cif = 1; cif <= 9; ++cif) {
+                for (int i = 1; i <= nrCif; ++i)
+                    fout << cif;
+                fout << " ";
+            }
+        }
+ 
+        fout << "\n";
+    }
+ 
+    return 0;
 }
