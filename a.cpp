@@ -1,41 +1,42 @@
-#include <iostream>
-#include <algorithm>
-using namespace std;
-
+#include <iostream>using namespace std;
+int v[100],n,i,aux,j;
 int main()
-{
-  int v[1000];
-  long int i,j,n,ma=-11110,mi=100000,poz1,poz2;
-  cin>>n;
-  for(i=1;i<=n;i++)
-    {
-        cin>>v[i];
-        if(v[i]>ma)
-        {
-            ma=v[i];
-            poz1=i;
-        }
-        if(v[i]<mi)
-        {
-            mi=v[i];
-            poz2=i;
-        }
-    }
-    if(poz1>poz2)
-    {
-        for(i=poz2;i<=poz1-1;i++)
-            for(j=i+1;j<=poz1;j++)
-                if(v[i]>v[j])
-                    swap(v[i],v[j]);
-    }
-    else
-    {
-        for(i=poz1;i<=poz2-1;i++)
-            for(j=i+1;j<=poz2;j++)
-                if(v[i]>v[j])
-                    swap(v[i],v[j]);
-    }
-  for(i=1;i<=n;i++)
-       cout<<v[i]<<' ';
-  return 0;
+{//in acest algoritm am folosit metoda sortarii prin insertie
+    //fiind cea mai usoara si rapida,dupa parerea mea
+    //pentru ca iti face vectorul deja ordonat,in orice
+    //moment
+    //ea consta in citirea primului element din vector
+    //comparandu-l cu valorile introduse pana ajunge in
+    //pozitia lui corecta
+    cout<<"n=";
+    cin>>n;
+    cout<<"v[1]=";
+    cin>>v[1];
+     //citim primul vector si incepand de la al doilea
+    for(i=2; i<=n; i++)
+    {
+        cout<<"v["<<i<<"]= ";
+        cin>>v[i];    j=i;
+    //daca elementul curent e mai mic ca cel din fata lui
+    //si nu am ajuns la primul element,le interschimbam
+    //ex: 9 6 12 3 8
+    //il luam pe 9 si il comparam cu 6:observam ca 9  e mai
+    //mare ca 6 si atunci inseamna ca il mutam pana ajunge
+    //la pozitia lui iar 6 vine in locul lui 9 si tot asa
+    //pana ajunge la pozitia sa
+    //se observa ca pe masura ce parcurgi algoritmul
+    //vectorul va fi mereu sortat la fiecare pas,fiind mai usor si rapid
+   
+    while(v[j]<v[j-1] && j>1)
+    {
+        aux=v[j];
+        v[j]=v[j-1];
+        v[j-1]=aux;
+        j--;
+    }
+    }
+cout<<"Vectorul sortat este ";
+//incepand de la ultimul afisam vectorul in ordine descrescatoare
+for(i=n;i>=1;i--)
+    cout<<v[i]<<" ";
 }
