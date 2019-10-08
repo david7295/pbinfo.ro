@@ -1,82 +1,22 @@
-#include <fstream>
-
+#include <iostream>
+#include <algorithm>
 using namespace std;
+const int NMAX = 100000;
 
-ifstream fin("clase.in");
-ofstream fout("clase.out");
-
-inline long long CautareBinara(long long x);
-
-const int MaxN = 10001;
-
-long long a[MaxN];
-
-long long  n, m, pachet, sol, cnt;
+int v[NMAX], n, nr;
 
 int main()
-
 {
+    cin >> n;
+    for(int i=1; i<=n; i++) cin >> v[i];
+    sort(v + 1, v + n + 1);
 
-   fin >> n;
+    for(int i=1; i<=n-2; i++)
+        for(int j=i+1; j<=n-1; j++)
+            for(int k=j+1; k<=n; k++)
+                if(v[i] + v[j] > v[k])
+                    nr++;
 
-   for(int i = 1; i <= n; ++i)
-
-       fin >> a[i];
-
-   fin >> m;
-
-   for(int i = 1; i <= m; ++i)
-
-   {
-
-       fin >> pachet;
-
-       sol = CautareBinara(pachet);
-
-       if(sol != -1)
-
-           ++cnt;
-
-   }
-
-   fout << cnt;
-
-   return 0;
-
-}
-
-inline long long  CautareBinara(long long x)
-
-{
-
-   long long Sol = -1, Left = 0, Right = n;
-
-   while(Left <= Right)
-
-   {
-
-       int Mid = (Left+Right) / 2;
-
-       if(a[Mid] == x)
-
-       {
-
-           Sol = Mid;
-
-           break;
-
-       }
-
-       if(a[Mid] > x)
-
-           Right = Mid - 1;
-
-       if(a[Mid] < x)
-
-           Left = Mid + 1;
-
-   }
-
-   return Sol;
-
+    cout << nr << '\n';
+    return 0;
 }
