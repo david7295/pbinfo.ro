@@ -1,52 +1,21 @@
-#include <iostream>
-
 #include <fstream>
-
 using namespace std;
-
-int main()
-
-{
-
-   ifstream fin("biti.in");
-
-   ofstream fout("biti.out");
-
-   int n,x,ct=0;
-
-   bool ok;
-
-   fin>>n;
-
-   for(int i=1;i<=n;i++)
-
-   {
-
-       fin>>x;
-
-       ok=true;
-
-       while(x)
-
-       {
-
-           if(x%2!=1)
-
-           {
-
-               ok=false;
-
-               break;
-
-           }
-
-           x=x/2;
-
-       }
-
-       if(ok)ct++;
-
-   }
-   fout<<ct;
-   return 0;
+ifstream f("distanta.in");
+ofstream g("distanta.out");
+int a[1001],b[1001]; // vectori de frecventa
+int main(){   int x,pozitie=1; //pozitie retine pozitia fiecarui element din sir   
+    while(f>>x)    {      
+        if(a[x]==0) // daca nu exista elementul in vector pun indicele lui         
+      a[x]=pozitie;   
+       b[x]=pozitie;
+        pozitie++; // maresc pozitie pentru a respecta pozitia din sirul initial
+    }   
+      int distMaxima=0, d,i;  
+           for(i=1;i<=1000;i++) {   
+               d=b[i]-a[i];     
+               if(d>distMaxima)        
+                   distMaxima=d;  
+   }    
+           g<<distMaxima;    
+           return 0;
 }
