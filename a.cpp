@@ -1,28 +1,24 @@
-#include <iostream>
-using namespace std;
-int n,i,x,k,cif,cmin,nrmax;
-int main()
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("maximpar.in");
+ofstream fout("maximpar.out");
+
+int main()
 {
-    cin>>n;
-    cin>>x;
-    k=x;
-    while(k/10)
-    {
-       k=k/10;
-    }
-    cmin=k;
-    nrmax=x;
-    for(i=2;i<=n;i++)
-     {
-        cin>>x;
-        k=x;
-         while(k/10)
-        {
-          k=k/10;
-        }
-         if(k<cmin) cmin=k, nrmax=x;
-           else if(k==cmin) if(x>nrmax) nrmax=x;
-     }
-    cout<<nrmax;
-    return 0;
+    int n,x,max=0,k=1;
+    fin>>n;
+    while(n!=0)
+    {
+        fin>>x;
+        if(x==max)
+        k++;
+        if(x%2==0&&x>max)
+        max=x;
+        n--;
+    }
+    fout<<max<<' '<<k;
+    return 0;
 }
