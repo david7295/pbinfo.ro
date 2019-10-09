@@ -1,73 +1,143 @@
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
-ifstream f("joc8.in");
-ofstream g("joc8.out");
+ifstream f("forus.in");
+ofstream g("forus.out");
 
-short c[10], alt, k, j;
+int nrdiv(int N)
 
-int i, n, num, difst, difdr, rez;
+{
+
+   int d,nrd=1;
+
+   for(d=1;d*d<N;d++)
+
+       if(N%d==0)nrd+=2;
+
+   if(d*d==N) ++nrd;
+
+      return nrd;
+
+}
 
 int main()
 
 {
 
-   f >> n;
+   int C,N,nr;
 
-   for (i=1; i<=n; ++i)
+   f>>C>>N;
+
+   if(C==1)
 
    {
 
-       f >> num;
+       int r=0,ok;
 
-       k=0;
-
-       while (num)
+       for(int i=1; i<=N; i++)
 
        {
 
-           ++k; c[k]=num%10;
+           f>>nr;
 
-           num/=10;
+           //cout<<nr<<" ";
 
-       }
+           ok=1;
 
-       if (k%2)
-
-       {
-
-           if (k==1) ++rez;
-
-           else
+           while(nr && ok)
 
            {
 
-              alt=1;
+               if (nr%10==0)ok=0;
 
-              difst=c[1]-c[2];
-
-              for (j=2; j<k; ++j)
-
-              {
-
-                  difdr=-difst; difst=c[j]-c[j+1];
-
-                  if (!(difst*difdr>0)) { alt=0; break; }
-
-              }
-
-              if (alt) ++rez;
+               nr=nr/10;
 
            }
 
+           r=r+ok;
+
        }
+
+       g<<r<<endl;
 
    }
 
-   g << rez;
+   else
 
-   return 0;
+   {   int y,p,nrc,x,pr,ult,pu,xmin,nrdm,nrd,z;
+
+       for(int i=1; i<=N; i++)
+
+       {
+
+           f>>nr;
+
+           p=1;nrc=1;pu=10;
+
+           xmin=nr; nrdm=nrdiv(nr);
+
+           x=nr;
+
+           while(x>0)
+
+           {
+
+               x=x/10;
+
+               p=p*10;
+
+               nrc++;
+
+           }
+
+           p=p/10;z=p;
+
+           for(int i=1; i<nrc; i++)
+
+           {
+
+               pr=nr/p;
+
+               ult=nr%p;
+
+               x=ult*pu+pr;
+
+               if(x/z>0)
+
+               {
+
+                   nrd=nrdiv(x);
+
+                   if(nrd<nrdm)
+
+                   {
+
+                       xmin=x;
+
+                       nrdm=nrd;
+
+                   }
+
+                   else
+
+                       if(nrd==nrdm) xmin=min(xmin,x);
+
+               }
+
+               pu=pu*10;
+
+               p=p/10;
+
+           }
+
+           g<<xmin<<" ";
+
+       }
+
+g<<endl;}
+
+return 0;
 
 }
