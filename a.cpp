@@ -3,30 +3,70 @@
 
 using namespace std;
 
-ifstream f("produsmaxim.in");
-ofstream g("produsmaxim.out");
+ifstream f("joc8.in");
+ofstream g("joc8.out");
+
+short c[10], alt, k, j;
+
+int i, n, num, difst, difdr, rez;
 
 int main()
 
 {
 
-   int num, a, b, c;
+   f >> n;
 
-   while (f >> num)
+   for (i=1; i<=n; ++i)
 
    {
 
-       a=num/3;
+       f >> num;
 
-       if (num%3==0) { b=a; c=a;}
+       k=0;
 
-       if (num%3==1) { b=a; c=a+1;}
+       while (num)
 
-       if (num%3==2) { b=a+1; c=a+1;}
+       {
 
-       g << num << " " << a << " " << b << " " << c << "\n";
+           ++k; c[k]=num%10;
+
+           num/=10;
+
+       }
+
+       if (k%2)
+
+       {
+
+           if (k==1) ++rez;
+
+           else
+
+           {
+
+              alt=1;
+
+              difst=c[1]-c[2];
+
+              for (j=2; j<k; ++j)
+
+              {
+
+                  difdr=-difst; difst=c[j]-c[j+1];
+
+                  if (!(difst*difdr>0)) { alt=0; break; }
+
+              }
+
+              if (alt) ++rez;
+
+           }
+
+       }
 
    }
+
+   g << rez;
 
    return 0;
 
