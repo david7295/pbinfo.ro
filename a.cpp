@@ -1,15 +1,33 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-int main() {
+ifstream f("produsmaxim.in");
+ofstream g("produsmaxim.out");
 
-unsigned long long int x,s = 0;
-   cin >> x;
-   while(x != 0){
-    s += x;
-       x /= 10;
-   }
-   cout << s;
+int main()
+
+{
+
+   int num, a, b, c;
+
+   while (f >> num)
+
+   {
+
+       a=num/3;
+
+       if (num%3==0) { b=a; c=a;}
+
+       if (num%3==1) { b=a; c=a+1;}
+
+       if (num%3==2) { b=a+1; c=a+1;}
+
+       g << num << " " << a << " " << b << " " << c << "\n";
+
+   }
+
+   return 0;
 
 }
