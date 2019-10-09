@@ -1,37 +1,28 @@
-#include <fstream>
-#include <cstring>
-
+#include <iostream>
 using namespace std;
-
-ifstream fin("palindrom.in");
-ofstream fout("palindrom.out");
-
-int n;
-char s[200],s1[200];
-
+int n,i,x,k,cif,cmin,nrmax;
 int main()
 {
-
-    fin >> n;
-    fin.get();
-
-    for(;n;n--)
+    cin>>n;
+    cin>>x;
+    k=x;
+    while(k/10)
     {
-        fin.getline(s,200);
-        int nr=0,ok=1;
-        s1[0]='\0';
-        for(int i=0;i<strlen(s);i++)
-            if(!isspace(s[i]))
-                s1[nr++]=s[i];
-        for(int i=0;i<nr;i++)
-            if(s1[i]!=s1[nr-1-i])
-                ok=0;
-        if(ok)
-            fout << 1 << endl;
-        else
-            fout << 0 << endl;
+       k=k/10;
     }
-
+    cmin=k;
+    nrmax=x;
+    for(i=2;i<=n;i++)
+     {
+        cin>>x;
+        k=x;
+         while(k/10)
+        {
+          k=k/10;
+        }
+         if(k<cmin) cmin=k, nrmax=x;
+           else if(k==cmin) if(x>nrmax) nrmax=x;
+     }
+    cout<<nrmax;
     return 0;
-
 }
