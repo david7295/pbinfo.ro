@@ -2,26 +2,28 @@
 
 using namespace std;
 
-unsigned long long  n, A, R, scor=0, i, t;
+int x,t,y,T;
+
+float v;
 
 int main()
 
 {
 
-   cin >> n;
+   cin >> x >> t >> y;
 
-   for (i=1; i<=n; ++i)
+   v=1.0*x;
 
-   {
+   while (v>y)
 
-       cin >> A >> R;
+   {
 
-       t=A*A+3*A+1;
+       T+=t;
 
-       if (t==R) ++scor;
+       v=v*3/4;
 
-   }
+   }
 
-   cout << scor;
+   cout << T;
 
 }
