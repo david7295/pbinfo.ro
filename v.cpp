@@ -2,52 +2,26 @@
 
 using namespace std;
 
+unsigned long long  n, A, R, scor=0, i, t;
+
 int main()
 
 {
 
-   int n,s,a,b=1,cnt=0;
+   cin >> n;
 
-   cin >> n >> s;
-
-   for (int i=1; i<=n; ++i)
-
-       b=b*10;
-
-   a=b/10;
-
-   for (int i=a; i<b; ++i)
+   for (i=1; i<=n; ++i)
 
    {
 
-       int num=i, suma=0;
+       cin >> A >> R;
 
-       while (num)
+       t=A*A+3*A+1;
 
-       {
-
-           suma+=num%10;
-
-           num/=10;
-
-       }
-
-       if (suma==s)
-
-       {
-
-           cout << i << " ";
-
-           ++cnt;
-
-       }
+       if (t==R) ++scor;
 
    }
 
-   if (cnt!=0) cout << "\n" << cnt;
-
-   else cout << cnt;
-
-   return 0;
+   cout << scor;
 
 }
