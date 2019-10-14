@@ -1,14 +1,27 @@
 #include <iostream>
+
 using namespace std;
-int n, p, nr;
+
+long long n,p,f;
+
 int main()
+
 {
-    cin >> n >> p;
-    nr = 1;
-    while(nr <= p)
-    {
-        cout << nr << " ";
-        nr = nr * n;
-    }
-    return 0;
+
+   cin >> n >> p;
+
+   f=n;
+
+   while (f<p)
+
+   {
+
+      cout << f << " ";
+
+      f=f*n;
+
+   }
+
+   if (f==p) cout << f;
+
 }
