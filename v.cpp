@@ -2,42 +2,52 @@
 
 using namespace std;
 
-short n, m, i, j;
-
 int main()
 
 {
 
-  cin >> n >> m;
+   int n,s,a,b=1,cnt=0;
 
-  for (j=1; j<=m; ++j)
+   cin >> n >> s;
 
-     cout << "__0_0___";
+   for (int i=1; i<=n; ++i)
 
-  cout << endl;
+       b=b*10;
 
-  if (n>1)
+   a=b/10;
 
-  {
+   for (int i=a; i<b; ++i)
 
-      for (i=2; i<n; ++i)
+   {
+
+       int num=i, suma=0;
+
+       while (num)
 
        {
 
-           for (j=1; j<=m; ++j)
+           suma+=num%10;
 
-               cout << "_0___0__";
-
-           cout << endl;
+           num/=10;
 
        }
 
-       for (j=1; j<=m; ++j)
+       if (suma==s)
 
-           cout << "0_____0_";
+       {
 
-       cout << endl;
+           cout << i << " ";
 
-  }
+           ++cnt;
+
+       }
+
+   }
+
+   if (cnt!=0) cout << "\n" << cnt;
+
+   else cout << cnt;
+
+   return 0;
 
 }
