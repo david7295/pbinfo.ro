@@ -1,29 +1,13 @@
-#include <iostream>
-
-using namespace std;
-
-int x,t,y,T;
-
-float v;
-
-int main()
+void Trim(char s[101])
 
 {
 
-   cin >> x >> t >> y;
+while(s[0]==' ')
 
-   v=1.0*x;
+ strcpy(s,s+1);
 
-   while (v>y)
+while(s[strlen(s)-1]==' ')
 
-   {
-
-       T+=t;
-
-       v=v*3/4;
-
-   }
-
-   cout << T;
+ s[strlen(s)-1]='\0';
 
 }
