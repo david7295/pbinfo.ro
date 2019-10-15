@@ -1,79 +1,63 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
+int main()
 
-   int n, i, a[100], s_pare=0,  s_poz_pare=0, nr_divizibile=0, suma_nr_divizibile_poz_impare=0;
-   cin>>n;
+{
 
-   for(i=1;i<=n;i++)
+   int n,k,r,line,sk, sr, primulk, ultimulk, cardpar, primulr,ultimulr;
 
-       cin>>a[i];
+   cin >> n >> k >> r;
 
-   for(i=1;i<=n;i++)
+   cardpar=n/2;
 
+   if (k%2==0) primulk=(k/2)*(k-1);
+
+   else primulk=((k-1)/2)*k;
+
+   ultimulk=(k-1)+primulk;
+
+   if (k%2==0)
+
+       sk=(k/2)*(primulk+ultimulk);
+
+   else sk=((primulk+ultimulk)/2)*k;
+
+   if (r%2==0) primulr=(r/2)*(r-1);
+
+   else primulr=((r-1)/2)*r;
+
+    ultimulr=(r-1)+primulr;
+
+   if (r%2==0)
+
+       sr=(r/2)*(primulr+ultimulr);
+
+   else sr=((primulr+ultimulr)/2)*r;
+
+   cout << cardpar << endl;
+
+   cout << (sk+sr)/(k+r) << endl;
+
+   while (primulr<ultimulr)
 
    {
 
-       if(a[i]%2==0) // cerinta 2
+       cout << primulr << " ";
 
+       ++primulr;
 
-           s_pare = s_pare + a[i];
+       if (primulr<ultimulr)
 
-       if(i%2==0) // cerinta 3
+           cout << primulr << " ";
 
+       cout << ultimulr << " ";
 
-           s_poz_pare = s_poz_pare + a[i];
-
-
-       
-
-
-       if(a[i]%10==0) // cerinta 4
-
-
-           nr_divizibile++;
-
-
-       
-
-
-       if(a[i]%3==0 && i%2!=0) //cerinta 5
-
-
-           suma_nr_divizibile_poz_impare = suma_nr_divizibile_poz_impare + a[i];
-
+       ++primulr; --ultimulr;
 
    }
 
-
-   for(int i=n;i>=1;i--) // cerinta 1
-
-
-       cout<<a[i]<<" ";
-
-
-   cout<<endl;
-
-
-       cout<<s_pare;
-
-
-   cout<<endl;
-
-
-       cout<<s_poz_pare;
-
-
-   cout<<endl;
-
-
-       cout<<nr_divizibile;
-
-
-   cout<<endl;
-
-
-       cout<<suma_nr_divizibile_poz_impare;
+   if (primulr==ultimulr) cout << primulr;
 
 }
