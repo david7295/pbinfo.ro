@@ -1,96 +1,91 @@
 #include <fstream>
-#include <algorithm>
 
 using namespace std;
 
-struct Probl{
+ifstream fi("ghiozdan.in");
 
-   int T;
+ofstream fo("ghiozdan.out");
 
-   int C;
+int d,k,t;
 
-   bool seFace = false;
+int A[100002];
 
-};
+int g;
 
-bool cmp(Probl a, Probl b){
+int st,dr;
 
-   if(a.C == b.C)
+int ajunge(int g)
 
-       return a.T < b.T;
+/// returneaza 1 daca un ghiozdan de capacitate g ii permite lui Ionel sa ajunga la patinoar
 
-   else return a.C > b.C;
+{
+
+   int hungry;
+
+   hungry=0;
+
+   for (int i=1;i<=k+1;i++)
+
+       if (A[i]-A[i-1]>g)
+
+           hungry=hungry+A[i]-A[i-1]-g;
+
+   if (hungry>t)
+
+       return 0;
+
+   else
+
+       return 1;
 
 }
 
-Probl vec[10001];
+int main()
 
-bool timp[100000];
+{
 
-int main(){
+   fi>>d>>k>>t;
 
-   ifstream fin("credite.in");
+   for (int i=1;i<=k;i++)
 
-   ofstream fout("credite.out");
+       fi>>A[i];
 
-   int n;
+   A[0]=0;
 
-   fin >> n;
+   A[k+1]=d;
 
-   for(int i = 0; i < n; i++){
+   /// se cauta binar cea mai mica valoare pentru g care ii permite lui Ionel sa ajunga la patinoar
 
-       fin >> vec[i].C >> vec[i].T;
+   st=0;
 
-   }
+   dr=d;
 
-   fin.close();
+   while (st<dr)
 
-   sort(vec, vec+n, cmp);
+   {
 
-   int total = 0;
+       int m;
 
-   for(int i = 0; i < n; i++){
+       m=(st+dr)/2;
 
-       int t = vec[i].T;
+       if (ajunge(m))
 
-       if(!timp[t]){
+           dr=m;
 
-           timp[t] = true;
+       else
 
-           vec[i].seFace = true;
-
-       }else{
-
-           int j;
-
-           for(j = t-1; j>0; j--){
-
-               if(!timp[j])
-
-                   break;
-
-           }
-
-           if(j != 0){
-
-               timp[j] = true;
-
-               vec[i].seFace = true;
-
-           }
-
-       }
+           st=m+1;
 
    }
 
-   for(int i = 0; i < n; i++)
+   g=st;
 
-       if(vec[i].seFace)
+   fo<<g;
 
-           total += vec[i].C;
+   fi.close();
 
-   fout << total;
+   fo.close();
 
-   fout.close();
+   return 0;
 
 }
