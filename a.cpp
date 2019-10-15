@@ -1,46 +1,30 @@
-#include <fstream>
-#include <cmath>
-using namespace std;
-#define Nmax 1000002
-ifstream fin ( "bomboane2.in" );
-ofstream fout ( "bomboane2.out" );
-long long v[Nmax];
+#include <fstream>
+using namespace std;
 
-int main(){
+ifstream fin("palindromsd.in");
+ofstream fout("palindromsd.out");
 
-    long long N, MaxVal = -1;
-
-    fin >> N;
-
-    for ( int i = 1; i <= N; ++i ){
-        fin >> v[i];
-        MaxVal = max ( MaxVal, v[i] );
-    }
-
-    long long Ture, st = 0, dr = sqrt ( double ( MaxVal ) ) * sqrt(double(2)) ;
-
-    while ( st <= dr ){
-        long long mid = ( st + dr ) >> 1;
-
-        bool ok = 1;
-        for ( int i = 1; i <= N; ++i ){
-            if ( v[i] < mid * i + ( N * mid * (mid-1) ) / 2 ){
-                ok = 0;
-                break;
-            }
-        }
-
-        if ( ok ){
-            Ture = mid;
-            st = mid + 1;
-        }
-        else
-            dr = mid - 1;
-    }
-
-    N *= Ture;
-
-    fout << ( N * (N+1) / 2 );
-
-    return 0;
+bool ePalindrom(int nr) {
+if(nr < 10) return true;
+int rasturnat = 0, numar = nr;
+while(numar > 0) {
+  rasturnat = rasturnat * 10 + numar % 10;
+  numar = numar / 10; 
+}
+if(rasturnat == nr) return true;
+  else 
+    return false;
+}
+int main() {
+int pal[1000], n = 0, nr;
+while(fin >> nr) { 
+  if(ePalindrom(nr)) pal[n++] = nr; 
+}
+for(int i = 0; i < n; i++) { 
+  if(i % 2 == 0) {  
+    fout << pal[i / 2] << " "; 
+  } 
+  else { 
+    fout << pal[n - (i/2 + 1)] << " "; } 
+    }
 }
