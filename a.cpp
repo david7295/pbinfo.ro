@@ -1,47 +1,17 @@
 #include <iostream>
-
-#include <cstring>
-
 using namespace std;
 
-char s[256];
+int main(){
+ 
+ int n,k,p=1,c;
+cin>>n>>k;
 
-long long suma=0, termen, i, lung;
+while(n!=0){
+ c=n%10;
 
-int main()
-
-{
-
-    cin.getline(s, 256);
-
-    lung=strlen(s);
-
-    for (i=0; i<lung; ++i)
-
-    {
-
-        if (isdigit(s[i]))
-
-        {
-
-            termen=termen*10+(s[i]-'0');
-
-        }
-
-        else
-
-        {
-
-            suma=suma+termen; termen=0;
-
-        }
-
-    }
-
-
-
-    cout << suma;
-
-    return 0;
-
+if(c!=k)
+ p=p*c;
+n=n/10;}
+cout<<p;
+return 0;
 }
