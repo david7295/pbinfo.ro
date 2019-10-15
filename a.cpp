@@ -1,30 +1,32 @@
-#include <fstream>
+#include <iostream>
+#include <algorithm>
+
 using namespace std;
 
-ifstream fin("palindromsd.in");
-ofstream fout("palindromsd.out");
+int v[100001],v1[100001];
 
-bool ePalindrom(int nr) {
-if(nr < 10) return true;
-int rasturnat = 0, numar = nr;
-while(numar > 0) {
-  rasturnat = rasturnat * 10 + numar % 10;
-  numar = numar / 10; 
-}
-if(rasturnat == nr) return true;
-  else 
-    return false;
-}
-int main() {
-int pal[1000], n = 0, nr;
-while(fin >> nr) { 
-  if(ePalindrom(nr)) pal[n++] = nr; 
-}
-for(int i = 0; i < n; i++) { 
-  if(i % 2 == 0) {  
-    fout << pal[i / 2] << " "; 
-  } 
-  else { 
-    fout << pal[n - (i/2 + 1)] << " "; } 
-    }
+int main(){
+
+   int c=0,i,n;
+
+   cin>>n;
+
+   cin>>v[1];v1[1]=v[1];
+
+   for( i=2; i<=n; i++)
+
+       {cin>>v[i];v1[i]=max(v[i],v1[i-1]);
+
+       }
+
+   for( i=2; i<n; ++i)
+
+       if(v1[i]>v1[i-1]&&v1[i]<v1[i+1])
+
+               c++;
+
+    cout<<c;
+
+    return 0;
+
 }
