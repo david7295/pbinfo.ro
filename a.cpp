@@ -1,32 +1,97 @@
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
-int v[100001],v1[100001];
+int main()
 
-int main(){
+{
 
-   int c=0,i,n;
+   unsigned long long nr,v[100],i=1,t=0;
 
-   cin>>n;
+   cin >> nr;
 
-   cin>>v[1];v1[1]=v[1];
+   int k;
 
-   for( i=2; i<=n; i++)
+   while(nr !=0)
 
-       {cin>>v[i];v1[i]=max(v[i],v1[i-1]);
+   {
+
+       v[i] = nr % 10;
+
+       nr = nr / 10;
+
+       i++;
+
+   }
+
+   for(int k=1; k<=i-1; k++)
+
+       {
+
+           nr = v[k]* 2;
+
+           v[k] = nr % 10 + t;
+
+           if(nr > 9)
+
+               t = 1;
+
+           else
+
+               t = 0;
 
        }
 
-   for( i=2; i<n; ++i)
+   if(t==1)
 
-       if(v1[i]>v1[i-1]&&v1[i]<v1[i+1])
+       v[i] = t;
 
-               c++;
+   else
 
-    cout<<c;
+       i--;
 
-    return 0;
+   t = 0;
+
+/*    for(int j=1; j<=i; j++)
+
+   {
+
+       if(v[j] == 0) {
+
+           v[j] = 9;
+
+       t = 1;
+
+       }
+
+       else if(j == 1)
+
+           v[j]--;
+
+    else   {
+
+           v[j] -=t ;
+
+           t = 0;
+
+       }
+
+   } */
+
+   for(int k=i; k>=1; k--)
+
+   {
+
+       if(v[k]!=0)
+
+           t =1 ;
+
+       if(t == 1)
+
+           cout << v[k];
+
+   }
+
+   return 0;
 
 }
