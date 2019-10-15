@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -6,91 +7,37 @@ int main()
 
 {
 
-   unsigned long long nr,v[100],i=1,t=0;
+long long x,y,n,m, mx = -3;
 
-   cin >> nr;
+   cin >> x >> y >> n >> m;
 
-   int k;
+    long long colt1, colt2, colt3, colt4;
 
-   while(nr !=0)
+   colt1 = x - 1 + y - 1 + 1;
 
-   {
+   if(colt1 > mx)
 
-       v[i] = nr % 10;
+       mx = colt1;
 
-       nr = nr / 10;
+   colt2 = x - 1 + m - y +1;
 
-       i++;
+   if(colt2 > mx)
 
-   }
+       mx = colt2;
 
-   for(int k=1; k<=i-1; k++)
+   colt3 = n - x + y - 1 +1;
 
-       {
+   if(colt3 > mx)
 
-           nr = v[k]* 2;
+       mx = colt3;
 
-           v[k] = nr % 10 + t;
+   colt4 = n - x + m - y +1;
 
-           if(nr > 9)
+   if(colt4 > mx)
 
-               t = 1;
+       mx = colt4;
 
-           else
-
-               t = 0;
-
-       }
-
-   if(t==1)
-
-       v[i] = t;
-
-   else
-
-       i--;
-
-   t = 0;
-
-/*    for(int j=1; j<=i; j++)
-
-   {
-
-       if(v[j] == 0) {
-
-           v[j] = 9;
-
-       t = 1;
-
-       }
-
-       else if(j == 1)
-
-           v[j]--;
-
-    else   {
-
-           v[j] -=t ;
-
-           t = 0;
-
-       }
-
-   } */
-
-   for(int k=i; k>=1; k--)
-
-   {
-
-       if(v[k]!=0)
-
-           t =1 ;
-
-       if(t == 1)
-
-           cout << v[k];
-
-   }
+   cout << mx;
 
    return 0;
 
