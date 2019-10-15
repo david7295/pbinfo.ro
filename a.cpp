@@ -1,27 +1,46 @@
-#include <iostream>
-#include <cstring>
-using namespace std;
-char s[257];
-int i,va,ve,vi,vo,vu,m;
-int main()
-{
-    cin.get(s,257);
-    for(i=0;i<strlen(s);i++)
-    {
-        if(strchr("Aa",s[i])!=NULL) va++;
-        else if(strchr("Ee",s[i])!=NULL) ve++;
-        else if(strchr("Ii",s[i])!=NULL) vi++;
-        else if(strchr("Oo",s[i])!=NULL) vo++;
-        else if(strchr("Uu",s[i])!=NULL) vu++;
-    }
-    m=va;
-    if(ve>m) m=ve;
-    if(vi>m) m=vi;
-    if(vo>m) m=vo;
-    if(vu>m) m=vu;
-    if(va==m) cout<<"A";
-    else if(ve==m) cout<<"E";
-    else if(vi==m) cout<<"I";
-    else if(vo==m) cout<<"O";
-    else cout<<"U";
+#include <fstream>
+#include <cmath>
+using namespace std;
+#define Nmax 1000002
+ifstream fin ( "bomboane2.in" );
+ofstream fout ( "bomboane2.out" );
+long long v[Nmax];
+
+int main(){
+
+    long long N, MaxVal = -1;
+
+    fin >> N;
+
+    for ( int i = 1; i <= N; ++i ){
+        fin >> v[i];
+        MaxVal = max ( MaxVal, v[i] );
+    }
+
+    long long Ture, st = 0, dr = sqrt ( double ( MaxVal ) ) * sqrt(double(2)) ;
+
+    while ( st <= dr ){
+        long long mid = ( st + dr ) >> 1;
+
+        bool ok = 1;
+        for ( int i = 1; i <= N; ++i ){
+            if ( v[i] < mid * i + ( N * mid * (mid-1) ) / 2 ){
+                ok = 0;
+                break;
+            }
+        }
+
+        if ( ok ){
+            Ture = mid;
+            st = mid + 1;
+        }
+        else
+            dr = mid - 1;
+    }
+
+    N *= Ture;
+
+    fout << ( N * (N+1) / 2 );
+
+    return 0;
 }
