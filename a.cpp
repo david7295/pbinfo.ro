@@ -1,22 +1,55 @@
 #include <iostream>
-#include <fstream>
+
+#include <algorithm>
+
 using namespace std;
 
-ifstream in ("restmare.in");
-ofstream out ("restmare.out");
+int T,i,x,j,nr_greu=0,nr_usor=0,y,a;
 
-long long int n,pana_unde,suma;
-int main() {
-  in >> n;
-    if(n>2)    {
-   if(n%2==1)  {   
-     pana_unde = n/2;    
-     suma = (pana_unde*(pana_unde+1))/2 + ((pana_unde-1)*pana_unde)/2;    }   
-    else {    
-      pana_unde = n/2-1;     
-      suma = pana_unde*(pana_unde+1);  
-    }
- }
-    out << suma;
-    return 0;
+int main()
+
+{
+
+   cin>>T;
+
+   i=1;
+
+   while(i<=T)
+
+   {
+
+       cin>>x>>y;
+
+       for(int j=1;j<=x;j++)
+
+       {
+
+           cin>>a;
+
+           if(a>=y/2)
+
+               nr_usor++;
+
+           if(a<=y/10)
+
+               nr_greu++;
+
+       }
+
+       if(nr_usor==1 && nr_greu==2)
+
+           cout<<"da"<<endl;
+
+       else
+
+           cout<<"nu"<<endl;
+
+       nr_usor=0;
+
+       nr_greu=0;
+
+       i++;
+
+   }
+
 }
