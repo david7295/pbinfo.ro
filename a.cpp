@@ -1,91 +1,131 @@
+#include <iostream>
+
+#include <cstring>
+
 #include <fstream>
 
 using namespace std;
 
-ifstream fi("ghiozdan.in");
+ifstream f("inversmax.in");
 
-ofstream fo("ghiozdan.out");
-
-int d,k,t;
-
-int A[100002];
-
-int g;
-
-int st,dr;
-
-int ajunge(int g)
-
-/// returneaza 1 daca un ghiozdan de capacitate g ii permite lui Ionel sa ajunga la patinoar
+bool litera(char c)
 
 {
 
-   int hungry;
+   if ((c>='A' && c<='Z')||(c>='a' && c<='z')) return 1;
 
-   hungry=0;
-
-   for (int i=1;i<=k+1;i++)
-
-       if (A[i]-A[i-1]>g)
-
-           hungry=hungry+A[i]-A[i-1]-g;
-
-   if (hungry>t)
-
-       return 0;
-
-   else
-
-       return 1;
+   else return 0;
 
 }
+
+char s[256], w[256], ch;
+
+int n, i, j, lcuv, ok, ind, lmax, poz[200], start;
 
 int main()
 
 {
 
-   fi>>d>>k>>t;
+   f.getline(s,256);
 
-   for (int i=1;i<=k;i++)
+   n=strlen(s);
 
-       fi>>A[i];
+   s[n]=' '; ++n; s[n]=0;
 
-   A[0]=0;
+   i=0;
 
-   A[k+1]=d;
-
-   /// se cauta binar cea mai mica valoare pentru g care ii permite lui Ionel sa ajunga la patinoar
-
-   st=0;
-
-   dr=d;
-
-   while (st<dr)
+   while (i<n)
 
    {
 
-       int m;
+       if (s[i]!=' ')
 
-       m=(st+dr)/2;
+       {
 
-       if (ajunge(m))
+           ++lcuv;
 
-           dr=m;
+           if (litera(s[i])) ok=1;
+
+       }
 
        else
 
-           st=m+1;
+       {
+
+           if(ok)
+
+           {
+
+               if (lcuv>lmax)
+
+               {
+
+                   lmax=lcuv;
+
+                   start=i-lmax;
+
+                   ind=1; poz[ind]=start;
+
+               }
+
+               else
+
+               {
+
+                   if (lcuv==lmax)
+
+                   {
+
+                       ++ind; poz[ind]=i-lmax;
+
+                   }
+
+               }
+
+           }
+
+           lcuv=0; ok=0;
+
+       }
+
+       ++i;
 
    }
 
-   g=st;
+   i=0;  ind=1; j=poz[ind];
 
-   fo<<g;
+   while (i<n)
 
-   fi.close();
+   {
 
-   fo.close();
+       if (i==j)
 
-   return 0;
+       {
+
+           for (int p=i; p<i+lmax; ++p)
+
+               w[p]=s[i+lmax+i-p-1];
+
+           i=i+lmax-1; ++ind;
+
+           j=poz[ind];
+
+       }
+
+       else
+
+       {
+
+           w[i]=s[i];
+
+       }
+
+       ++i;
+
+   }
+
+   --n; w[n]=0;
+
+   cout << w;
 
 }
