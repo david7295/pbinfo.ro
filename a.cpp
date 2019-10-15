@@ -1,44 +1,96 @@
-#include <iostream>
-#include <cmath>
+#include <fstream>
+#include <algorithm>
 
 using namespace std;
 
-int main()
+struct Probl{
 
-{
+   int T;
 
-long long x,y,n,m, mx = -3;
+   int C;
 
-   cin >> x >> y >> n >> m;
+   bool seFace = false;
 
-    long long colt1, colt2, colt3, colt4;
+};
 
-   colt1 = x - 1 + y - 1 + 1;
+bool cmp(Probl a, Probl b){
 
-   if(colt1 > mx)
+   if(a.C == b.C)
 
-       mx = colt1;
+       return a.T < b.T;
 
-   colt2 = x - 1 + m - y +1;
+   else return a.C > b.C;
 
-   if(colt2 > mx)
+}
 
-       mx = colt2;
+Probl vec[10001];
 
-   colt3 = n - x + y - 1 +1;
+bool timp[100000];
 
-   if(colt3 > mx)
+int main(){
 
-       mx = colt3;
+   ifstream fin("credite.in");
 
-   colt4 = n - x + m - y +1;
+   ofstream fout("credite.out");
 
-   if(colt4 > mx)
+   int n;
 
-       mx = colt4;
+   fin >> n;
 
-   cout << mx;
+   for(int i = 0; i < n; i++){
 
-   return 0;
+       fin >> vec[i].C >> vec[i].T;
+
+   }
+
+   fin.close();
+
+   sort(vec, vec+n, cmp);
+
+   int total = 0;
+
+   for(int i = 0; i < n; i++){
+
+       int t = vec[i].T;
+
+       if(!timp[t]){
+
+           timp[t] = true;
+
+           vec[i].seFace = true;
+
+       }else{
+
+           int j;
+
+           for(j = t-1; j>0; j--){
+
+               if(!timp[j])
+
+                   break;
+
+           }
+
+           if(j != 0){
+
+               timp[j] = true;
+
+               vec[i].seFace = true;
+
+           }
+
+       }
+
+   }
+
+   for(int i = 0; i < n; i++)
+
+       if(vec[i].seFace)
+
+           total += vec[i].C;
+
+   fout << total;
+
+   fout.close();
 
 }
