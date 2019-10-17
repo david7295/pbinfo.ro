@@ -2,64 +2,44 @@
 
 using namespace std;
 
+int a[51][51], n, m, i ,j;
+
 int main()
 
-{  int a,b,a1,b1,k=0,nrc1=0,nrc2=0;
+{
 
-   cin>>a>>b;//citim a si b
+   cin >> n >> m;
 
-   a1=a;
-
-   b1=b;//copiem a si b in 2 variabile
-
-   while(a1)
+   for (i=0; i<n; ++i)
 
    {
 
-        if(a1>0)
+       for (j=0; j<m; ++j)
 
-         nrc1++;
-
-       a1=a1/10; // aflam cate cifre are a
+           cin >> a[i][j];
 
    }
 
-   while(b1)
+   int t=a[n-1][m-1];
+
+   for (i=0; i<n; ++i)
 
    {
 
-       if(b1>0)
-
-         nrc2++;
-
-      b1=b1/10;//aflam cate cifre are b
-
-   }
-
-   if(nrc1!=nrc2)//verificam daca au acelasi nr de cifre
-
-    cout<<"NU";
-
-   else
+       for (j=0; j<m; ++j)
 
        {
 
+           if (i==0 || i==n-1 || j==0 || j==m-1)
 
-        while(a && b)
+               a[i][j]=t;
 
-        { if(a%10==b%10)//aflam cate cifre identice se afla pe aceleasi pozitii
+           cout << a[i][j] << " ";
 
-            k++;
+       }
 
-            a=a/10;
-
-            b=b/10;
-
-        }
-
-        cout<<k;
+       cout << endl;
 
    }
-
 
 }
