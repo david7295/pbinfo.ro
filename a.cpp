@@ -1,36 +1,71 @@
 #include <fstream>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int main()
-{
-int is[1000], elem = 0, m, x, aux:
-char cs[10];
-ifstream fin("coada1.in");
-ofstream fout("coada1.out");
-fin>>m;
-while(m>0)
-{
-m--; fin>>cs>>x;
-if(cs[0]=='p')
-{
-is[elem] = x; elem++;
-for(unsigned int i = 0; i < elem-1; i++)
-if(is[i] == x)
-{
-for(unsinged int j = 0; j < elem - i - 1; j++)
-is[j] = is[i+j];
-break;
+#define Nmax 100002
+#define Mod 666013
+
+ifstream fin ( "gasti.in" );
+ofstream fout ( "gasti.out" );
+
+vector < int > G[Nmax];
+int Gasca[Nmax], Members[Nmax], Cate[Nmax];
+
+int cnt = 0;
+void DFS ( int node, int gasca ){
+
+    cnt++;
+    Gasca[node] = gasca;
+
+    vector < int > :: iterator it;
+    for ( it = G[node].begin(); it != G[node].end(); ++it ){
+        if ( !Gasca[*it] )
+            DFS ( *it, gasca );
+    }
 }
-}
-else
-{
-aux=-1;
-for(unsigned int i = 0; i < elem ; i++)
-if(is[i]==x)
-{ aux = i+1; break; }
-fout<<aux<<endl;
-}
-}
-return 0;
+
+int main(){
+
+    int N, M;
+
+    fin >> N >> M;
+    for ( int i = 1; i <= M; ++i ){
+        int x, y;
+        fin >> x >> y;
+        G[x].push_back ( y );
+        G[y].push_back ( x );
+    }
+
+    int gasti = 0, max1 = -1, max2 = -1;
+    for ( int i = 1; i <= N; ++i ){
+        if ( !Gasca[i] ){
+            cnt = 0;
+            DFS ( i, ++gasti );
+            Members[gasti] = cnt;
+            Cate[Members[gasti]]++;
+
+            if ( Members[gasti] > max1 ){
+                max2 = max1;
+                max1 = Members[gasti];
+            }
+            else if ( Members[gasti] > max2 )
+                max2 = Members[gasti];
+        }
+    }
+
+    long long x, y;
+    if ( max1 != max2 ){
+        x = ( 1LL * Cate[max1] * max1 ) % Mod;
+        y = ( 1LL * Cate[max2] * max2 ) % Mod;
+    }
+    else{
+        x = ( 1LL * max1 * max1 ) % Mod;
+        y = ( 1LL * Cate[max1] * ( Cate[max1]-1 ) / 2 ) % Mod;
+    }
+    long long rez = ( x * y ) % Mod;
+
+    fout << gasti << " " << rez;
+
+    return 0;
 }
