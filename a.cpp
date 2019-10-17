@@ -1,53 +1,36 @@
-#include <iostream>
+#include <fstream>
 
 using namespace std;
 
 int main()
-
 {
-
-   int v[1001], n, i, j, subsiruri=0, x;
-
-   cin>>n;
-
-   for(i=1;i<=n;i++)
-
-       cin>>v[i];
-
-   while(n){
-
-       subsiruri++;
-
-       x=v[1];
-
-       for(j=1;j<n;j++)
-
-           v[j]=v[j+1];
-
-       n--;
-
-       for(i=1;i<=n;i++)
-
-       if(x<v[i]){
-
-           x=v[i];
-
-           for(j=i;j<n;j++)
-
-               v[j]=v[j+1];
-
-           n--;
-
-           i--;
-
-       }
-
-   }
-
-   cout<<'\n';
-
-   cout<<subsiruri;
-
-   return 0;
-
+int is[1000], elem = 0, m, x, aux:
+char cs[10];
+ifstream fin("coada1.in");
+ofstream fout("coada1.out");
+fin>>m;
+while(m>0)
+{
+m--; fin>>cs>>x;
+if(cs[0]=='p')
+{
+is[elem] = x; elem++;
+for(unsigned int i = 0; i < elem-1; i++)
+if(is[i] == x)
+{
+for(unsinged int j = 0; j < elem - i - 1; j++)
+is[j] = is[i+j];
+break;
+}
+}
+else
+{
+aux=-1;
+for(unsigned int i = 0; i < elem ; i++)
+if(is[i]==x)
+{ aux = i+1; break; }
+fout<<aux<<endl;
+}
+}
+return 0;
 }
