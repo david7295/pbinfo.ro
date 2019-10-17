@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <fstream>
+
 using namespace std;
 
 int a[101][101];
@@ -8,43 +10,43 @@ int main()
 
 {
 
-   int n, m, i, j, t, schimb;
+   ifstream f("matrice7.in");
 
-   cin >> n >> m;
+   ofstream g ("matrice7.out");
 
-   for (i=1; i<=n; ++i)
+   int n, m, i, j, max;
+
+   f >> n >> m;
+
+   max=-1;
+
+    for (i=1; i<=n; ++i)
 
        for (j=1; j<=m; ++j)
 
-           cin >> a[i][j];
+           { f >> a[i][j]; if (a[i][j]>max) max=a[i][j];}
 
-   do
+   int mincol[101], min;
+
+   for (j=1; j<=m; ++j)
 
    {
 
-       schimb=0;
+       min=a[1][j];
 
-       for (j=1; j<m; ++j)
+       for (i=2; i<=n; ++i)
 
-       if (a[1][j]>a[1][j+1])
+           if (a[i][j]<min) min=a[i][j];
 
-           {
-
-              schimb=1;
-
-              for (i=1; i<=n; ++i)
-
-              {
-
-                t=a[i][j]; a[i][j]=a[i][j+1]; a[i][j+1]=t;
-
-              }
-
-           }
+       mincol[j]=min;
 
    }
 
-   while (schimb);
+   for (i=1; i<=n; ++i)
+
+       for (j=1; j<=m; ++j)
+
+           if (a[i][j]==max) a[i][j]=mincol[j];
 
    for (i=1; i<=n; ++i)
 
@@ -52,9 +54,9 @@ int main()
 
        for (j=1; j<=m; ++j)
 
-           cout << a[i][j] << " ";
+           g << a[i][j] << " ";
 
-       cout << "\n";
+       g << "\n";
 
    }
 
