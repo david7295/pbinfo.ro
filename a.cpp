@@ -1,45 +1,53 @@
-#include <iostream>
+#include <iostream>
 
-using namespace std;
+using namespace std;
 
-int n,k,a[1001],i,minim,maxim,j,S;
+int main()
 
-int main()
 {
 
-    cin >> n;
+   int v[1001], n, i, j, subsiruri=0, x;
 
-    for(i=1;i<=n;i++)
-     cin >> a[i];
+   cin>>n;
 
-    cin >>k;
+   for(i=1;i<=n;i++)
 
-    minim=a[1];
-    maxim=a[1];
+       cin>>v[i];
 
-    for(i=1;i<=n;i++)
-    {
-        if(a[i]<minim) minim=a[i];
-        if(a[i]>maxim) maxim=a[i];
-    }
+   while(n){
 
-   while(j<=k)
-    for(minim=minim;minim<=maxim;minim++)
-     for(i=1;i<=n;i++)
-      if(minim==a[i])
-             {
-                  j++;
-                  if(j<=k)
-                   a[i]=-a[i];
+       subsiruri++;
 
-             }
+       x=v[1];
 
+       for(j=1;j<n;j++)
 
+           v[j]=v[j+1];
 
-    for(i=1;i<=n;i++)
-     S+=a[i];
+       n--;
 
-    cout << S;
+       for(i=1;i<=n;i++)
 
-    return 0;
+       if(x<v[i]){
+
+           x=v[i];
+
+           for(j=i;j<n;j++)
+
+               v[j]=v[j+1];
+
+           n--;
+
+           i--;
+
+       }
+
+   }
+
+   cout<<'\n';
+
+   cout<<subsiruri;
+
+   return 0;
+
 }
