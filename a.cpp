@@ -1,71 +1,81 @@
 #include <fstream>
-#include <vector>
+
 #include <algorithm>
+
 using namespace std;
 
-#define Nmax 100002
-#define Mod 666013
+ifstream fi("clase.in");
 
-ifstream fin ( "gasti.in" );
-ofstream fout ( "gasti.out" );
+ofstream fo("clase.out");
 
-vector < int > G[Nmax];
-int Gasca[Nmax], Members[Nmax], Cate[Nmax];
+int n;
 
-int cnt = 0;
-void DFS ( int node, int gasca ){
+long long A[10001];
 
-    cnt++;
-    Gasca[node] = gasca;
+int m;
 
-    vector < int > :: iterator it;
-    for ( it = G[node].begin(); it != G[node].end(); ++it ){
-        if ( !Gasca[*it] )
-            DFS ( *it, gasca );
-    }
-}
+long long B[10001];
 
-int main(){
+int rez;
 
-    int N, M;
+int i,j;
 
-    fin >> N >> M;
-    for ( int i = 1; i <= M; ++i ){
-        int x, y;
-        fin >> x >> y;
-        G[x].push_back ( y );
-        G[y].push_back ( x );
-    }
+int main()
 
-    int gasti = 0, max1 = -1, max2 = -1;
-    for ( int i = 1; i <= N; ++i ){
-        if ( !Gasca[i] ){
-            cnt = 0;
-            DFS ( i, ++gasti );
-            Members[gasti] = cnt;
-            Cate[Members[gasti]]++;
+{
 
-            if ( Members[gasti] > max1 ){
-                max2 = max1;
-                max1 = Members[gasti];
-            }
-            else if ( Members[gasti] > max2 )
-                max2 = Members[gasti];
-        }
-    }
+   fi>>n;
 
-    long long x, y;
-    if ( max1 != max2 ){
-        x = ( 1LL * Cate[max1] * max1 ) % Mod;
-        y = ( 1LL * Cate[max2] * max2 ) % Mod;
-    }
-    else{
-        x = ( 1LL * max1 * max1 ) % Mod;
-        y = ( 1LL * Cate[max1] * ( Cate[max1]-1 ) / 2 ) % Mod;
-    }
-    long long rez = ( x * y ) % Mod;
+   for (int i=1;i<=n;i++)
 
-    fout << gasti << " " << rez;
+       fi>>A[i];
 
-    return 0;
+   fi>>m;
+
+   for (int i=1;i<=m;i++)
+
+       fi>>B[i];
+
+   sort(A+1,A+n+1);
+
+   sort(B+1,B+m+1);
+
+   i=1;
+
+   j=1;
+
+   rez=0;
+
+   while (i<=n && j<=m)
+
+       if (A[i]==B[j])
+
+       {
+
+           rez++;
+
+           i++;
+
+           j++;
+
+       }
+
+       else
+
+           if (A[i]<B[j])
+
+               i++;
+
+           else
+
+               j++;
+
+   fo<<rez;
+
+   fi.close();
+
+   fo.close();
+
+   return 0;
+
 }
