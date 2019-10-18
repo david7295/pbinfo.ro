@@ -2,85 +2,25 @@
 
 using namespace std;
 
-long long n,b,r,k,x,s,i,nr ;
-
 int main()
 
 {
 
-   cin >> n >> b >> r ;
+   int n, b, zecimal=0, z=1;
 
-   // numarul cifrelor lui r
+   cin >> n >> b;
 
-   k = 0 ;
-
-   x = r ;
-
-   while ( x != 0 )
+   while (n)
 
    {
 
-       k++ ;
+       zecimal= zecimal+n%10*z;
 
-       x = x / 10 ;
+        n/=10; z=z*b;
 
    }
 
-   // afisare
-
-   if ( k > n ) cout << -1 ;
-
-   else if ( k == n ) cout << r ;
-
-        else
-
-          {
-
-             s = 1 ;
-
-             for ( i = 2 ; i <= n ; i++ ) s = ( s * 10 ) % b ;
-
-             if ( s <= r ) nr = r - s ;
-
-             else nr = b - s + r ;
-
-             if ( nr == 0 )
-
-             {
-
-                 cout << 1 ;
-
-                 for ( i=1 ; i<=n-1 ; i++ ) cout << 0 ;
-
-             }
-
-             else
-
-             {
-
-             k = 0 ;
-
-             x = nr ;
-
-             while ( x != 0 )
-
-              {
-
-                k++ ;
-
-                x = x / 10 ;
-
-              }
-
-             cout << 1 ;
-
-             for ( i=1 ; i<=n-k-1 ; i++ ) cout << 0 ;
-
-             cout << nr ;
-
-             }
-
-          }
+   cout  << zecimal;
 
    return 0;
 
