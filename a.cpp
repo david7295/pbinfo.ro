@@ -1,55 +1,49 @@
 #include <iostream>
 
-#include <fstream>
+#include <cstring>
 
 using namespace std;
 
-ifstream f("alo.in");
+char s[201], vocale[]="AEIOUaeiou", chmediu;
 
-ofstream g("alo.out");
+int n, i, suma, contor;
 
-int E, N, Nr, D, i, suma, prima, ultima;
+bool bun(char ch)
+
+{
+
+   if (ch!=' ' && !strchr(vocale,ch) && !(ch>='A' && ch<='Z')) return 1;
+
+   else return 0;
+
+}
 
 int main()
 
 {
 
-   f >> E >> N;
+   cin.getline(s,201);
 
-   suma=E;
+   n=strlen(s);
 
-   for (i=1; i<=N; ++i)
+   for (i=0; i<n; ++i)
 
    {
 
-      f >> Nr >> D;
+       if (bun(s[i]))
 
-      prima=Nr/10000;
+       {
 
-      ultima=Nr%10;
+           ++contor;
 
-      if (prima==1)
+           suma+=(int)s[i];
 
-      {
-
-          if (ultima==9) suma+=0;
-
-          else suma=suma-2*D;
-
-      }
-
-      else
-
-      {
-
-          if (ultima==5) suma=suma+1*D;
-
-          else suma=suma;
-
-      }
+       }
 
    }
 
-   g << suma;
+   chmediu=(char)(suma/contor);
+
+   cout << chmediu;
 
 }
