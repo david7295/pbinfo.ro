@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -6,22 +6,14 @@ int main()
 
 {
 
-   int n, b, zecimal=0, z=1;
+   int ip,in,cif;
 
-   cin >> n >> b;
+   double x=5*sqrtl(2)-7,n,p,pp;
 
-   while (n)
+   cin>>n;
 
-   {
+   for(int i=1;i<=n;i++)
 
-       zecimal= zecimal+n%10*z;
-
-        n/=10; z=z*b;
-
-   }
-
-   cout  << zecimal;
-
-   return 0;
+       cout<<0;
 
 }
