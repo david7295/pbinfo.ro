@@ -1,23 +1,55 @@
 #include <iostream>
-using namespace std;
-long long int n, maxim;
-bool ci;
 
-int main() {
-  cin>>n;   
-  while (n>0) {  
-   if (n%2==1) {      
-     ci=true;     
-     maxim = max(maxim, n%10);  }  
-     else {      
-       if (ci==true)   
-          ci=true;     
-       else            
-         ci=false;  }   
-    n/=10;    }  
-   if (ci==false)  
-     cout<<"nu exista"; 
-   else      
-     cout<<maxim;   
-  return 0;
+#include <fstream>
+
+using namespace std;
+
+ifstream f("alo.in");
+
+ofstream g("alo.out");
+
+int E, N, Nr, D, i, suma, prima, ultima;
+
+int main()
+
+{
+
+   f >> E >> N;
+
+   suma=E;
+
+   for (i=1; i<=N; ++i)
+
+   {
+
+      f >> Nr >> D;
+
+      prima=Nr/10000;
+
+      ultima=Nr%10;
+
+      if (prima==1)
+
+      {
+
+          if (ultima==9) suma+=0;
+
+          else suma=suma-2*D;
+
+      }
+
+      else
+
+      {
+
+          if (ultima==5) suma=suma+1*D;
+
+          else suma=suma;
+
+      }
+
+   }
+
+   g << suma;
+
 }
