@@ -1,80 +1,86 @@
-#include <fstream>
-
-#include <algorithm>
+#include <iostream>
 
 using namespace std;
 
-ifstream fi("clase.in");
-
-ofstream fo("clase.out");
-
-int n;
-
-long long A[10001];
-
-int m;
-
-long long B[10001];
-
-int rez;
-
-int i,j;
+long long n,b,r,k,x,s,i,nr ;
 
 int main()
 
 {
 
-   fi>>n;
+   cin >> n >> b >> r ;
 
-   for (int i=1;i<=n;i++)
+   // numarul cifrelor lui r
 
-       fi>>A[i];
+   k = 0 ;
 
-   fi>>m;
+   x = r ;
 
-   for (int i=1;i<=m;i++)
+   while ( x != 0 )
 
-       fi>>B[i];
+   {
 
-   sort(A+1,A+n+1);
+       k++ ;
 
-   sort(B+1,B+m+1);
+       x = x / 10 ;
 
-   i=1;
+   }
 
-   j=1;
+   // afisare
 
-   rez=0;
+   if ( k > n ) cout << -1 ;
 
-   while (i<=n && j<=m)
+   else if ( k == n ) cout << r ;
 
-       if (A[i]==B[j])
+        else
 
-       {
+          {
 
-           rez++;
+             s = 1 ;
 
-           i++;
+             for ( i = 2 ; i <= n ; i++ ) s = ( s * 10 ) % b ;
 
-           j++;
+             if ( s <= r ) nr = r - s ;
 
-       }
+             else nr = b - s + r ;
 
-       else
+             if ( nr == 0 )
 
-           if (A[i]<B[j])
+             {
 
-               i++;
+                 cout << 1 ;
 
-           else
+                 for ( i=1 ; i<=n-1 ; i++ ) cout << 0 ;
 
-               j++;
+             }
 
-   fo<<rez;
+             else
 
-   fi.close();
+             {
 
-   fo.close();
+             k = 0 ;
+
+             x = nr ;
+
+             while ( x != 0 )
+
+              {
+
+                k++ ;
+
+                x = x / 10 ;
+
+              }
+
+             cout << 1 ;
+
+             for ( i=1 ; i<=n-k-1 ; i++ ) cout << 0 ;
+
+             cout << nr ;
+
+             }
+
+          }
 
    return 0;
 
