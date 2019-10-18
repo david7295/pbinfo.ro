@@ -1,49 +1,37 @@
-#include <iostream>
-
-#include <cstring>
-
+#include<bits/stdc++.h>
 using namespace std;
-
-char s[201], vocale[]="AEIOUaeiou", chmediu;
-
-int n, i, suma, contor;
-
-bool bun(char ch)
-
-{
-
-   if (ch!=' ' && !strchr(vocale,ch) && !(ch>='A' && ch<='Z')) return 1;
-
-   else return 0;
-
-}
-
+ifstream f("limite.in");
+ofstream g("limite.out");
 int main()
-
 {
-
-   cin.getline(s,201);
-
-   n=strlen(s);
-
-   for (i=0; i<n; ++i)
-
-   {
-
-       if (bun(s[i]))
-
-       {
-
-           ++contor;
-
-           suma+=(int)s[i];
-
-       }
-
-   }
-
-   chmediu=(char)(suma/contor);
-
-   cout << chmediu;
-
+    double x,n;
+    f>>n;
+    for(int i=1;i<=n;i++)
+    {
+    f>>x;
+    if(x>=-128&&x<=127)
+    g<<"char"<<endl;
+    else
+    if(x>=0&&x<=256)
+    g<<"unsigned char"<<endl;
+    else
+    if(x>=-32768&&x<=32767)
+    g<<"short"<<endl;
+    else
+    if(x>=0&&x<=65535)
+    g<<"unsigned short"<<endl;
+    else
+    if(x>=-2147483648&&x<=2147483647)
+    g<<"int"<<endl;
+    else
+    if(x>=0&&x<=4294967295)
+    g<<"unsigned int"<<endl;
+    else
+    if(x>=-9223372036854775808&&x<=9223372036854775807)
+    g<<"long long"<<endl;
+    else
+    if(x>=0&&x<=18446744073709551615)
+    g<<"unsigned long long"<<endl;
+    }
+    return 0;
 }
