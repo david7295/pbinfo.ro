@@ -1,25 +1,23 @@
 #include <iostream>
-
 using namespace std;
+long long int n, maxim;
+bool ci;
 
-int main()
-{
-    int p, q, n, nrP=0, nrQ=0;
-    cin >> p >> q >> n;
-    for (int i=0; i<n; i++)
-    {
-        int x; cin >> x;
-        while(x%p==0)
-        {
-            x /= p;
-            nrP++;
-        }
-        while (x%q==0)
-        {
-            x /= q;
-            nrQ++;
-        }
-    }
-    cout << (nrP < nrQ? nrP:nrQ);
-    return 0;
+int main() {
+  cin>>n;   
+  while (n>0) {  
+   if (n%2==1) {      
+     ci=true;     
+     maxim = max(maxim, n%10);  }  
+     else {      
+       if (ci==true)   
+          ci=true;     
+       else            
+         ci=false;  }   
+    n/=10;    }  
+   if (ci==false)  
+     cout<<"nu exista"; 
+   else      
+     cout<<maxim;   
+  return 0;
 }
