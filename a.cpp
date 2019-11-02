@@ -1,47 +1,26 @@
-#include <iostream>
-
 #include <fstream>
-
 using namespace std;
 
+ifstream fin("platou3.in");
+ofstream fout("platou3.out");
+
 int main()
-
 {
-
-   int n, a, k, len, b, i;
-
-   ifstream f("platou2.in");
-
-   ofstream g("platou2.out");
-
-   f >> n >> a;
-
-   len=1; k=1; b=a;
-
-   for (i=2; i<=n; ++i)
-
-   {
-
-       f >> a;
-
-       if (a>b) ++len;
-
-       else
-
-       { if (len>k) k=len;
-
-           len=1;
-
-       }
-
-       b=a;
-
-   }
-
-   if (len>k) k=len;
-
-   g << k;
-
- return 0;
-
+    int n, x, secv = 0, mx = 0;
+    
+    fin>>n;
+    for(int i = 0; i < n; i++)
+       {
+       fin>>x;
+       if(x > 0) secv++;
+       else
+       {
+           
+          if(secv > mx) mx = secv;
+             secv = 0;
+       }        
+    }
+    if(secv > mx) mx = secv;
+    
+    fout<<mx;
 }
