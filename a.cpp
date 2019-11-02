@@ -1,25 +1,22 @@
-#include <iostream>
+#include <iostream>
+using namespace std;
 
-using namespace std;
-
-int main()
-
+int main()
 {
+char cif;
+int r , s = 0 , k , c;
+cin >> k;
+for(int i = 1 ; i <= k ; i++)
+{
+cin >> cif; 
+s = s + cif - '0';
+}
+r = s % k; c = s / k;
+for(int i = 1 ; i <= k - r ; i++)
+cout << c;
+c ++;
+for(int i = 1 ; i <= r ; i ++)
+cout << c;
 
-int F, B, n, F1, B1;
-
-cin >> F >> B >> n;
-
-F1=3*n;
-
-B1=2*n;
-
-F=F1*F;
-
-B=B1*B;
-
-cout << F+B;
-
-return 0;
-
+return 0;
 }
