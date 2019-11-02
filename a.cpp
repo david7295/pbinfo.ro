@@ -1,22 +1,61 @@
-#include <fstream>
+#include <iostream>
+
 using namespace std;
 
-ifstream fin("platou4.in");
-ofstream fout("platou4.out");
+int gen(int k,int l){
 
-int main()
-{
-    int x, n = 0, p1 = 0, p2;
-    
-    while(fin>>x)
-       {
-        n++;
-        if(x % 2 == 0)
-        {
-            if(!p1) p1 = n;
-            else p2 = n;
-        }
-    }
-    
-    fout<<p2 - p1 + 1;
+int s = 0;
+
+for(int i = 1; i <= l; i++){
+
+ s += ((k&1) == 1 ? 1 : -1)*i*i;
+
+ k>>=1;
+
+}
+
+return s;
+
+}
+
+void writebin(int x, int l){
+
+   for(int i = 1; i <= l; i++){
+
+ cout << ((x&1) ? '+' : '-');
+
+       x>>=1;
+
+   }
+
+}
+
+int main(){
+
+int n;
+
+   cin >> n;
+
+   int s;
+
+   bool f = false;
+
+   for(int j = 1; j <= 15; j++){
+
+       for(int k = 0; k < 1<<j; k++){
+
+           s = gen(k, j);
+
+           if(s==n){
+
+               f = true;
+
+           writebin(k,j);break;}
+
+       }
+
+       if(f)break;
+
+   }
+
 }
