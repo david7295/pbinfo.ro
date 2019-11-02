@@ -1,26 +1,22 @@
 #include <fstream>
 using namespace std;
 
-ifstream fin("platou3.in");
-ofstream fout("platou3.out");
+ifstream fin("platou4.in");
+ofstream fout("platou4.out");
 
 int main()
 {
-    int n, x, secv = 0, mx = 0;
+    int x, n = 0, p1 = 0, p2;
     
-    fin>>n;
-    for(int i = 0; i < n; i++)
+    while(fin>>x)
        {
-       fin>>x;
-       if(x > 0) secv++;
-       else
-       {
-           
-          if(secv > mx) mx = secv;
-             secv = 0;
-       }        
+        n++;
+        if(x % 2 == 0)
+        {
+            if(!p1) p1 = n;
+            else p2 = n;
+        }
     }
-    if(secv > mx) mx = secv;
     
-    fout<<mx;
+    fout<<p2 - p1 + 1;
 }
