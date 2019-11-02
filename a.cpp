@@ -1,22 +1,38 @@
-#include <iostream>
-using namespace std;
+#include <iostream>
+#include <fstream>
 
-int main()
+using namespace std;
+
+ifstream fin("platou1.in");
+ofstream fout("platou1.out");
+
+int main()
 {
-char cif;
-int r , s = 0 , k , c;
-cin >> k;
-for(int i = 1 ; i <= k ; i++)
+int xmin=10, k=0,lg=1,x,y;
+fin>>x;
+
+while(fin>>y)
+if(x==y)
+lg++;
+else
 {
-cin >> cif; 
-s = s + cif - '0';
+if(k<lg)
+{
+k=lg;
+xmin=x;
 }
-r = s % k; c = s / k;
-for(int i = 1 ; i <= k - r ; i++)
-cout << c;
-c ++;
-for(int i = 1 ; i <= r ; i ++)
-cout << c;
+else
+if(k==lg && xmin>x)
+xmin=x;
 
-return 0;
+lg=1;
+x=y;
+}
+
+fout<<k<<" "<<xmin<<endl;
+
+fin.close();
+fout.close();
+
+return 0;
 }
