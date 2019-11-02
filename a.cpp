@@ -1,38 +1,47 @@
 #include <iostream>
+
 #include <fstream>
 
 using namespace std;
 
-ifstream fin("platou1.in");
-ofstream fout("platou1.out");
-
 int main()
+
 {
-int xmin=10, k=0,lg=1,x,y;
-fin>>x;
 
-while(fin>>y)
-if(x==y)
-lg++;
-else
-{
-if(k<lg)
-{
-k=lg;
-xmin=x;
-}
-else
-if(k==lg && xmin>x)
-xmin=x;
+   int n, a, k, len, b, i;
 
-lg=1;
-x=y;
-}
+   ifstream f("platou2.in");
 
-fout<<k<<" "<<xmin<<endl;
+   ofstream g("platou2.out");
 
-fin.close();
-fout.close();
+   f >> n >> a;
 
-return 0;
+   len=1; k=1; b=a;
+
+   for (i=2; i<=n; ++i)
+
+   {
+
+       f >> a;
+
+       if (a>b) ++len;
+
+       else
+
+       { if (len>k) k=len;
+
+           len=1;
+
+       }
+
+       b=a;
+
+   }
+
+   if (len>k) k=len;
+
+   g << k;
+
+ return 0;
+
 }
