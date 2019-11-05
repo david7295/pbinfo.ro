@@ -1,86 +1,120 @@
-#include <iostream>
+#include <fstream>
 
 using namespace std;
 
-int n,m,k;
+ifstream fin("accesibil.in");
+ofstream fout("accesibil.out");
 
-	//starts from 1
-int wall[101][101]={{0, 0, 0, 0, 0, 0},
-					{0,	3, 5, 4, 5, 1}, 
-					{0, 2, 1, 1, 5, 3}, 
-					{0, 1, 1, 5, 5, 1}, 
-					{0, 5, 5, 1, 4, 3}};		//FOR TESTS-DEFAULT		
-//starts from 1
-int weapon_pos,weapon[101]={0,1,5,1};		//FOR TESTS-DEFAULT		
+int accesibil(long long n);
+int caccesibil(long long n);
+int nrcifre(long long n);
 
-void show_arr();				//used for debugging-shows the content of 'wall' aray
-void Attack_Wall(int weapon);	//simulates the attack of the weapon-destroys bricks(marking them with 0)
-void Simulate_Gravity();		//simulates gravity(bricks falling on the 'ground')
+int main()
+{
 
-int main(){
+int p,k,n;
+    fin >> p >> k >> n;
 
-	cin>>n>>m>>k;
-	n=4;m=5;k=3; //FOR TESTS-DEFAULT
-	show_arr();
+    if(p==1)
+    {
+        long long a=-1,b=-1,c=-1,x;
+        for(;n;n--)
+        {
+            fin >> x;
+            if(accesibil(x) and x>=c)
+            {
+                c=x;
+                if(c>=b)
+                    swap(c,b);
+                if(b>=a)
+                    swap(a,b);
+            }
+        }
+        fout << c << " " << b << " " << a;
+    }
+    if(p==2)
+    {
+        int nr=0;
+        long long x;
+        for(;n;n--)
+        {
+            fin >> x;
+            if(!accesibil(x) and caccesibil(x))
+                nr++;
+        }
+        fout << nr;
+    }
+    if(p==3)
+    {
+        long long Min=0,Max=0,q=1;
+        if(k==9)
+            fout << 123456789;
+        else
+        {
+            for(int i=1;i<=k;i++)
+            {
+                Min=Min*10+i;
+                Max+=(10-i)*q;
+                q*=10;
+            }
+            fout << Min << " " << Max;
+        }
+    }
+    if(p==4)
+        fout << (5-(k+1)/2) << " " << (5-k/2);
 
-	for(int i=1;i<=n;i++)
-		for(int j=1;j<=m;j++){
-			//cin>>wall[i][j];  //COMMENTED FOR TESTS-DEFAULT (decomment this afterwards)
+    return 0;
 
-		}
-
-    for(int i=1;i<=k;i++){
-		Attack_Wall(weapon[i]);
-	}
-
-	show_arr();
-	system("pause");
-	return 0;
 }
-
-void Attack_Wall(int weapon){
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=m;j++){
-			if(wall[i][j]==weapon) wall[i][j]=0;
-		}
-	}
-	Simulate_Gravity();
+int accesibil(long long n)
+{
+    if(n<10)
+        return 0;
+    int k=n%10,c;
+    while(n>9)
+    {
+        n/=10;
+        c=n%10;
+        if(c+1!=k)
+            return 0;
+        else
+            k=c;
+    }
+    return 1;
 }
-
-void Simulate_Gravity(){
-	for(int i=n-1;i>0;i--){		//from DOWN to UP
-		for(int j=1;j<=m;j++){
-			if(wall[i+1][j]==0) {		//i+1 e randul de dedesubt..si daca e gol(adica 0)
-				wall[i+1][j]=wall[i][j];//aici ma mut cu caramida
-				wall[i][j]=0;			//apoi fa-l pe acesta 0
-			}
-		}
-	}
-
-		//EX.:
-		//  BBBBBB					n=0    <-----
-		//	BBBBBB								|
-		//	B0BBB0								|
-		//	BBBBBB  <--i=n-1 start from here to /  (vor 'cadea' in groapile notate cu 0)
-		//	B0B0BB  <--n
-		//     |
-		//	   |
-		//	   V
-		//	BBBBBB
-		//	BBBBBB
-		//	B0BBB0
-		//	B0B0BB
-		//	BBBBBB...si continua
+int caccesibil(long long n)
+{
+    if(n<100)
+        return 0;
+    int nr=nrcifre(n);
+    for(;nr;nr--)
+    {
+        int q=0;
+        long long x=0,p=n,k=1;
+        while(p!=0)
+        {
+            q++;
+            if(q!=nr)
+            {
+                x+=k*(p%10);
+                k*=10;
+            }
+            p/=10;
+        }
+        if(accesibil(x))
+return 1;
 }
-
-
-void show_arr(){
-	for(int i=1;i<=n;i++){
-		for(int j=1;j<=m;j++){
-			cout<<wall[i][j]<<" ";
-
-		}
-		cout<<endl;
-	}
-
+return 0;
+}
+int nrcifre(long long n)
+{
+if(n<10)
+return 1;
+int nr=0;
+while(n!=0)
+{
+n/=10;
+nr++;
+}
+return nr;
 }
