@@ -1,120 +1,30 @@
-#include <fstream>
-
-using namespace std;
-
-ifstream fin("accesibil.in");
-ofstream fout("accesibil.out");
-
-int accesibil(long long n);
-int caccesibil(long long n);
-int nrcifre(long long n);
-
-int main()
+#include <bits/stdc++.h>
+using namespace std;
+int n, i, j, v[205], x, y, s1, s2, ct;
+int main()
 {
-
-int p,k,n;
-    fin >> p >> k >> n;
-
-    if(p==1)
-    {
-        long long a=-1,b=-1,c=-1,x;
-        for(;n;n--)
-        {
-            fin >> x;
-            if(accesibil(x) and x>=c)
-            {
-                c=x;
-                if(c>=b)
-                    swap(c,b);
-                if(b>=a)
-                    swap(a,b);
-            }
-        }
-        fout << c << " " << b << " " << a;
-    }
-    if(p==2)
-    {
-        int nr=0;
-        long long x;
-        for(;n;n--)
-        {
-            fin >> x;
-            if(!accesibil(x) and caccesibil(x))
-                nr++;
-        }
-        fout << nr;
-    }
-    if(p==3)
-    {
-        long long Min=0,Max=0,q=1;
-        if(k==9)
-            fout << 123456789;
-        else
-        {
-            for(int i=1;i<=k;i++)
-            {
-                Min=Min*10+i;
-                Max+=(10-i)*q;
-                q*=10;
-            }
-            fout << Min << " " << Max;
-        }
-    }
-    if(p==4)
-        fout << (5-(k+1)/2) << " " << (5-k/2);
-
+    cin >> n;
+    for(i = 1; i <= n; i ++)
+     cin >> v[i];
+    for(i = 1; i < n; i ++)
+     for(j = i + 1; j <= n; j ++)
+      {
+          s1 = 0;
+          x = v[i];
+          while(x != 0)
+          {
+              s1 = s1 + x % 10;
+              x = x / 10;
+          }
+          s2 = 0;
+          y = v[j];
+          while(y != 0)
+          {
+              s2 = s2 + y % 10;
+              y = y / 10;
+          }
+          if(s1 == s2) ct ++;
+      }
+      cout << ct;
     return 0;
-
-}
-int accesibil(long long n)
-{
-    if(n<10)
-        return 0;
-    int k=n%10,c;
-    while(n>9)
-    {
-        n/=10;
-        c=n%10;
-        if(c+1!=k)
-            return 0;
-        else
-            k=c;
-    }
-    return 1;
-}
-int caccesibil(long long n)
-{
-    if(n<100)
-        return 0;
-    int nr=nrcifre(n);
-    for(;nr;nr--)
-    {
-        int q=0;
-        long long x=0,p=n,k=1;
-        while(p!=0)
-        {
-            q++;
-            if(q!=nr)
-            {
-                x+=k*(p%10);
-                k*=10;
-            }
-            p/=10;
-        }
-        if(accesibil(x))
-return 1;
-}
-return 0;
-}
-int nrcifre(long long n)
-{
-if(n<10)
-return 1;
-int nr=0;
-while(n!=0)
-{
-n/=10;
-nr++;
-}
-return nr;
 }
