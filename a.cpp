@@ -1,61 +1,48 @@
-#include <iostream>
+#include <iostream>
+using namespace std;
 
-using namespace std;
+void afisare(int a[100][100],int n,int m){
+int i,j;
+for(i=0;i<n;i++){
+for(j=0;j<m;j++){
+cout<<a[i][j]<<" ";
+}
+cout<<endl;
+}
+}
+int main(){
 
-int gen(int k,int l){
-
-int s = 0;
-
-for(int i = 1; i <= l; i++){
-
- s += ((k&1) == 1 ? 1 : -1)*i*i;
-
- k>>=1;
+int n,m,k,k0,i,j,trag,nr_lov,a[100][100];
+cin>>n>>m>>k;
+for(i=0;i<n;i++){
+for(j=0;j<m;j++){
+cin>>a[i][j];
+}
+}
+k0=k;
+while(k>0){
+cin>>trag;
+for(j=0;j<m;j++){
+nr_lov=0;
+for(i=n-1;i>=0;i--){
+if(a[i][j]==trag){
+nr_lov++;
 
 }
-
-return s;
-
+else{
+if(nr_lov>0){
+a[i+nr_lov][j]=a[i][j];
+}
 }
 
-void writebin(int x, int l){
-
-   for(int i = 1; i <= l; i++){
-
- cout << ((x&1) ? '+' : '-');
-
-       x>>=1;
-
-   }
-
 }
-
-int main(){
-
-int n;
-
-   cin >> n;
-
-   int s;
-
-   bool f = false;
-
-   for(int j = 1; j <= 15; j++){
-
-       for(int k = 0; k < 1<<j; k++){
-
-           s = gen(k, j);
-
-           if(s==n){
-
-               f = true;
-
-           writebin(k,j);break;}
-
-       }
-
-       if(f)break;
-
-   }
-
+for(i=0;i<nr_lov;i++){
+a[i][j]=0;
+}
+}
+k--;
+cout<<"Dupa tragerea "<<k0-k<<":\n";
+afisare(a,n,m);
+}
+return 0;
 }
