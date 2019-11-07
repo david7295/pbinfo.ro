@@ -1,50 +1,47 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
-int n;
+int a[101][101],n,m,i,j,Min,Max,p,s;
 
-unsigned long long Count(unsigned long long a);
 
 int main()
 {
 
-    cin >> n;
+    cin >> n >> m;
 
-    for(unsigned long long i=0;i<n;i++)
-    {
-        unsigned long long nr=i*(1ULL<<i)+1;
-            cout << Count(nr) << " ";
-    }
+    Min=1000001;
+    Max=-1000001;
+
+    for(i=1;i<=n;i++)
+        for(j=1;j<=m;j++)
+            {
+                cin >> a[i][j];
+                if(a[i][j]>Max) Max=a[i][j];
+                else if(a[i][j]<Min) Min=a[i][j];
+            }
+
+    for(int k=Max;k>=Min;k--)
+        for(i=1;i<=n;i++)
+            for(j=1;j<=m;j++)
+            {
+
+                if(k==a[i][j])
+                {
+
+                    if(p!=k) s=0;
+                    s++;
+                    if(k==p and s==2)
+                    {
+                        cout << k;
+                        return 0;
+                    }
+                    p=k;
+                }
+            }
+
+    cout << "IMPOSIBIL";
 
     return 0;
-}
 
-unsigned long long Count(unsigned long long a)
-{
-   unsigned long long count = 1, k = 0, i;
-   if (a == 1 || a == 2)
-      return a;
-   while ((a & 1) == 0)
-   {
-      k++;
-      a >>= 1;
-   }
-   if (a == 1)
-      return k + 1;
-   else
-      count = k + 1;
-   for(i = 3; i*i <= a; i += 2)
-   {
-      k = 0;
-      while(a % i == 0)
-      {
-         k++;
-         a /= i;
-      }
-      count *= (k + 1);
-   }
-   if (a > 1)
-      count <<= 1;
-   return count;
 }
