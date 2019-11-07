@@ -1,30 +1,91 @@
-#include <bits/stdc++.h>
-using namespace std;
-int n, i, j, v[205], x, y, s1, s2, ct;
-int main()
+#include <iostream>
+
+#include <algorithm>
+
+using namespace std;
+
+short a[13], b[13], nrmin, nrmax, i, j, nrcifa, nrcifb;
+
+long long m, n;
+
+int main()
+
 {
-    cin >> n;
-    for(i = 1; i <= n; i ++)
-     cin >> v[i];
-    for(i = 1; i < n; i ++)
-     for(j = i + 1; j <= n; j ++)
-      {
-          s1 = 0;
-          x = v[i];
-          while(x != 0)
-          {
-              s1 = s1 + x % 10;
-              x = x / 10;
-          }
-          s2 = 0;
-          y = v[j];
-          while(y != 0)
-          {
-              s2 = s2 + y % 10;
-              y = y / 10;
-          }
-          if(s1 == s2) ct ++;
-      }
-      cout << ct;
-    return 0;
+
+   cin >> m >> n;
+
+   while (m)
+
+   {
+
+       ++nrcifa; a[nrcifa]=m%10;
+
+       m/=10;
+
+   }
+
+   sort(a+1, a+nrcifa+1);
+
+   while (n)
+
+   {
+
+       ++nrcifb; b[nrcifb]=n%10;
+
+       n/=10;
+
+   }
+
+   sort(b+1, b+nrcifb+1);
+
+   nrmax=max(a[nrcifa],b[nrcifb])*10+min(a[nrcifa],b[nrcifb]);
+
+   if (a[1] && b[1]) nrmin=min(a[1],b[1])*10+max(a[1],b[1]);
+
+   else
+
+   {
+
+       if (a[1]==0 && b[1])
+
+       {
+
+           j=1; while (a[j]==0) ++j;
+
+           if (a[j]<b[1]) nrmin=a[j]*10+b[1];
+
+           else nrmin=b[1]*10;
+
+       }
+
+       if (a[1] && b[1]==0)
+
+       {
+
+           j=1; while (b[j]==0) ++j;
+
+           if (b[j]<a[1]) nrmin=b[j]*10+a[1];
+
+           else nrmin=a[1]*10;
+
+       }
+
+       if (a[1]==0 && b[1]==0)
+
+       {
+
+           j=1; while (a[j]==0) ++j;
+
+           i=1; while (b[i]==0) ++i;
+
+           nrmin=min(a[j], b[i])*10;
+
+       }
+
+   }
+
+   cout << nrmin << " " << nrmax;
+
+   return 0;
+
 }
