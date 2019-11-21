@@ -1,45 +1,20 @@
-#include <iostream>
-
-using namespace std;
-
-int n,k,a[1001],i,minim,maxim,j,S;
-
-int main()
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+ ifstream in("prize.in");
+ofstream out("prize.out");
+int n;
+int tmp;
+in>>n;
+int s=0;
+for(int i=0;i<n;i++)
 {
 
-    cin >> n;
-
-    for(i=1;i<=n;i++)
-     cin >> a[i];
-
-    cin >>k;
-
-    minim=a[1];
-    maxim=a[1];
-
-    for(i=1;i<=n;i++)
-    {
-        if(a[i]<minim) minim=a[i];
-        if(a[i]>maxim) maxim=a[i];
-    }
-
-   while(j<=k)
-    for(minim=minim;minim<=maxim;minim++)
-     for(i=1;i<=n;i++)
-      if(minim==a[i])
-             {
-                  j++;
-                  if(j<=k)
-                   a[i]=-a[i];
-
-             }
-
-
-
-    for(i=1;i<=n;i++)
-     S+=a[i];
-
-    cout << S;
-
-    return 0;
+in>>tmp;
+s=s+(tmp-1);
+}
+s=s+1;
+out<<s;
 }
