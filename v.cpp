@@ -1,50 +1,98 @@
 #include <iostream>
 
-#include <fstream>
+#include <cmath>
+
+#include <algorithm>
 
 using namespace std;
 
-ifstream fin("easyquery.in");
+struct elev{
 
-ofstream fout("easyquery.out");
+string nume,prenume;
 
-long long n,i,j,x,y,p,op,v[100002],A[100003],B[100003],T;
+   double medie1,medie2,medie3;
 
-int main()
+   double mediegen;
 
-{
+};
 
-  fin >> n;
+elev elevi[101];
 
-  for (i=1; i<=n; ++i) fin >> v[i];
+bool cmp(elev e1, elev e2){
 
-  fin >> T;
+   if(e1.mediegen == e2.mediegen){
 
-  for (i=1; i<=T; ++i)
+    if(e1.nume == e2.nume)
 
-  {
+           return e1.prenume < e2.prenume;
 
-      fin >> op >> x >> y >> p;
+       else return e1.nume < e2.nume;
 
-      if (op==1) { B[x]+=p; B[y+1]-=p; }
+   }
 
-      else { B[x]+=-p; B[y+1]-=-p; }
+return e1.mediegen > e2.mediegen;
 
-  }
+}
 
-  A[1]=B[1];
+int main(){
 
-   for (i=2; i<=n; ++i)
+int n,p;
 
-       A[i]=A[i-1]+B[i];
+   cin >> n >> p;
 
-   for (i=1; i<=n; ++i) v[i]+=A[i];
+   for(int i = 0; i < n; i++){
 
-   for (i=1; i<=n; ++i)
+    cin >> elevi[i].nume >> elevi[i].prenume >> elevi[i].medie1 >> elevi[i].medie2 >> elevi[i].medie3;
 
-   {
+    elevi[i].mediegen = (elevi[i].medie1 + elevi[i].medie2 + elevi[i].medie3)/3.0;
 
-       fout << v[i] << " ";
+   }
+
+   sort(&elevi[0], &elevi[n], cmp);
+
+   double medie = 0;
+
+   for(int i = 0; i < n; i++)
+
+    medie += elevi[i].mediegen;
+
+medie = medie / (1.0*n);
+
+   medie = floor(medie * 100.0) / 100.0;
+
+           
+
+   switch(p){
+
+       case 1:{
+
+           int cnt = 0;
+
+           for(int i = 0; i < n; i++){
+
+            if(elevi[i].mediegen > medie)
+
+                cnt++;
+
+           }
+
+           cout << cnt;
+
+           break;
+
+       }
+
+       case 2:{
+
+           cout << medie << "\n";
+
+           for(int i = 0; i < n; i++)
+
+               cout << elevi[i].nume << " " << elevi[i].prenume << " " << elevi[i].mediegen << "\n";
+
+           break;
+
+       }
 
    }
 
