@@ -1,90 +1,62 @@
-#include <fstream>
+#include <iostream>
 
-#include <cmath>
+#include <fstream>
 
 using namespace std;
 
-ifstream f("vterminal.in");
+ifstream f("arbore.in");
 
-ofstream g("vterminal.out");
+ofstream g("arbore.out");
 
-int Prim(int n)
+int tata[105],n,x,y,k,a[105][105],viz[105];
+
+void dfs(int k)
+
+{ int i;
+
+viz[k]=1;
+
+for(i=1;i<=n;i++)
 
 {
 
-   if(n==0||n==1)  
-
-       return 0;
-
-   else
+   if(viz[i]==0 && a[k][i])
 
    {
 
-       for(int d=2;d<=sqrt(n);d++)
+       tata[i]=k;
 
-           if(n%d==0)  
-
-               return 0;
-
-       return 1;
+       dfs(i);
 
    }
 
 }
 
-int n, x;
+}
 
 int main()
 
+{ int i;
+
+f>>n>>k;
+
+for(i=1;i<n;i++)
+
 {
 
-   f>>n;
+   f>>x>>y;
 
-   int  s=0;
+   a[x][y]=a[y][x]=1;
 
-   bool prime=false;
+}
 
-   for(int i=1;i<=n;i++)
+dfs(k);
 
-   {
+viz[k]=1;
 
-       f >> x;
+for(i=1;i<=n;i++)
 
-       if(Prim(x)==1)
-
-       {
-
-           prime=true;
-
-           x%=9;
-
-           if(x==0)  
-
-           s+=9;
-
-           else  
-
-           s+=x;
-
-       }
-
-   }
-
-   s%=9;
-
-   if(!prime)
-
-   g<<0;
-
-   else
-
-   if(s==0)
-
-   g<<9;
-
-   else
-
-   g<<s;
+   g<<tata[i]<<" ";
 
    return 0;
 
