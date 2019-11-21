@@ -1,99 +1,91 @@
-#include <iostream>
+#include <fstream>
 
 #include <cmath>
 
-#include <algorithm>
-
 using namespace std;
 
-struct elev{
+ifstream f("vterminal.in");
 
-string nume,prenume;
+ofstream g("vterminal.out");
 
-   double medie1,medie2,medie3;
+int Prim(int n)
 
-   double mediegen;
+{
 
-};
+   if(n==0||n==1)  
 
-elev elevi[101];
+       return 0;
 
-bool cmp(elev e1, elev e2){
+   else
 
-   if(e1.mediegen == e2.mediegen){
+   {
 
-    if(e1.nume == e2.nume)
+       for(int d=2;d<=sqrt(n);d++)
 
-           return e1.prenume < e2.prenume;
+           if(n%d==0)  
 
-       else return e1.nume < e2.nume;
+               return 0;
+
+       return 1;
 
    }
-
-return e1.mediegen > e2.mediegen;
 
 }
 
-int main(){
+int n, x;
 
-int n,p;
+int main()
 
-   cin >> n >> p;
+{
 
-   for(int i = 0; i < n; i++){
+   f>>n;
 
-    cin >> elevi[i].nume >> elevi[i].prenume >> elevi[i].medie1 >> elevi[i].medie2 >> elevi[i].medie3;
+   int  s=0;
 
-    elevi[i].mediegen = (elevi[i].medie1 + elevi[i].medie2 + elevi[i].medie3)/3.0;
+   bool prime=false;
 
-   }
+   for(int i=1;i<=n;i++)
 
-   sort(&elevi[0], &elevi[n], cmp);
+   {
 
-   double medie = 0;
+       f >> x;
 
-   for(int i = 0; i < n; i++)
+       if(Prim(x)==1)
 
-    medie += elevi[i].mediegen;
+       {
 
-medie = medie / (1.0*n);
+           prime=true;
 
-   medie = floor(medie * 100.0) / 100.0;
+           x%=9;
 
-           
+           if(x==0)  
 
-   switch(p){
+           s+=9;
 
-       case 1:{
+           else  
 
-           int cnt = 0;
-
-           for(int i = 0; i < n; i++){
-
-            if(elevi[i].mediegen > medie)
-
-                cnt++;
-
-           }
-
-           cout << cnt;
-
-           break;
-
-       }
-
-       case 2:{
-
-           cout << medie << "\n";
-
-           for(int i = 0; i < n; i++)
-
-               cout << elevi[i].nume << " " << elevi[i].prenume << " " << elevi[i].mediegen << "\n";
-
-           break;
+           s+=x;
 
        }
 
    }
+
+   s%=9;
+
+   if(!prime)
+
+   g<<0;
+
+   else
+
+   if(s==0)
+
+   g<<9;
+
+   else
+
+   g<<s;
+
+   return 0;
 
 }
