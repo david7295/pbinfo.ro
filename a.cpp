@@ -1,47 +1,77 @@
-#include <iostream>
+#include <iostream>
 
-using namespace std;
+#include <cstring>
 
-int a[101][101],n,m,i,j,Min,Max,p,s;
+using namespace std;
 
+char s[101], cuv[50][10], ss[10]="", t[10], ch, *p;
 
-int main()
+short n, i, k, j;
+
+int main()
+
 {
 
-    cin >> n >> m;
+   cin.getline(s,101);
 
-    Min=1000001;
-    Max=-1000001;
+   p=strtok(s," ");
 
-    for(i=1;i<=n;i++)
-        for(j=1;j<=m;j++)
-            {
-                cin >> a[i][j];
-                if(a[i][j]>Max) Max=a[i][j];
-                else if(a[i][j]<Min) Min=a[i][j];
-            }
+   while (p)
 
-    for(int k=Max;k>=Min;k--)
-        for(i=1;i<=n;i++)
-            for(j=1;j<=m;j++)
-            {
+   {
 
-                if(k==a[i][j])
-                {
+       ++k; strcpy(cuv[k],p);
 
-                    if(p!=k) s=0;
-                    s++;
-                    if(k==p and s==2)
-                    {
-                        cout << k;
-                        return 0;
-                    }
-                    p=k;
-                }
-            }
+       p=strtok(NULL, " ");
 
-    cout << "IMPOSIBIL";
+   }
 
-    return 0;
+   short gasit=0;
+
+   for (i=1; i<=k; ++i)
+
+   {
+
+       n=strlen(cuv[i]);
+
+       if (n%2)
+
+       {
+
+           for (j=1; j<=k; ++j)
+
+           {
+
+               if (strlen(cuv[j])==n+1)
+
+               {
+
+                  ch=cuv[i][n/2];
+
+                  strcpy(ss,cuv[i]);
+
+                  strcpy(t,ss+n/2);
+
+                  strcpy(ss+n/2+1,t);
+
+                  ss[n/2]=ch;
+
+                  if (strcmp(cuv[i],ss)) gasit=1;
+
+               }
+
+               if (gasit) break;
+
+           }
+
+       }
+
+       if (gasit) break;
+
+   }
+
+   if (gasit) cout << "DA";
+
+   else cout << "NU";
 
 }
