@@ -1,37 +1,48 @@
-#include <bits/stdc++.h>
+#include <fstream>
 using namespace std;
-long long C, P, ga, va;
-int cer, d, nrdi, nrdp;
+ifstream f("cifre15.in");
+ofstream g("cifre15.out");
 int main()
 {
-    ifstream f("ograda.in");
-    ofstream g("ograda.out");
-    f >> cer;
-    f >> C >> P;
-    if(cer == 1)
+int n,x, d2 = 0, d5 = 0, p=1;
+f >> n;
+for(int i=1;i<=n;++i)
     {
-        va = (P - 2 * C) / 2;
-        ga = C - va;
-        g << ga << " " << va;
-    }
-    if(cer == 2)
-    {
-        for(d = 1; d * d < C; d ++)
-         if(C % d == 0)
-         {
-             if(d % 2 == 1) nrdi = nrdi + 1;
-             if((C / d) % 2 == 1) nrdi = nrdi + 1;
-         }
-         if(d * d == C && d % 2 == 1) nrdi = nrdi + 1;
+f >> x;
+while(x%2==0)
+{
+    d2++;
+    x/=2;
+}
 
-         for(d = 1; d * d < P; d ++)
-         if(P % d == 0)
-         {
-             if(d % 2 == 0) nrdp = nrdp + 1;
-             if((P / d) % 2 == 0) nrdp = nrdp + 1;
-         }
-         if(d * d == P && d % 2 == 0) nrdp = nrdp + 1;
-         g << nrdi << " " << nrdp;
+while(x%5==0)
+        {
+            d5++;
+            x/=5;
+        }
+
+p = (p * (x%10)) %10;
+}
+g << min(d2,d5) << ' ';
+int k = 0 , f = 0;
+if(d2>d5)
+    {
+        k = d2 - d5;
+        f = 2;
     }
-    return 0;
+else
+    {
+        k = d5 - d2;
+        f = 5;
+    }
+
+while (k>0)
+    {
+        p  = (p*f)%10;
+        k--;
+    }
+    g<<p;
+
+
+return 0;
 }
