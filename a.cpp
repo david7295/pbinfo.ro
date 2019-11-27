@@ -1,51 +1,33 @@
 #include <iostream>
 
-#include <fstream>
-
-#include <cstring>
-
 using namespace std;
-
-char s[255], ch;
-
-short n, i, j, cod;
 
 int main()
 
 {
 
-  cin >> s;
+char c;
 
-  n=strlen(s);
+while(cin.get(c))
 
-  for (i=0; i<n-1; ++i)
+   {
 
-  {
+       if(c >= 'A')
 
-     if (s[i]==s[i+1] || (int)s[i]-(int)s[i+1]==32 || (int)s[i]-(int)s[i+1]==-32 )
+       {
 
-     {
+           if(c >= 'a')
 
-         while (s[i]==s[i+1] || (int)s[i]-(int)s[i+1]==32 || (int)s[i]-(int)s[i+1]==-32)
+   c = (c - 'a'+ 13) % 26 + 'a';
 
-         {
+else
 
-             for (j=i; j<n-1; ++j) s[j]=s[j+1];
+   c = (c - 'A' + 13) % 26 + 'A';
 
-             --n; s[n]=0;
+}
 
-         }
+cout.put(c);
 
-          for (j=i; j<n-1; ++j) s[j]=s[j+1];
-
-             --n; s[n]=0;
-
-          i=-1;
-
-     }
-
-  }
-
-  cout << s;
+} return 0;
 
 }
