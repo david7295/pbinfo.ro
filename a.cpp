@@ -1,33 +1,26 @@
 #include <fstream>
 using namespace std;
-
-ifstream fin("crescator1.in");
-ofstream fout("crescator1.out");
+ifstream cin("mincifre.in");
+ofstream cout("mincifre.out");
+char c;
+int x[10];
 
 int main()
 {
-    int a[100000], n, x, cnt = 0, y = 0;
-
-    fin>>n;
-    for(int i = 0; i < n; ++i)
-        fin>>a[i];
-
-    fin>>x;
-    while(x > 9)
+    c=cin.get();
+    while(!cin.eof())
     {
-        for(int i = 0; i < n; ++i)
-            if(a[i] == x) cnt++;
-
-        int s = 0;
-        while(x)
-            {
-                s += x % 10;
-                x /= 10;
-            }
-        x = s;
+        x[c-48]++;
+        c=cin.get();
     }
-    for(int i = 0; i < n; ++i)
-        if(a[i] == x) cnt++;
-
-    fout<<cnt;
+    int n=1;
+    while(x[n]==0)
+        n++;
+    cout<<n;
+    x[n]--;
+    for(int i=1;i<=x[0];i++)
+        cout<<0;
+    for(int i=n;i<10;i++)
+        for(int j=1;j<=x[i];j++)
+            cout<<i;
 }
