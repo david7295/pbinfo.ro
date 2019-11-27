@@ -1,48 +1,33 @@
-#include <fstream>
-using namespace std;
-ifstream f("cifre15.in");
-ofstream g("cifre15.out");
-int main()
-{
-int n,x, d2 = 0, d5 = 0, p=1;
-f >> n;
-for(int i=1;i<=n;++i)
-    {
-f >> x;
-while(x%2==0)
-{
-    d2++;
-    x/=2;
-}
+#include <iostream>
 
-while(x%5==0)
-        {
-            d5++;
-            x/=5;
-        }
+using namespace std;
 
-p = (p * (x%10)) %10;
-}
-g << min(d2,d5) << ' ';
-int k = 0 , f = 0;
-if(d2>d5)
-    {
-        k = d2 - d5;
-        f = 2;
-    }
-else
-    {
-        k = d5 - d2;
-        f = 5;
-    }
+double r1, g1, b1, r2, g2, b2;
 
-while (k>0)
-    {
-        p  = (p*f)%10;
-        k--;
-    }
-    g<<p;
+int n;
 
+double q1, q2, q3;
 
-return 0;
+int main(){
+
+   cin >> r1 >> g1 >> b1;
+
+   cin >> r2 >> g2 >> b2;
+
+   cin >> n;
+
+   cout << r1 << ", " << g1 << ", " << b1 << "\n";
+
+   q1=r2-r1;
+
+   q2=g2-g1;
+
+   q3=b2-b1;
+
+   for (int i=1; i<n; i++){
+
+       cout << int(r1+q1*i/(n-1)) << ", " << int(g1+q2*i/(n-1)) << ", " << int(b1+q3*i/(n-1)) << "\n";
+
+   }
+
 }
