@@ -1,20 +1,23 @@
-#include <iostream>
+#include <fstream>
 using namespace std;
- 
-unsigned long long cmmmc(unsigned long long a,unsigned long long b)
-{
-    unsigned long long p=a*b,r;
-    while(b!=0)
-        r=a%b,a=b,b=r;
-    return p/a;
-}
- 
+short v[200];
 int main()
 {
-    unsigned long long n;
-    cin>>n;
-    unsigned long long c1=n*4-4,c2=(n-2)*4-4,c3=(n-4)*4-4;
-    unsigned long long sol=cmmmc(cmmmc(c1,c2),c3);
-    cout<<sol/c1<<' '<<sol/c2<<' '<<sol/c3<<'\n';
-    return 0;
+int n,a=0,b=0,c=0,d=0,g,i;
+cin>>n;
+for(i=0;i<n;i++)
+{cin>>g;
+v[g-1]++;}
+for(i=0;i<200;i++)
+{if(v[i]==0) continue; //sare direct la următorul i în for dacă am dat de un 0; ne interesează doar nenulele
+c++;
+d=d+v[i]; //adunăm numerele pozitive
+if(c==3)
+{c=0;
+if(d%2==1)a=a+1;else b=b+1; //numărăm direct
+d=0;}
+}
+a=a%10;b=b%10; //a sau b ar putea să fi depășit 9
+cout<<10*a+b;
+return 0;
 }
