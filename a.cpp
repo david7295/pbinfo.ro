@@ -1,22 +1,45 @@
-#include <iostream>
+#include <fstream>
+
+ 
+
 using namespace std;
 
-int prim (int n) {
-    int d = 2;         // testam potentialii divizori incepand cu 2 ( primul numar prim)
-    while(d * d <= n && n % d != 0)               //cat timp d este mai mic decat radical(n)
-      d++;                                                      //si n nu se imparte la d, crestem d
-    return (d * d > n && n > 1);       //daca n este prim, d o sa depaseasca radical(n)
-}
-int main() {
-   freopen("prime.in", "r", stdin);
-   freopen("prime.out", "w", stdout);
-   int n;
-   cin >> n;
-   for(int i = 0; i < n; i++) {
-       int val;
-       cin >> val;
-       if(prim(val) == 1)
-         cout << val <<" ";
-   }
-    return 0;
+ 
+
+ifstream f("matrice5.in");
+
+ofstream g("matrice5.out");
+
+ 
+
+int main()
+
+{
+
+   int n, a[105][105], suma = 0;
+
+   f >> n;
+
+   for(int i = 1; i <= n; ++i)
+
+       for(int j = 1; j <= n; ++j)
+
+           f >> a[i][j];
+
+   
+
+   for(int i = 1; i <= n; ++i)
+
+       for(int j = 1; j <= n - i; ++j)
+
+           suma += a[i][j];
+
+       
+
+   g << suma;
+
+       
+
+   return 0;
+
 }
