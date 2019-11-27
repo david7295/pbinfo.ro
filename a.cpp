@@ -1,41 +1,20 @@
-#include<bits/stdc++.h>
-
-using namespace std;
-
-int a[1001],n,k;
-int Begin,End,ok=0;
-
-int main()
+#include <iostream>
+using namespace std;
+ 
+unsigned long long cmmmc(unsigned long long a,unsigned long long b)
 {
-
-    cin >> n >> k;
-
-    for(int i=1;i<=n;i++)
-        cin >> a[i];
-
-    for(int i=1;i<n-k and !ok;i++)
-    {
-        for(int j=i+1;j<=n-k+1 and !ok;j++)
-        {
-            int ii=i,jj=j,nr=0;
-            while(a[ii]==a[jj] and nr < k)
-            {
-                ii++;
-                jj++;
-                nr++;
-            }
-            if(nr==k)
-            {
-                ok=1;
-                Begin=i;
-                End=jj-k;
-            }
-        }
-    }
-
-    if(ok) cout << Begin << " " << End;
-    else cout << "NU";
-
-    return 0;
-
+    unsigned long long p=a*b,r;
+    while(b!=0)
+        r=a%b,a=b,b=r;
+    return p/a;
+}
+ 
+int main()
+{
+    unsigned long long n;
+    cin>>n;
+    unsigned long long c1=n*4-4,c2=(n-2)*4-4,c3=(n-4)*4-4;
+    unsigned long long sol=cmmmc(cmmmc(c1,c2),c3);
+    cout<<sol/c1<<' '<<sol/c2<<' '<<sol/c3<<'\n';
+    return 0;
 }
