@@ -1,63 +1,73 @@
-#include <iostream>
-
 #include <fstream>
-
 using namespace std;
-
-ifstream f("arbore.in");
-
-ofstream g("arbore.out");
-
-int tata[105],n,x,y,k,a[105][105],viz[105];
-
-void dfs(int k)
-
-{ int i;
-
-viz[k]=1;
-
-for(i=1;i<=n;i++)
-
-{
-
-   if(viz[i]==0 && a[k][i])
-
-   {
-
-       tata[i]=k;
-
-       dfs(i);
-
-   }
-
-}
-
-}
-
-int main()
-
-{ int i;
-
-f>>n>>k;
-
-for(i=1;i<n;i++)
-
-{
-
-   f>>x>>y;
-
-   a[x][y]=a[y][x]=1;
-
-}
-
-dfs(k);
-
-viz[k]=1;
-
-for(i=1;i<=n;i++)
-
-   g<<tata[i]<<" ";
-
-   return 0;
-
+fstream f("kcifra.in");
+ofstream g("kcifra.out");
+int main() { 
+  int k;
+  f>>k; 
+  int c,nrcif=0,nr; 
+  if(k<=18)
+    c=(k+1)/2; 
+  else if(k<=288) { 
+    nr=9; 
+    nrcif=18; 
+    while(nrcif+3<=k) { 
+      nrcif+=3;
+      nr++; 
+    } 
+    if (nrcif==k) 
+      c=nr%10;
+    else { 
+      nr++; 
+      if(nrcif+1==k)
+        c=nr/10;
+      else c=nr%10; }
+  } else if(k<=3888) { 
+    nr=99; 
+    nrcif=288; 
+    while(nrcif+4<=k) { 
+      nrcif+=4;
+      nr++; } 
+    if (nrcif==k)
+      c=nr%10; 
+    else { 
+      if(nrcif+1==k) 
+        c=nr/100; 
+      else c=nr/10%10; } 
+  } else if(k<=48888) {
+    nr=999;
+    nrcif=3888; 
+    while(nrcif+5<=k) {
+      nrcif+=5;
+      nr++;} 
+    if (nrcif==k)
+      c=nr%10; 
+    else { 
+      if(nrcif+1==k)
+        c=nr/1000; 
+      else if(nrcif+2==k)
+        c=nr/100%10;
+      else if(nrcif+3==k)
+        c=nr/10%10; 
+      else c=nr/10%10; } 
+  } else {
+    nr=9999;
+    nrcif=48888; 
+    while(nrcif+6<=k) {
+      nrcif+=6;
+      nr++;}
+    if (nrcif==k)
+      c=nr%10; else {
+        if(nrcif+1==k)
+          c=nr/10000; 
+        else if(nrcif+2==k)
+          c=nr/1000%10; 
+        else if(nrcif+3==k)
+          c=nr/100%10;
+        else if(nrcif+4==k)
+          c=nr/10%10; 
+        else c=nr/10%10; }
+  }
+  g<<c<<endl; 
+  return 0;
 }
