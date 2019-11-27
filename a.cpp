@@ -1,49 +1,27 @@
-#include<bits/stdc++.h>
-
-using namespace std;
-
-ifstream fin("spirala1.in");
-
-ofstream fout("spirala1.out");
-
-int main()
+void triplete(int a, int b, int c)
 
 {
 
-int a[101][101],n,i,j,k,x;
+   bool afisat = false;
 
-fin>>n;
+   int limita = c / 3 + 1;
 
-n=sqrt(n);
+   for (int ia = a; ia <= limita; ++ia)
 
-for(k=1;k<=(n+1)/2;k++)
+       for (int ib = ia; ib <= (c - ia) / 2 + 1 && ib <= b; ++ib)
 
-{
+       {
 
- for(i=k;i<=n+1-k;i++) fin>>a[i][k];
+           int ic = c - ia - ib;
 
- for(j=k+1;j<=n+1-k;j++) fin>>a[n+1-k][j];
+           if (ia <= ib && ib <= ic && ic <= b)
 
- for(i=n-k;i>=k;i--) fin>>a[i][n+1-k];
+             afisat = true, cout << '{' << ia << ',' << ib << ',' << c - ia - ib << "}\n";
 
- for(j=n-k;j>k;j--) fin>>a[k][j];
+   }
 
-}
+   if (!afisat)
 
-for(i=1;i<=n;i++)
-
-{
-
- for(j=1;j<=n;j++) fout<<a[i][j]<<" ";
-
- fout<<endl;
-
-}
-
-fin.close();
-
-fout.close();
-
-return 0;
+       cout << "nu exista";
 
 }
