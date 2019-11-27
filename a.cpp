@@ -1,63 +1,53 @@
-# include <fstream>
-# include <cstring>
+#include <fstream>
+#include <queue>
+#define INF 1000000000
 using namespace std;
 
-# define max(a, b) ((a) < (b) ? (b) : (a))
-# define Lmax 100003
+int A[1001][1001],B[1001][1001],n,m,im,jm,ic,jc;
+const int di[]={1,-1,0,0},dj[]={0,0,1,-1};// Deplasarea spre magazin
+queue<pair<int,int> >Q;// Initializarea cozii
 
-ifstream f("charlie.in");
-ofstream g("charlie.out");
-
-char s[Lmax], st[Lmax];
-int p, L, vf, k, i, Max, j;
-long long S;
-
-void afis()
+void citire()
 {
-    for(int i=1; i <=vf; ++i)
-        g << st[i];
-    g<< "\n";
+    ifstream  f("ubuph.in");
+    f>>n>>m;
+    for(int i=1;i<=n;++i)
+        for(int j=1;j<=m;++j)
+        {
+            f>>A[i][j];
+            B[i][j]=INF;
+        }
+    f>>im>>jm>>ic>>jc;
+    f.close();
+}
+
+bool verif(int i,int j)// Verifica daca pozitia curenta se afla in matrice
+{
+    return 1<=i&&i<=n&&1<=j&&j<=m;
+}
+
+void Lee()
+{   B[ic][jc]=A[ic][jc];
+    while(!Q.empty())
+    {
+        pair<int,int> P=Q.front();
+        for(int k=0;k<4;++k)
+        {
+            int i=P.first+di[k],j=P.second+dj[k];
+            if(verif(i,j)&&B[i][j]>B[P.first][P.second]+A[i][j])
+                B[i][j]=B[P.first][P.second]+A[i][j],Q.push(make_pair(i,j));
+        }
+        Q.pop();
+    }
 }
 
 int main()
 {
-    f >> p; f.get();
-    f.getline(s, 100001);
-    L = strlen(s);
-
-    if (p == 1) //a)
-    {
-        k = i = 0;
-        while ( i < L )
-        {
-            j = i;
-            while (s[j] > s[j+1] && s[j+1] < s[j+2] && j + 2 < L)
-                j += 2;
-            if (j - i >= 2)
-            {
-                if ( j - i + 1 > Max ) Max = j - i + 1;
-                i = j;
-            }
-            ++i;
-        }
-        g << Max << "\n";
-    }
-    else //b)
-    {
-        st[1] = s[0]; st[2] = s[1];
-        i = vf = 2;
-        while ( i < L )
-        {
-            while (s[i] > st[vf] && st[vf] < st[vf-1] && vf > 1)
-            {
-                S += max(s[i] - 'a' + 1, st[vf-1] - 'a' + 1);
-                --vf;
-            }
-            st[++vf] = s[i];
-            ++i;
-        }
-        afis();
-        g << S << "\n";
-    }
+    citire();
+    Q.push(make_pair(ic,jc));
+    Lee();
+    ofstream g("ubuph.out");
+    g<<B[im][jm];
+    g.close();
     return 0;
 }
