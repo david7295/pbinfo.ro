@@ -1,40 +1,22 @@
-#include <fstream>
-#include <bitset>
-
+#include <iostream>
+#include <cstring>
 using namespace std;
 
-ifstream f("memory007.in");
-ofstream g("memory007.out");
-
-bitset<700020> v ;
-long n , m , a , b , i , j , nr , x ;
-long long suma , r , t ;
-
-int main()
+int apcar(char * s , char c)
 {
-    f >> n >> m >> a >> b ;
-    for ( i=1 ; i<=n ; i++ )
-    {
-        f >> x ;
-        j = x-a ;
-        v[j] = 1 ;
-    }
-    j = 0 ;
-    nr = 0 ;
-    suma = 0 ;
-    for ( i=1 ; i<=m ; i++)
-    {
-        f >> x ;
-        while ( nr < x )
-        {
-          nr = nr + v[j] ;
-          j++ ;
-        }
-        suma = suma + j - 1 ;
-    }
-    r = m ;
-    t = a ;
-    suma = suma + r * t ;
-    g << suma ;
-    return 0;
+int cnt = 0;
+for(int i = 0 ; s[i] ; i++)
+if(s[i] == c)
+cnt ++;
+return cnt;
+}
+
+int main(){
+char s[256], v[]="aeiouAEIOU";
+cin.getline(s, 256);
+int cnt = 0;
+for(int i = 0 ; v[i] ; i ++)
+cnt += apcar(s, v[i]);
+cout << cnt;
+return 0;
 }
