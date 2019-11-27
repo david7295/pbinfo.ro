@@ -1,66 +1,63 @@
-#include <fstream>
-#include <iostream>
-#include <cstring>
-#include <cctype>
+# include <fstream>
+# include <cstring>
 using namespace std;
 
-ifstream fin("cuvinte3.in");
-ofstream fout("cuvinte3.out");
+# define max(a, b) ((a) < (b) ? (b) : (a))
+# define Lmax 100003
 
-int n;
-char lista[505][256];
+ifstream f("charlie.in");
+ofstream g("charlie.out");
 
-void to_lower(char * p)
+char s[Lmax], st[Lmax];
+int p, L, vf, k, i, Max, j;
+long long S;
+
+void afis()
 {
-for(int i = 0 ; p[i] ; i++)
-p[i] = tolower(p[i]);
-}
-
-bool OK(char * p)
-{
-char t[256];
-strcpy(t , p);
-to_lower(t);
-if( strstr(t , "ate") )
-return true;
-return false;
-}
-
-bool egale(char * s , char * t)
-{
-char ss[256], tt[256];
-strcpy(ss , s);
-strcpy(tt , t);
-to_lower(ss); to_lower(tt);
-if(strcmp(ss , tt) == 0)
-return true;
-return false;
+    for(int i=1; i <=vf; ++i)
+        g << st[i];
+    g<< "\n";
 }
 
 int main()
 {
-char linie[256], sep[]=".,;:-?! ";
-while( fin.getline(linie , 256) )
-{
-char * p = strtok(linie , sep);
-while(p)
-{
-if(OK(p))
-{
-bool gasit = false;
-for(int i = 1 ; i <= n && ! gasit ; i++)
-if( egale(p , lista[i]) )
-gasit = true;
-if(! gasit)
-{
-n ++;
-strcpy(lista[n] , p);
-}
-}
-p = strtok( NULL , sep);
-}
-}
-for(int i = 1 ; i <= n ; i ++)
-fout << lista[i] << "\n";
-return 0;
+    f >> p; f.get();
+    f.getline(s, 100001);
+    L = strlen(s);
+
+    if (p == 1) //a)
+    {
+        k = i = 0;
+        while ( i < L )
+        {
+            j = i;
+            while (s[j] > s[j+1] && s[j+1] < s[j+2] && j + 2 < L)
+                j += 2;
+            if (j - i >= 2)
+            {
+                if ( j - i + 1 > Max ) Max = j - i + 1;
+                i = j;
+            }
+            ++i;
+        }
+        g << Max << "\n";
+    }
+    else //b)
+    {
+        st[1] = s[0]; st[2] = s[1];
+        i = vf = 2;
+        while ( i < L )
+        {
+            while (s[i] > st[vf] && st[vf] < st[vf-1] && vf > 1)
+            {
+                S += max(s[i] - 'a' + 1, st[vf-1] - 'a' + 1);
+                --vf;
+            }
+            st[++vf] = s[i];
+            ++i;
+        }
+        afis();
+        g << S << "\n";
+    }
+    return 0;
 }
