@@ -1,45 +1,24 @@
-#include <fstream>
-
- 
-
-using namespace std;
-
- 
-
-ifstream f("matrice5.in");
-
-ofstream g("matrice5.out");
-
- 
-
-int main()
-
+bool cifre(int numar)
 {
+        int c = numar % 10;
 
-   int n, a[105][105], suma = 0;
+        while (numar > 0)
+        {
+               if (numar % 10 == c)
+                        numar /= 10;
+                else
+                        break;
+        }
 
-   f >> n;
+      return (numar == 0);
+}
 
-   for(int i = 1; i <= n; ++i)
 
-       for(int j = 1; j <= n; ++j)
-
-           f >> a[i][j];
-
-   
-
-   for(int i = 1; i <= n; ++i)
-
-       for(int j = 1; j <= n - i; ++j)
-
-           suma += a[i][j];
-
-       
-
-   g << suma;
-
-       
-
-   return 0;
-
+void identice(int a, int b)
+{
+        for (int i = a; i <= b; i++)
+        {
+                  if (cifre(i))
+                        cout << i << " ";
+        }
 }
