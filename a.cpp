@@ -2,44 +2,80 @@
 
 using namespace std;
 
-long long x, i, cif, v[20], k, schimb;
-
-int main()
+int ogl(int m)
 
 {
 
-   cin >> x;
+   int p=0;
 
-   while (x)
+   while (m)
 
    {
 
-       cif=x%10;
+       p=p*10+m%10;
 
-       v[k++]=cif;
-
-       x=x/10;
+       m/=10;
 
    }
 
-   for (i=k-1; i>=0; --i)
+   return p;
+
+}
+
+int primeintreele(int a, int b)
+
+{
+
+    int pie=1, d;
+
+    if ((a==2 && b==2)||(a==b)) pie=0;
+
+   else {
+
+   for (d=2; d*d<=b && pie; ++d)
 
    {
 
-       if (schimb==1) v[i]=1;
-
-       else
+       if (b%d==0)
 
        {
 
-          if (v[i]%2==0) {++v[i]; schimb=1;}
+           if (a%d==0) pie=0;
+
+           else if (a%(b/d)==0) pie=0;
 
        }
 
    }
 
-   for (i=k-1; i>=0; --i)
+   }
 
-       cout << v[i];
+    return pie;
+
+}
+
+int main()
+
+{
+
+   int a,b, suma=0;
+
+   cin >> a >> b;
+
+   while (a>=0 && b>0)
+
+   {
+
+       if (primeintreele(a,b) && primeintreele(ogl(a), ogl(b)))
+
+           suma=suma +a+b;
+
+       cin >> a >> b;
+
+   }
+
+   cout << suma;
+
+   return 0;
 
 }
