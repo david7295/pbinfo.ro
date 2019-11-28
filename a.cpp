@@ -1,39 +1,29 @@
 #include <iostream>
-
 using namespace std;
 
-int n, k, i, m, cif, num;
+int main() {
+int n, sum, nr, d, prim;
 
-int main()
-
-{
-
-   cin >> n;
-
-   for (i=1; i<=n; ++i)
-
-   {
-
-       cin >> k;
-
-       num=100; m=3;
-
-       while (m<k)
-
-       {
-
-           m+=3; ++num;
-
-       }
-
-       if (m-k==0) cif=num%10;
-
-       if (m-k==1) cif=(num/10)%10;
-
-       if (m-k==2) cif=num/100;
-
-       cout << cif << " ";
-
-   }
-
+cin >> n;
+sum = 0;
+for (int i = 0; i < n; ++i) {
+cin >> nr;
+d = 2;
+prim = 1;
+while (d * d <= nr) {
+if (nr % d == 0) {
+prim = 0;
 }
+++d;
+}
+if (prim == 1) {
+while (nr) {
+sum += nr % 10;
+nr /= 10;
+}
+}
+}
+cout << sum << "\n";
+
+return 0;
+} 
