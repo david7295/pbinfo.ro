@@ -1,81 +1,49 @@
-#include <bits/stdc++.h>
-
+#include <iostream>
+#include <cmath>
 using namespace std;
 
-ifstream fin("odaoni.in");
-
-ofstream fout("odaoni.out");
-
- 
-
-int n, cf[10], d, aux, nrdiv=1;
-
-int multimecifre(int nr)
-
-{
-
-   while(nr)
-
-   {
-
-       if(cf[nr%10]==0)
-
-           return 0;
-
-       nr/=10;
-
-   }
-
-   return 1;
-
-}
-
 int main()
-
 {
-
-   fin>>n;
-
-   aux=n;
-
-   while(aux)
-
-   {
-
-       cf[aux%10]++;
-
-       aux/=10;
-
-   }
-
-   if(cf[1])
-
-       nrdiv++;
-
-    for(d=2; d*d<n;d++)
-
-       if(n%d==0)
-
-       {
-
-           if(multimecifre(d))
-
-               nrdiv++;
-
-           if(multimecifre(n/d))
-
-               nrdiv++;
-
-       }
-
-   if(d*d==n)
-
-       if(multimecifre(d))
-
-           nrdiv++;
-
-   fout<<nrdiv;
-
-   return 0;
-
+   long long int x, y, a, b, z, c, nrcifx, nrcify, nr1, nr2, inv1, inv2, k = 0;
+    do
+    {
+        cin >> x;
+        cin >> y;
+        nrcifx = 0;
+        nrcify = 0;
+        a = x;
+        while (a != 0)
+        {
+            nrcifx = nrcifx + 1;
+            a = a / 10;
+        }
+        b = y;
+        while (b != 0)
+        {
+            nrcify = nrcify + 1;
+            b = b / 10;
+        }
+        nr1 = x*pow(10, nrcify) + y;
+        nr2 = y*pow(10, nrcifx) + x;
+        z = nr1;
+        c = nr2;
+        inv1 = 0;
+        while (nr1)
+        {
+            inv1 = inv1 * 10 + nr1 % 10;
+            nr1 = nr1 / 10;
+        }
+        inv2 = 0;
+        while (nr2)
+        {
+            inv2 = inv2 * 10 + nr2 % 10;
+            nr2 = nr2 / 10;
+        }
+        if (z == inv1 || c == inv2)
+            k = k + 1;
+        if (x == 0 && y == 0)
+            k = k - 1;
+    } while (x != 0 && y != 0);
+    cout << k;
+    return 0;
 }
