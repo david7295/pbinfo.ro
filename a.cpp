@@ -1,41 +1,20 @@
 #include <iostream>
-
 using namespace std;
 
-int main()
-
-{
-
-   long long a, b, d, schimb, m, c;
-
-   cin >> a >> b;
-
-   if (a==b) schimb=0;
-
-   else
-
-   {
-
-       if (a<b) { int t=a; a=b; b=t;}
-
-       d=a; m=b;
-
-      while (m) {
-
-       c = d % m;
-
-       d = m;
-
-       m = c;
-
-   }
-
-       schimb=b/d+a/d-2;
-
-   }
-
-   cout << schimb;
-
-   return 0;
-
+int main() {
+    long long n, max = 0, d = 2;
+    cin >> n;
+    while(d * d <= n) {
+        if(n % d == 0) {
+          while(n % d == 0)
+            n /= d;
+          if(d > max)
+            max = d;
+        }
+        d++;
+    }
+    if(n > 1)
+      max = n;
+    cout << max; 
+    return 0;
 }
