@@ -1,31 +1,23 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-int main(){
+ifstream fin("becuri.in");
+ofstream fout("becuri.out");
 
-   long long s, n, i;
+int n, nrd, nrr, d=1;
 
-   cin >> n;
-
-   s = 0;
-
-   if (n%2 == 0)
-
-       s += 2;
-
-   for (i = 3;i*i <= n;i += 2){
-
-       if (n%i == 0){
-
-           s += i;
-
-       }
-
-   }
-
-   cout << s;
-
-   return 0;
-
+int main()
+{
+int i=1;
+fin>>n;
+while(i*d<=n)
+{
+nrr++;
+i++;
+d++;
+}
+fout<<nrr;
+return 0;
 }
