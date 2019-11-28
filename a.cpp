@@ -6,28 +6,36 @@ int main()
 
 {
 
-char c;
+   long long a, b, d, schimb, m, c;
 
-while(cin.get(c))
+   cin >> a >> b;
+
+   if (a==b) schimb=0;
+
+   else
 
    {
 
-       if(c >= 'A')
+       if (a<b) { int t=a; a=b; b=t;}
 
-       {
+       d=a; m=b;
 
-           if(c >= 'a')
+      while (m) {
 
-   c = (c - 'a'+ 13) % 26 + 'a';
+       c = d % m;
 
-else
+       d = m;
 
-   c = (c - 'A' + 13) % 26 + 'A';
+       m = c;
 
-}
+   }
 
-cout.put(c);
+       schimb=b/d+a/d-2;
 
-} return 0;
+   }
+
+   cout << schimb;
+
+   return 0;
 
 }
