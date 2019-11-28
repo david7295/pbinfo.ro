@@ -2,79 +2,43 @@
 
 using namespace std;
 
-int ogl(int m)
-
-{
-
-   int p=0;
-
-   while (m)
-
-   {
-
-       p=p*10+m%10;
-
-       m/=10;
-
-   }
-
-   return p;
-
-}
-
-int primeintreele(int a, int b)
-
-{
-
-    int pie=1, d;
-
-    if ((a==2 && b==2)||(a==b)) pie=0;
-
-   else {
-
-   for (d=2; d*d<=b && pie; ++d)
-
-   {
-
-       if (b%d==0)
-
-       {
-
-           if (a%d==0) pie=0;
-
-           else if (a%(b/d)==0) pie=0;
-
-       }
-
-   }
-
-   }
-
-    return pie;
-
-}
-
 int main()
 
 {
 
-   int a,b, suma=0;
+   int n,k,m,p,ec7,ec8,y,z,t, x;
 
-   cin >> a >> b;
+   cin >> n >> k >> m >> p;
 
-   while (a>=0 && b>0)
+   ec7=n*k;
+
+   ec8=m*p;
+
+   k=ec7; p=ec8;
+
+   int r=k%p;
+
+   while (r!=0)
 
    {
 
-       if (primeintreele(a,b) && primeintreele(ogl(a), ogl(b)))
+       k=p;
 
-           suma=suma +a+b;
+       p=r;
 
-       cin >> a >> b;
+       r=k%p;
 
    }
 
-   cout << suma;
+   t=p;
+
+   y=ec7/t;
+
+   z=ec8/t;
+
+   x=y+z;
+
+   cout << x << " " << y << " " << z << " " << t;
 
    return 0;
 
