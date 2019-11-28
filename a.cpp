@@ -1,15 +1,29 @@
-#include <iostream>
-using namespace std; 
-unsigned n,i,j,t=0,f1=1,f2=1,f;
-int main() { 
-  cin>>n;
-  for(i=1;i<=n;i++) {
-    for(j=1;j<=n;j++) {
-      t++;
-      f1=f2; 
-      f2=f; 
-      f=(f1+f2)%10;
-      cout<<f<<' '; } 
-    cout<<'\n'; }
-  return 0; 
+#include <bits/stdc++.h>
+using namespace std;
+int m, p, cif, i, nr;
+int exp(int a, int n)
+{
+if(n == 0) return 1;
+if(n % 2 == 1)
+{
+long long tmp = exp(a, n - 1);
+tmp = tmp * a;
+return tmp % nr;
+}
+else
+{
+long long tmp = exp(a , n / 2);
+return (tmp * tmp) % nr;
+}
+}
+
+
+int main()
+{
+    cin>>m>>p>>cif;
+    nr = 1;
+    for(i=1;i<=cif;i++)
+        nr = nr * 10;
+    cout << exp(m, p);
+    return 0;
 }
