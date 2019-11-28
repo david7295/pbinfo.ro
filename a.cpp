@@ -1,20 +1,45 @@
 #include <iostream>
+
 using namespace std;
 
-int main() {
-    long long n, max = 0, d = 2;
-    cin >> n;
-    while(d * d <= n) {
-        if(n % d == 0) {
-          while(n % d == 0)
-            n /= d;
-          if(d > max)
-            max = d;
-        }
-        d++;
-    }
-    if(n > 1)
-      max = n;
-    cout << max; 
-    return 0;
+long long x, i, cif, v[20], k, schimb;
+
+int main()
+
+{
+
+   cin >> x;
+
+   while (x)
+
+   {
+
+       cif=x%10;
+
+       v[k++]=cif;
+
+       x=x/10;
+
+   }
+
+   for (i=k-1; i>=0; --i)
+
+   {
+
+       if (schimb==1) v[i]=1;
+
+       else
+
+       {
+
+          if (v[i]%2==0) {++v[i]; schimb=1;}
+
+       }
+
+   }
+
+   for (i=k-1; i>=0; --i)
+
+       cout << v[i];
+
 }
