@@ -1,44 +1,32 @@
 #include <iostream>
 
+#include <cmath>
+
 using namespace std;
 
 int main()
 
 {
 
-   int n,k,m,p,ec7,ec8,y,z,t, x;
+   unsigned long long n, a, b, k,p=1,i;
 
-   cin >> n >> k >> m >> p;
+   cin >> n >> a >> b;
 
-   ec7=n*k;
+   k=log2(a);
 
-   ec8=m*p;
+   if (log2(a)!=(int)log2(a)) ++k;
 
-   k=ec7; p=ec8;
+   for (i=1; i<=k; ++i) p*=2;
 
-   int r=k%p;
-
-   while (r!=0)
+   while (p<=b && n)
 
    {
 
-       k=p;
+       cout << p << " ";
 
-       p=r;
-
-       r=k%p;
+       --n; p*=2;
 
    }
-
-   t=p;
-
-   y=ec7/t;
-
-   z=ec8/t;
-
-   x=y+z;
-
-   cout << x << " " << y << " " << z << " " << t;
 
    return 0;
 
