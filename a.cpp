@@ -1,30 +1,34 @@
 #include <iostream>
 
-#include <cmath>
-
 using namespace std;
 
-int main()
+long long divMaxImpar(long long num)
 
 {
 
-   unsigned long long n, a, b, k,p=1,i;
+   while (num%2==0)
 
-   cin >> n >> a >> b;
+       num/=2;
 
-   k=log2(a);
+   return num;
 
-   if (log2(a)!=(int)log2(a)) ++k;
+}
 
-   for (i=1; i<=k; ++i) p*=2;
+int  main()
 
-   while (p<=b && n)
+{
+
+   long long n, i, num;
+
+   cin >> n;
+
+   for (i=1; i<=n; ++i)
 
    {
 
-       cout << p << " ";
+       cin >> num;
 
-       --n; p*=2;
+       cout << divMaxImpar(num) << " ";
 
    }
 
