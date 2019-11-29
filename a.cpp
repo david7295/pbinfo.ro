@@ -1,48 +1,219 @@
-#include <iostream>
-#include <fstream>
-using namespace std;
-ifstream f("bomboane1.in");
-ofstream g("bomboane1.out");
-int main()
-{
-int d1, x, y, d=-1, b ,a, n;
-int k = 0;
-f >> x >> y;
-if(x%2==1)
-x++;
-for(int i=x;i<=y;i+=2)
-    {
-k = 0;
-int d2 = 0;
-int m = i;
-while(m%2 == 0)
-{
-    m /= 2;
-    d2++;
-}
-for(d1=1; d1*d1<m; d1+=2)
-if(m % d1 == 0)
-k +=2;
-if(d1 * d1 == m)
-k ++;
-k *= d2;
+#include <bits/stdc++.h>
 
-if(k>d)
-        {
-            d = k;
-            a = b = i;
-            n = 1;
-        }
-else
-if(k == d)
-            {
-                b = i;
-                n++;
-            }
+using namespace std;
+
+ 
+
+const short Cifmax = 11;
+
+const int Kmax = 51;
+
+ 
+
+int n , C[11] , op , nc , a[Kmax] , b[Kmax] , na , nb;
+
+ 
+
+ifstream fin ("numere24.in");
+
+ofstream fout ("numere24.out");
+
+ 
+
+inline bool PAL(int c)
+
+{
+
+   int ogl = 0 , aux = c;
+
+   while(c > 0)
+
+   {
+
+       ogl = ogl * 10 + c % 10;
+
+       c /= 10;
+
+   }
+
+   return (ogl == aux);
 
 }
-g << a << ' ' << b << ' ' << n << ' ' << d;
 
+ 
 
-return 0;
+inline void DIF()
+
+{
+
+   int t = 0 , cif;
+
+   for(int i = nb + 1 ; i <= na ; i++)
+
+       b[i] = 0;
+
+   for(int i = 1 ; i <= na ; i++)
+
+   {
+
+       cif = a[i] - b[i] + t;
+
+       if(cif < 0)
+
+       {
+
+           a[i] = 10 + cif;
+
+           t = - 1;
+
+       }
+
+       else
+
+       {
+
+           a[i] = cif;
+
+           t = 0;
+
+       }
+
+   }
+
+   while(!a[na] && na > 0)
+
+       --na;
+
+}
+
+int main()
+
+{
+
+   int number;
+
+   fin >> op;
+
+   if(op == 1)
+
+   {
+
+       fin >> n;
+
+       fout << 1LL * (n - 1) * 10 << "\n";;
+
+   }
+
+   else if(op == 2)
+
+   {
+
+       fin >> n;
+
+       nc = 0;
+
+       while(n > 0)
+
+       {
+
+           C[++nc] = n % 10;
+
+           n /= 10;
+
+       }
+
+       for(int i = 1 ; i <= 3 ; i++)
+
+       {
+
+           number = 0;
+
+           int P = 1;
+
+           for(int j = i + 1 ; j <= nc ; j++)
+
+           {
+
+               if(i == j)
+
+                   continue;
+
+               number = number  + C[j] * P;
+
+               P *= 10;
+
+           }
+
+ 
+
+           if(number % 10 == 0)
+
+               fout << "0 ";
+
+           else if(!PAL(number))
+
+               fout << "2 ";
+
+           else fout << "1 ";
+
+       }
+
+       fout << "\n";
+
+   }
+
+   else
+
+   {
+
+       fin >> n;
+
+       if(n == 1)
+
+       {
+
+           fout << "9\n";
+
+           return 0;
+
+       }
+
+       for(int i = 1 ; i < n - 1 ; i++)
+
+           a[++na] = 0;
+
+       a[++na] = 2;
+
+       a[++na] = 6;
+
+       a[++na] = 1;
+
+       if(n % 2 == 1)
+
+           n = (n / 2) + 1;
+
+       else n = n / 2;
+
+       for(int i = 1 ; i < n ; i++)
+
+           b[++nb] = 0;
+
+       b[++nb] = 9;
+
+       DIF();
+
+       for(int i = na ; i >= 1 ; i--)
+
+           fout << a[i];
+
+       fout << "\n";
+
+   }
+
+   fin.close();
+
+   fout.close();
+
+   return 0;
+
 }
