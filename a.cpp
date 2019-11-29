@@ -1,55 +1,65 @@
-#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream f("memory006.in");
+ofstream g("memory006.out");
+long long n,k,i,suma,nr,x,st,dr,p[60];
+long mij;
+char a[10001],t,j;
 
-using namespace std;
-
-unsigned int nr_perechi(unsigned int n)
-
+char exp(long s,long d)
 {
-
-   unsigned int exp, i, np=1, a=n;
-
-   for (i=2; i*i<=a; ++i)
-
-   {
-
-       exp=0;
-
-      while (a%i==0)
-
-      {
-
-          ++exp;  a/=i;
-
-      }
-
-      if (exp!=0) np=np*(2*exp+1);
-
-   }
-
-   if (a!=1) np*=3;
-
-   return np;
-
+    if(s>d) return 0;
+    mij=(s+d)/2;
+    if(x==p[mij])
+        return mij;
+    if(x<p[mij])
+        return exp(s,mij-1);
+    else
+        return exp(mij+1,d);
 }
 
-int main()
-
+int main()
 {
-
-   unsigned int n, x, i;
-
-   cin >> n;
-
-   for (i=1; i<=n; ++i)
-
-   {
-
-       cin >> x;
-
-       cout << nr_perechi(x) << " " ;
-
-   }
-
-   return 0;
-
+    f>>n>>k;
+    p[1]=2;
+    for(i=2;i<=57;++i)
+        p[i]=p[i-1]*2;
+    nr=0;
+    suma=0;
+    st=0;
+    dr=-1 ;
+    for(i=0;i<n;++i)
+    {
+        f>>x;
+        t=exp(1,57);
+        if(t==0)
+        {
+           suma=0;
+           st=0;
+           dr=-1;
+        }
+        else
+        {
+           dr=(dr+1)%10001;
+           a[dr]=t ;
+           suma=suma+t;
+           if(suma>=k)
+           {
+              if(suma==k)
+                ++nr;
+              else
+              {
+                while(suma>k)
+              {
+                  suma=suma-a[st];
+                  st=(st+1)%10001;
+              }
+              if(suma==k)
+                ++nr;
+              }
+           }
+        }
+    }
+    g<<nr;
+    return 0;
 }
