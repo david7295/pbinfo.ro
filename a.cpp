@@ -1,47 +1,42 @@
-#include <iostream>
-
-using namespace std;
-
-int n, i, m[11], b, r, cif, num[11], r2, j;
-
-int main()
-
+#include <bits/stdc++.h>
+using namespace std;
+int i, j, q, n, m, lu, k, k1, k2, k3;
+char s[15000], c[50], *p, sep[]=" ";
+string v1[105], v2[105], v3[105];
+int main()
 {
+    ifstream f("s_p_c.in");
+    ofstream g("s_p_c.out");
+    f.getline(s, sizeof(s));
+    p = strtok(s, sep);
+    while(p)
+    {
+        strcpy(c, p);
+        lu = strlen(c);
+        if(c[lu - 1] == 'S')
+        {
+            c[lu - 2] = NULL;
+            v1[++ k1] = c;
+        }
+        if(c[lu - 1] == 'P')
+        {
+            c[lu - 2] = NULL;
+            v2[++ k2] = c;
+        }
+        if(c[lu - 1] == 'C')
+        {
+            c[lu - 2] = NULL;
+            v3[++ k3] = c;
+        }
+            p = strtok(NULL, sep);
+    }
+    sort(v1 + 1, v1 + k1 + 1);
+    sort(v2 + 1, v2 + k2 + 1);
+    sort(v3 + 1, v3 + k3 + 1);
 
-   cin >> n;
-
-   for (i=1; i<=n; ++i)
-
-   {
-
-       cin >> m[i] >> b >> r;
-
-       r2=1;
-
-       for (j=1; j<m[i]; ++j)
-
-           r2=(r2*10)%b;
-
-       if (r>=r2) cif=r-r2;
-
-       else cif=b+r-r2;
-
-       num[i]=cif;
-
-   }
-
-   for (i=1; i<=n; ++i)
-
-   {
-
-       cout << 1;
-
-       for (j=1; j<=m[i]-2; ++j)
-
-           cout << 0;
-
-       cout << num[i] << endl;
-
-   }
-
+    for(i = 1; i <= k1; i ++)
+      for(j = 1; j <= k2; j ++)
+        for(q = 1; q <= k3; q ++)
+         g << v1[i] << " " << v2[j] << " " << v3[q] << "\n";
+    return 0;
 }
