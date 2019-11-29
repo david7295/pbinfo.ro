@@ -2,42 +2,48 @@
 
 using namespace std;
 
-int main()
+int v[20];
 
-{
+int main(){
 
-   int n,i,num,urm, prima, ultima;
+   long long n, k, loc, i;
 
    cin >> n;
 
-   cin >> num;
+   while (n){
 
-   ultima=num%10;
+    cin >> k;
 
-   for (i=2; i<=n; ++i)
+    if (k < 100)
 
-   {
+           cout << k << " ";
 
-       cin >> urm;
+       else {
 
-       prima=urm;
+           loc = 0;
 
-       while (prima>9)
+           while (k){
 
-       {
+               v[++loc] = k%10;
 
-           prima=prima/10;
+               k /= 10;
+
+           }
+
+           cout << v[loc];
+
+           for (i = 2;i < loc;i++)
+
+               cout << v[i];
+
+           cout << v[1] << " ";
 
        }
 
-       if (ultima==prima)
-
-           cout << num << " " << urm << endl;
-
-       num=urm;
-
-       ultima=num%10;
+       n--;
 
    }
+
+   return 0;
 
 }
