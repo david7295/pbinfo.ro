@@ -1,22 +1,18 @@
-#include <bits/stdc++.h>
-using namespace std;
-int ninv, i, a, b, nr, n, k, r;
-int main()
-{
-    cin >> a >> b;
-    for(i = 1; i <= 31623; i ++)
-    {
-        n = i * i;
-        k = n;
-        ninv = 0;
-        while(n)
-        {
-            ninv = ninv * 10 + n % 10;
-            n = n / 10;
-        }
-        r = sqrt(ninv);
-        if(r * r == ninv && k >= a && k <= b) nr++;
-    }
-    cout << nr;
-    return 0;
+#include <iostream> 
+using namespace std; 
+int main(){ 
+  int n, a , b , C = 0, x, sx , y , sy; 
+  cin >> n >> a; 
+  for(int i = 2 ; i <= n ; ++i){
+    cin >> b;
+    x = a;
+    y = b;
+    sx = sy = 0;
+    while(x) 
+      sx += x % 10, x /= 10; 
+    while(y) sy += y % 10, y /= 10; 
+    if(sx%2 != sy%2) C++;
+    a = b; }
+  cout << C;
+  return 0; 
 }
