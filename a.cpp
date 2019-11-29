@@ -1,31 +1,28 @@
-#include <iostream>
-
-#include <fstream>
-
-#include <cmath>
-
-using namespace std;
-
-ifstream fin("punctsegment.in");
-
-ofstream fout("punctsegment.out");
-
-int X1,Y1,X2,Y2,X3,Y3,d1,d2,d3;
-
-int main()
-
+#include <fstream>
+using namespace std;
+int d2,d5,n,i,nr;
+int main()
 {
-
-   fin >> X1 >> Y1 >> X2 >> Y2 >> X3 >> Y3;
-
-   d1=sqrt((X2-X1)*(X2-X1)+(Y2-Y1)*(Y2-Y1));
-
-   d2=sqrt((X3-X1)*(X3-X1)+(Y3-Y1)*(Y3-Y1));
-
-   d3=sqrt((X3-X2)*(X3-X2)+(Y3-Y2)*(Y3-Y2));
-
-   if (d1+d2==d3) fout << "DA";
-
-   else fout << "NU";
-
+    ifstream f("vistiernic.in");
+    ofstream g("vistiernic.out");
+    f>>n;
+    for(i=1;i<=n;i++)
+    {
+        f>>nr;
+        while(nr%2==0)
+        {
+            d2++;
+            nr=nr/2;
+        }
+        while(nr%5==0)
+        {
+            d5++;
+            nr=nr/5;
+        }
+    }
+    if(d2<=d5) g<<d2;
+          else g<<d5;
+    f.close();
+    g.close();
+    return 0;
 }
