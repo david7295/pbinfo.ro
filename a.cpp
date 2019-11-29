@@ -1,36 +1,48 @@
-#include <iostream> 
-using namespace std;
-int main() {
-  int p , a , b , c , d , n , i , k , nr = 0 , y;
-  cin >> n >> k >> p; 
-  a = 1;
-  b = 1; 
-  c = 2; 
-  y = p % 124;
-  if(a == k) nr ++;
-  if(b == k) nr ++; 
-  if(c == k) nr ++; 
-  for(i = 4 ; i <= n ; i ++) {
-    d = (a + b + c) % 10;
-    a = b;
-    b = c; 
-    c = d; 
-    if(d == k) nr ++; }
-  a = 1; 
-  b = 1;
-  c = 2; 
-  if(y == 1) 
-    d = a;
-  else if(y == 2) d = b;
-  else if(y == 3) d = c; 
-  else { 
-    if(y == 0) y = 124;
-    for(i = 4 ; i <= y ; i++) {
-      d = (a + b + c) % 10; 
-      a = b;
-      b = c; 
-      c = d; }
-  } 
-  cout << nr << endl << d <<endl;
-  return 0; 
+#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream f("bomboane1.in");
+ofstream g("bomboane1.out");
+int main()
+{
+int d1, x, y, d=-1, b ,a, n;
+int k = 0;
+f >> x >> y;
+if(x%2==1)
+x++;
+for(int i=x;i<=y;i+=2)
+    {
+k = 0;
+int d2 = 0;
+int m = i;
+while(m%2 == 0)
+{
+    m /= 2;
+    d2++;
+}
+for(d1=1; d1*d1<m; d1+=2)
+if(m % d1 == 0)
+k +=2;
+if(d1 * d1 == m)
+k ++;
+k *= d2;
+
+if(k>d)
+        {
+            d = k;
+            a = b = i;
+            n = 1;
+        }
+else
+if(k == d)
+            {
+                b = i;
+                n++;
+            }
+
+}
+g << a << ' ' << b << ' ' << n << ' ' << d;
+
+
+return 0;
 }
