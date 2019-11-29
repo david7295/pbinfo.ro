@@ -1,49 +1,22 @@
-#include <iostream>
-
-using namespace std;
-
-int v[20];
-
-int main(){
-
-   long long n, k, loc, i;
-
-   cin >> n;
-
-   while (n){
-
-    cin >> k;
-
-    if (k < 100)
-
-           cout << k << " ";
-
-       else {
-
-           loc = 0;
-
-           while (k){
-
-               v[++loc] = k%10;
-
-               k /= 10;
-
-           }
-
-           cout << v[loc];
-
-           for (i = 2;i < loc;i++)
-
-               cout << v[i];
-
-           cout << v[1] << " ";
-
-       }
-
-       n--;
-
-   }
-
-   return 0;
-
+#include <bits/stdc++.h>
+using namespace std;
+int ninv, i, a, b, nr, n, k, r;
+int main()
+{
+    cin >> a >> b;
+    for(i = 1; i <= 31623; i ++)
+    {
+        n = i * i;
+        k = n;
+        ninv = 0;
+        while(n)
+        {
+            ninv = ninv * 10 + n % 10;
+            n = n / 10;
+        }
+        r = sqrt(ninv);
+        if(r * r == ninv && k >= a && k <= b) nr++;
+    }
+    cout << nr;
+    return 0;
 }
