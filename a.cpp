@@ -2,36 +2,46 @@
 
 using namespace std;
 
+int n, i, m[11], b, r, cif, num[11], r2, j;
+
 int main()
 
 {
 
-   long long int n, x, num, gasit=0, i, poz=0;
-
-   cin >> n >> x;
+   cin >> n;
 
    for (i=1; i<=n; ++i)
 
    {
 
-       cin >> num;
+       cin >> m[i] >> b >> r;
 
-       if (x<num) ++poz;
+       r2=1;
 
-       else
+       for (j=1; j<m[i]; ++j)
 
-       {
+           r2=(r2*10)%b;
 
-           if (x==num) { gasit=1; ++poz;}
+       if (r>=r2) cif=r-r2;
 
-       }
+       else cif=b+r-r2;
+
+       num[i]=cif;
 
    }
 
-   if (gasit) cout << poz;
+   for (i=1; i<=n; ++i)
 
-   else cout << -1;
+   {
 
-   return 0;
+       cout << 1;
+
+       for (j=1; j<=m[i]-2; ++j)
+
+           cout << 0;
+
+       cout << num[i] << endl;
+
+   }
 
 }
