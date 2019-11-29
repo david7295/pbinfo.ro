@@ -1,36 +1,30 @@
-#include <iostream>
-#include <cmath>
-
-using namespace std;
-
-int main()
+#include <iostream>
+using namespace std;
+int main()
 {
-    int n,i,j,x,cx,aux;
-    bool prim;
-    long long s=0;
-
-    cin>>n;
-
-    for(i=1;i<=n;i++){
-        cin>>x;
-        cx=x;
-        aux=0;
-        while(cx)
-        {
-            aux=aux*10+cx%10;
-            cx=cx/10;
-        }
-        prim=true;
-        if(aux%2==0 && aux!=2)
-            prim=false;
-        else
-            for(j=3;j<=sqrt(aux) && prim;j+=2)
-               if(aux%j==0)
-                  prim=false;
-        if(prim==true && x!=1)
-            s=s+x;
-
-    }
-    cout<<s<<endl;
-    return 0;
+    int n,m,v[100][100],C=0;
+    cin>>n>>m;
+     for(int i=1;i<=n;i++)
+     for(int j=1;j<=m;j++)
+     {
+       cout<<"v["<<i<<"]["<<j<<"]=";
+       cin>>v[i][j];
+     }
+   for(int i=1;i<n;i++)
+     for(int j=i+1;j<=n;j++)
+     {    
+         bool ok=true;
+         int k=1;
+         while(k<=m && ok)
+         {
+             if(v[i][k]!=v[j][k] )
+                ok=false;
+             else
+                k++;
+         }
+         if(ok)
+            C++;
+     }
+     cout<<C;
+     return 0;
 }
