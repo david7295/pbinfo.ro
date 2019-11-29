@@ -1,23 +1,36 @@
-#include <bits/stdc++.h>
-using namespace std;
-int ct, k, p, n, v[105], i, s;
-int main ()
-{
-    cin >> n >> k >> p;
-    v[1] = 1;
-    v[2] = 2;
-    for (i = 3; i<= 100; i ++)
-        v[i] = (v[i-1] + v[i-2]) % 10;
-    s = 0;
-    for (i = 1; i <= n; i ++)
-    {
-        if (v[i] == 2 || v[i] == 3 || v[i] == 5 || v[i] == 7)
-            s = s + v[i];
-        if (v[i] == k) ct ++;
-    }
-    p = p % 60;
-    cout << s << "\n";
-    cout << ct << "\n";
-    cout << v[p];
-    return 0;
+#include <iostream> 
+using namespace std;
+int main() {
+  int p , a , b , c , d , n , i , k , nr = 0 , y;
+  cin >> n >> k >> p; 
+  a = 1;
+  b = 1; 
+  c = 2; 
+  y = p % 124;
+  if(a == k) nr ++;
+  if(b == k) nr ++; 
+  if(c == k) nr ++; 
+  for(i = 4 ; i <= n ; i ++) {
+    d = (a + b + c) % 10;
+    a = b;
+    b = c; 
+    c = d; 
+    if(d == k) nr ++; }
+  a = 1; 
+  b = 1;
+  c = 2; 
+  if(y == 1) 
+    d = a;
+  else if(y == 2) d = b;
+  else if(y == 3) d = c; 
+  else { 
+    if(y == 0) y = 124;
+    for(i = 4 ; i <= y ; i++) {
+      d = (a + b + c) % 10; 
+      a = b;
+      b = c; 
+      c = d; }
+  } 
+  cout << nr << endl << d <<endl;
+  return 0; 
 }
