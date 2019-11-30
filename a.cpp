@@ -1,57 +1,24 @@
 #include <iostream>
-
 using namespace std;
-
-long long n, m, d, p, exp[200], rez[200], k, i;
-
-int main()
-
-{
-
-   cin >> n;
-
-   d=2; m=n;
-
-   while(m!=1)
-
-   {
-
-       p=0;
-
-       while(m%d==0)
-
-       {
-
-           m=m/d;
-
-           p++;
-
-       }
-
-       if(p>0) { ++k; exp[k]=p; }
-
-       d++;
-
-   }
-
-       for (i=1; i<=k; ++i)
-
-       {
-
-           exp[i]=(n*exp[i]+1)%59999;
-
-       }
-
-   m=1;
-
-   for (i=1; i<=k; ++i)
-
-   {
-
-       m=m*(exp[i])%59999;
-
-   }
-
-   cout << m;
-
+int main(){
+  int n , x; 
+  cin >> n;
+  int max = -1, exp = 0; 
+  for(int i = 1 ; i <= n ; ++i) { 
+    cin >> x;
+    int d = 2, p; 
+    while(x > 1) {
+      p = 0; 
+      while(x % d == 0) 
+        p ++, x /= d; 
+      if(p) {
+        if(d > max)
+          max = d, exp = p;
+        else if(d == max) exp += p; }
+      d ++; 
+      if(x > 1 && d * d > x)
+        d = x; }
+  } 
+  cout << max << " " << exp;
+  return 0; 
 }
