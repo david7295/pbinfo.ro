@@ -1,25 +1,39 @@
-#include <fstream>
+#include <bits/stdc++.h>
 using namespace std;
-long long x,y,z1,z2,d,i,r,v1,v2;
+unsigned long long start, stop;
+unsigned long long a, b, i, nr, p = 1;
+bool prim(long long x)
+{
+    bool ok = true;
+    long long i;
+    if(x == 0 or x == 1) return false;
+    for(i = 2; i * i <= x; i ++)
+    if(x % i == 0)
+    {
+        ok = false;
+        break;
+    }
+    return ok;
+}
+
 int main()
 {
-    ifstream f("vapoare.in");
-    ofstream g("vapoare.out");
-    f>>x>>y;
-    f>>z1>>z2;
-    v1=2*x*7+z1;
-    v2=2*y*7+z2;
-    d=v1;
-    i=v2;
-    r=d%i;
-    while(r)
+    cin >> a >> b;
+    start = log2(a) + 1;
+    stop = log2(b);
+    for(i = 1; i <= start; i ++)
+        p = p * 2;
+    if(prim(start))
     {
-        d=i;
-        i=r;
-        r=d%i;
+        nr = nr + p - a;
     }
-    g<<(v1*v2)/i;
-    f.close();
-    g.close();
+    for(i = start; i < stop; i ++)
+        if(prim(i + 1))
+        {
+            nr = nr + p;
+            p = p * 2;
+        } else p = p * 2;
+    if(prim(stop + 1)) nr = nr + b - p + 1;
+    cout << nr << " ";
     return 0;
 }
