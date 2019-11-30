@@ -1,27 +1,17 @@
-#include <cstdio>
+#include <iostream>
+#include <cstring>
 using namespace std;
 
-int v[100001], N, X, Q, nr;
-
-int main()
-{
-    freopen("divizori1.in", "r", stdin);
-    freopen("divizori1.out", "w", stdout);
-
-    scanf("%d %d", &N, &Q);
-
-    for (int i = 1; i <= N; i++)
-        {
-            scanf("%d", &X);
-            for (int j = X; j <= 100000; j += X)
-                v[j]++;
-        }
-
-    for (int i = 1; i <= Q; i++)
-    {
-        scanf("%d", &X);
-        printf("%d\n", v[X]);
-
-    }
-    return 0;
+int main(){
+char s[256];
+cin.getline(s,256);
+for(char * p = s+strlen(s)-2; p>=s;--p)
+if(strchr("aeiou",p[0]) && strchr("aeiou",p[1])){
+if(p>s && strchr("aeiou",p[-1]))
+strcpy(p,p+1);
+else
+strcpy(p,p+2);
+}
+cout << s << endl;
+return 0;
 }
