@@ -2,38 +2,56 @@
 
 using namespace std;
 
+long long n, m, d, p, exp[200], rez[200], k, i;
+
 int main()
 
 {
 
-   long long n, b, p,d,dmax=0,x,t,i,nr=1;
+   cin >> n;
 
-   cin>>n;
+   d=2; m=n;
 
-   d=2;
+   while(m!=1)
 
-   while(n>1)
+   {
 
-   {p=0;
+       p=0;
 
-       while(n%d==0)
+       while(m%d==0)
 
        {
 
-           p++;
+           m=m/d;
 
-           n=n/d;
+           p++;
 
        }
 
-       if(p>0)nr=nr*d;
+       if(p>0) { ++k; exp[k]=p; }
 
        d++;
 
-       if(d*d>n) d=n;
+   }
+
+       for (i=1; i<=k; ++i)
+
+       {
+
+           exp[i]=(n*exp[i]+1)%59999;
+
+       }
+
+   m=1;
+
+   for (i=1; i<=k; ++i)
+
+   {
+
+       m=m*(exp[i])%59999;
 
    }
 
-   cout<<nr;
+   cout << m;
 
 }
