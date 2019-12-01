@@ -1,45 +1,21 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
-using namespace std;
+using namespace std;
 
-int main()
+ifstream fin("cartonase.in");
+ofstream fout("cartonase.out");
 
+int n,m,S;
+
+int main()
 {
 
-   int k, g, s, x, poz;
+   fin >> n >> m;
 
-   cin >> k;
+   S=2*n*m-n-m;
 
-   if (k<3) cout << k;
+   fout << S;
 
-   else
-
-   {
-
-       x=1;
-
-       while (x*(x+1)<k) ++x;
-
-       g=x-1;
-
-       s=g*(g+1);
-
-       poz=k-s;
-
-       if (poz==0) cout << 2;
-
-       else
-
-       {
-
-           if (poz<=x+1) cout << poz;
-
-           else { poz=poz-(x+1); cout << (x+1)-poz; }
-
-       }
-
-   }
-
-   return 0;
+   return 0;
 
 }
