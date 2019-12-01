@@ -1,53 +1,27 @@
-#include <iostream>
-
-using namespace std;
-
-int main()
-
+#include <cstdio>
+#include <cstring>
+using namespace std;
+int a, i, j, nr, p, w[105];
+char s[105];
+int main()
 {
-
-unsigned a, b, nrSchimb=0, i, j, sus, jos, dreapta, stanga, colt;
-
-cin>>a>>b;
-
-sus=1; dreapta=1; jos=0; stanga=0;
-
-a++; b++;
-
-i=b; j=1;
-
-colt=0;
-
-while(!colt){
-
- if(sus) i--;
-
- if(dreapta) j++;
-
- if(jos) i++;
-
- if(stanga) j--;
-
- if((i==1 && j==1) || (i==1 && j==a) || (i==b && j==1) || (i==b && j==a))
-
-  colt=1;
-
- else{
-
-  if(i==1){jos=1; sus=0; nrSchimb++;}
-
-  if(i==b){jos=0; sus=1; nrSchimb++;}
-
-  if(j==1){dreapta=1; stanga=0; nrSchimb++;}
-
-  if(j==a){dreapta=0; stanga=1; nrSchimb++;}
-
- }
-
-}
-
-cout<<nrSchimb;
-
-return 0;
-
+    gets(s + 1);
+    a = strlen(s + 1);
+    for(i = 1; i <= a; i ++)
+    {
+        if(s[i] == '.')
+            {
+            for(j = i + 1; j <= a; j ++)
+            if(s[j]!='0' && s[j]!='1' && s[j]!='2' && s[j]!='3' && s[j]!='4' && s[j]!='5' && s[j]!='6' && s[j]!='7' && s[j]!='8' && s[j]!='9') {p=j-1;break;}
+            if(p == 0) p = a;
+            for(j = i - nr; j <= p; j ++)
+            w[j] = true;
+            }
+            if(s[i] <= '9' && s[i] >= '0') nr ++;
+            else nr = 0;
+            p = 0;
+    }
+    for(i = 1; i <= a; i ++)
+        if(!w[i]) printf("%c", s[i]);
+    return 0;
 }
