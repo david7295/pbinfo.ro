@@ -1,43 +1,123 @@
-#include <fstream>
+#include<fstream>
 
-using namespace std;
+using namespace std;
 
-ifstream fin("pitic.in");
-ofstream fout("pitic.out");
+ifstream f("colier.in");
 
-int prime(int a);
-int sumdivprim(int n);
-int m;
+ofstream g("colier.out");
 
-int main()
+int main()
+
 {
 
-    fin >> m;
+   int n, nr=1, tip1=0, tip2=0,x,c,u,k=0,cmin=10,cmax=0,pcmin,pcmax,p,i,t;
 
-    for(int i=1;i<=m;i++)
-        fout << sumdivprim(i) << " ";
+   f>>t>>n>>x;
 
-    return 0;
+   while (x)
 
-}
-int prime(int a)
-{
-   int i;
-   if(a==2)
-      return 1;
-   if(a==0 or a==1 or a%2==0)
-      return 0;
-   for(i=3;i*i<=a and a%i;i+=2)
-      ;
-   return i*i>a;
-}
-int sumdivprim(int n)
-{
-    if(prime(n))
-        return n;
-    int s=0;
-    for(int i=2;i<=n/2;i++)
-        if(prime(i) and n%i==0)
-            s+=i;
-    return s;
+   {
+
+       c=x%10; k++;
+
+       if (c<cmin)
+
+       {
+
+           cmin=c; pcmin=k;
+
+       }
+
+       if (c>cmax)
+
+       {
+
+           cmax=c;pcmax=k;
+
+       }
+
+       x/=10;
+
+   }
+
+   if (pcmin>pcmax)
+
+   {
+
+       tip1++; u=p=1;
+
+   }
+
+   else
+
+   {
+
+       tip2++; u=p=2;
+
+   }
+
+   for (i=2; i<=n; i++)
+
+   {
+
+       f>>x;
+
+       k=0;  cmin=10; cmax=0;
+
+       while (x)
+
+       {
+
+           c=x%10; k++;
+
+           if (c<cmin)
+
+           {
+
+               cmin=c; pcmin=k;
+
+           }
+
+           if (c>cmax)
+
+           {
+
+               cmax=c; pcmax=k;
+
+           }
+
+           x/=10;
+
+       }
+
+       if (pcmin>pcmax)
+
+       {
+
+           tip1++;
+
+           if (u!=1) {nr++; u=1;}
+
+       }
+
+       else
+
+       {
+
+           tip2++;
+
+           if (u!=2) {nr++; u=2;}
+
+       }
+
+   }
+
+if (u==p) nr--;
+
+if (t==1) g<<tip1<<'\n';
+
+else g<<nr<<'\n';
+
+return 0;
+
 }
