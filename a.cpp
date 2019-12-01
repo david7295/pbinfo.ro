@@ -1,123 +1,99 @@
-#include<fstream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-ifstream f("colier.in");
+int n, k, maxi, a[10001][103], l, x, y, smax = -1, elem = -1, s, cerinta;
 
-ofstream g("colier.out");
+void proces(int nr)
+
+{
+
+   int aux = a[nr][a[nr][0]];
+
+   int j = a[nr][0]-1;
+
+   while (aux > a[nr][j] && j)
+
+       a[nr][j+1] = a[nr][j], j--;
+
+   a[nr][j+1] = aux;
+
+   while (a[nr][0] > k)
+
+       a[nr][0]--;
+
+}
 
 int main()
 
 {
 
-   int n, nr=1, tip1=0, tip2=0,x,c,u,k=0,cmin=10,cmax=0,pcmin,pcmax,p,i,t;
+   cin >> k >> n >> x;
 
-   f>>t>>n>>x;
+   maxi = x;
 
-   while (x)
-
-   {
-
-       c=x%10; k++;
-
-       if (c<cmin)
-
-       {
-
-           cmin=c; pcmin=k;
-
-       }
-
-       if (c>cmax)
-
-       {
-
-           cmax=c;pcmax=k;
-
-       }
-
-       x/=10;
-
-   }
-
-   if (pcmin>pcmax)
+   for (int i = 2; i <= n; i++)
 
    {
 
-       tip1++; u=p=1;
+       cin >> y;
 
-   }
+       maxi = max(maxi, y);
 
-   else
+       if (x == y)
 
-   {
-
-       tip2++; u=p=2;
-
-   }
-
-   for (i=2; i<=n; i++)
-
-   {
-
-       f>>x;
-
-       k=0;  cmin=10; cmax=0;
-
-       while (x)
-
-       {
-
-           c=x%10; k++;
-
-           if (c<cmin)
-
-           {
-
-               cmin=c; pcmin=k;
-
-           }
-
-           if (c>cmax)
-
-           {
-
-               cmax=c; pcmax=k;
-
-           }
-
-           x/=10;
-
-       }
-
-       if (pcmin>pcmax)
-
-       {
-
-           tip1++;
-
-           if (u!=1) {nr++; u=1;}
-
-       }
+           l++;
 
        else
 
        {
 
-           tip2++;
+           a[x][0]++;
 
-           if (u!=2) {nr++; u=2;}
+           a[x][a[x][0]] = l;
+
+           proces(x);
+
+           l = 1;
 
        }
 
+       x = y;
+
    }
 
-if (u==p) nr--;
+   a[x][0]++;
 
-if (t==1) g<<tip1<<'\n';
+   a[x][a[x][0]] = l;
 
-else g<<nr<<'\n';
+   proces(x);
 
-return 0;
+   for (int i = 0; i <= maxi; i++)
+
+   {
+
+       s = 0;
+
+       for (int j = 1; j <= a[i][0]; j++)
+
+           s += a[i][j];
+
+       if (s >= smax)
+
+           smax = s, elem = i;
+
+   }
+
+   cin >> cerinta;
+
+   if (cerinta == 1)
+
+       cout << smax;
+
+   else
+
+       cout << elem;
+
+   return 0;
 
 }
