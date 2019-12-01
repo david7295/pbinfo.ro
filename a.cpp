@@ -1,22 +1,35 @@
-#include <iostream>
+#include <fstream>
 
 using namespace std;
 
-int main()
-{
-   ifstream fin("conturi.in");
-   ofstream fout("coduri.out);
+ifstream f("daruri.in");
 
-   unsigned long long cod, sMax = 0, sCurent;
-   unsigned short N, X;
-   fin>>N>>X;
-   for(unsigned short i=1; i<=N; i++)
-   {
-      fin>>cod;
-      if(cod/1000000==X && cod/10000%10 == 1)
-      {
-         sCurent = 1000*cod/1000%10 + 100*cod/100%10 + 10*cod/10%10 + cod%10;
-        if(sCurent > sMax) sMax = sCurent;
-     }
-     fout<<sCurent;
+ofstream g("daruri.out");
+
+int main()
+
+{   int a,b;
+
+   f>>a>>b;
+
+   int aux1=a,aux2=b;
+
+   while(b)
+
+   {   int r=a%b;
+
+       a=b;
+
+       b=r;
+
+   }
+
+   if(a==1)
+
+       g<<0<<'\n'<<0<<' '<<0;
+
+   else
+
+       g<<a<<'\n'<<aux1/a<<' '<<aux2/a;
+
 }
