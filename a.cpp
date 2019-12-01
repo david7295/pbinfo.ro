@@ -1,24 +1,17 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-int main(){
-  int n,i,j;
-  int a[30][30];
-  cout<<"Introduceti dimensiunea matricei: "; 
-  cin>>n;
-  for (i=0;i<n;i++){
-    for (j=0;j<n;j++){ 
-      if(i+j<n){ 
-        a[i][j]=i+j+1; }
-      else{ 
-        a[i][j]=2*n-1-(i+j); }
-    } 
-  }
-  cout<<"Matricea formata este: "<<endl;
-  for (i=0;i<n;i++){
-    for (j=0;j<n;j++){
-      cout<<a[i][j]<<" "; 
-    } 
-    cout<<endl; 
-  } 
-  return 0;
+
+int main(){  
+  int a1, r, n,x,y;   
+  cin>>a1>>r>>n;  
+  x=a1;   
+  for(int i=1;i<=n;i++){   
+    y=x;     
+    for(int j=1;j<=n;j++){ 
+      cout<<y<<" ";      
+      y=y+n*r;   
+    } 
+    cout<<'\n'; 
+    x=x+r;  }
+    return 0;
 }
