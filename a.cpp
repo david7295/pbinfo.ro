@@ -1,31 +1,45 @@
-#include <fstream>
-#include <cstring>
-
+#include <bits/stdc++.h>
 using namespace std;
-
-ifstream fin("pbinfo.in");
-ofstream fout("pbinfo.out");
-
-char s[100],k[100];
-int n;
-
+int n,i,k;
+char s1[256],s2[256],c[25],*p;
+bool ok;
+string v[256],aux;
 int main()
 {
+   ifstream f("sortcuv.in");
+   ofstream g("sortcuv.out");
+   f.getline(s1,256);
+   f.getline(s2,256);
+   n=strlen(s1);
+   p=strtok(s1," .");
+   while(p)
+{
+strcpy(c,p);
+v[++k]=c;
+p=strtok(NULL," .");
+}
+n=strlen(s1);
+    p=strtok(s2," .");
+    while(p)
+{
+strcpy(c,p);
+v[++k]=c;
+p=strtok(NULL," .");
+}
+do
+{
+    ok=true;
+    for(i=1;i<k;i++)
+     if(v[i]>v[i+1])
+     {
+       aux=v[i];
+       v[i]=v[i+1];
+       v[i+1]=aux;
+       ok=false;
+     }
+}while(!ok);
 
-    fin >> s >> n;
-
-    for(;n;n--)
-    {
-        fin >> k;
-        if(strstr(s,k)!=NULL or strstr(s,"virus")!=NULL)
-        {
-            fout << "DA";
-            return 0;
-        }
-    }
-
-    fout << "NU";
-
+     for(i=1;i<=k;i++)
+     g<<v[i]<<"\n";
     return 0;
-
 }
