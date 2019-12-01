@@ -1,17 +1,31 @@
-#include <bits/stdc++.h>
+#include <fstream>
+#include <cstring>
+
 using namespace std;
 
-int n, i, nr;
-char s[75], *p;
+ifstream fin("pbinfo.in");
+ofstream fout("pbinfo.out");
+
+char s[100],k[100];
+int n;
+
 int main()
 {
-    cin.getline(s, sizeof(s));
-    p = strtok(s, " ");
-    while(p)
+
+    fin >> s >> n;
+
+    for(;n;n--)
     {
-      if(strchr(p, 'a')) nr ++;
-      p = strtok(NULL, " ");
+        fin >> k;
+        if(strstr(s,k)!=NULL or strstr(s,"virus")!=NULL)
+        {
+            fout << "DA";
+            return 0;
+        }
     }
-    cout << nr;
+
+    fout << "NU";
+
     return 0;
+
 }
