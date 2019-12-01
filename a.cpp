@@ -1,33 +1,37 @@
-#include <iostream>
+# include <iostream>
+# include <fstream>
 
-#include <fstream>
+# define MAX_X 100000
 
 using namespace std;
 
-int main()
+int f[MAX_X + 1];
 
-{
+int main() {
+    ifstream fin("maraton.in");
+    ofstream fout("maraton.out");
 
-   ifstream f("conversie_b_10.in");
+    int N, Q, x, y, q, i;
 
-   ofstream g("conversie_b_10.out");
+    fin >> N;
 
-   int n, b, zecimal=0, z=1;
+    for ( i = 0; i < N; i ++ ) {
+        fin >> x >> y;
+        f[x / y + ( x % y > 0 )] ++;
+    }
 
-   f >> n >> b;
+    for ( i = 1; i <= MAX_X; i ++ )
+        f[i] += f[i - 1];
 
-   while (n)
+    fin >> Q;
 
-   {
+    for ( i = 0; i < Q; i ++ ) {
+        fin >> q;
+        fout << f[q] << endl;
+    }
 
-       zecimal= zecimal+n%10*z;
+    fin.close();
+    fout.close();
 
-        n/=10; z=z*b;
-
-   }
-
-   g << zecimal;
-
-   return 0;
-
+    return 0;
 }
