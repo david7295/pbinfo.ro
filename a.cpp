@@ -2,96 +2,88 @@
 
 #include <fstream>
 
+#include <cstring>
+
 #include <algorithm>
 
 using namespace std;
 
-ifstream f("zece.in");
-
-ofstream g("zece.out");
-
-struct elev{
-
-   int probrez;
-
-   int poz;
-
-}v[1001];
-
-bool descr(elev a, elev b)
+struct Copil
 
 {
 
-   if (a.probrez==b.probrez)
+   char Nume[21];
 
-   {
+   int Numar;
 
-       return a.poz<b.poz;
+};
 
-   }
+char voc[]="aeiouAEIOU";
 
-   else return a.probrez>b.probrez;
+bool acompare(Copil lhs, Copil rhs) {
 
-}
+   if(lhs.Numar == rhs.Numar){
 
-int n,k,i, c;
+       if (strcmp(lhs.Nume,rhs.Nume)<0)
+
+      return lhs.Nume < rhs.Nume;
+
+       }
+
+   return lhs.Numar < rhs.Numar;
+
+    }
+
+Copil v[300001] ;
 
 int main()
 
 {
 
-   f >> c >> n >> k;
+  int n;
 
-   for (i=1; i<=n; ++i)
+  cin >> n;
 
-   {
+  for(int i = 1; i <= n; i++)
 
-       f >> v[i].probrez;
+  {
 
-       v[i].poz=i;
+      cin >> v[i].Nume;
 
-   }
+      char aux[21]="";
 
-   sort(v+1,v+n+1,descr);
+      strcpy(aux,v[i].Nume);
 
-   if (c==1)
+      int maxim = 0;
 
-   {
+      int l = strlen(aux);
 
-       for (i=1; i<=k; ++i)
+      for(int j = 0; j < l - 1; j++)
 
-           g << v[i].probrez << " ";
+      {
 
-       i=k+1;
+          if(strchr(voc,aux[j]) && strchr(voc,aux[j + 1]))
 
-       while (v[i].probrez==v[i-1].probrez)
+              maxim += 1;
 
-       {
+          if(!(strchr(voc,aux[j])) && !(strchr(voc,aux[j + 1])))
 
-           g << v[i++].probrez << " ";
+              maxim -= 1;
 
-       }
+      }
 
-   }
+      v[i].Numar = maxim;
 
-   else
+  }
 
-   {
+  sort(v + 1, v + 1 + n,acompare);
 
-       for (i=1; i<=k; ++i)
+  for(int i = 1; i <= n; i++)
 
-           g << v[i].poz << " ";
+  {
 
-       i=k+1;
+      cout << v[i].Nume << "\n";
 
-       while (v[i].probrez==v[i-1].probrez)
-
-       {
-
-           g << v[i++].poz << " ";
-
-       }
-
-   }
+  }
 
 }
