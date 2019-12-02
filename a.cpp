@@ -1,28 +1,27 @@
-#include <iostream>
-
+#include<bits/stdc++.h>
 using namespace std;
-
-int n,m,a[1001][1001],nr;
-
-int main()
-{
-
-    cin >> n >> m;
-    for(int i=1;i<=n;i++)    
-        for(int j=1;j<=m;j++)        
-            cin >> a[i][j];         
-
-    for(int i=1;i<=m;i++)
-    {
-        int min=10001;
-        for(int j=1;j<=n;j++)    
-                if(a[j][i]<min)        
-                        min=a[j][i];
-        nr+=min;
-    }
-
-    cout << nr;
-
-    return 0;
-
+int v[2005][2005];
+int main(){ 
+  int n,m,i,j;  
+  cin>>n>>m; 
+  for(i=1;i<=n;++i){   
+    for(j=1;j<=m;++j){  
+      cin>>v[i][j];  }   
+  }    
+  for(i=1;i<=m;++i){  
+    int dp[2005]; 
+    for(j=1;j<=n;++j){    
+      dp[j]=v[j][i];        } 
+    sort(dp+1,dp+n+1);   
+    for(j=1;j<=n;++j){  
+      v[j][i]=dp[j];   
+    }   
+  }  
+  for(i=1;i<=n;++i){    
+    for(j=1;j<=m;++j){  
+      cout<<v[i][j]<<" ";   
+    }   
+    cout<<'\n';  
+  }   
+  return 0;
 }
