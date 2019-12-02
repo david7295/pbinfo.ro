@@ -1,59 +1,115 @@
-#include <bits/stdc++.h>
-#define maxN 2004 //nimeni altu
-using namespace std;
-const int INF=(1<<30);
-struct point
+#include<bits/stdc++.h>
+
+using namespace std;
+
+ifstream in("gradinita.in");
+
+ofstream out("gradinita.out");
+
+bool ciur[100001];
+
+int n,x,v[100001],nr;
+
+int sum_cif_impare(int x)
+
 {
-    double x,y,r;
-    double _tan;
-    double first,last;
-}v[maxN];
-bool cmp(const point &a,const point &b)
-{
-    if(a._tan==b._tan)
-        return a.last<b.last;
-    return a._tan<b._tan;
+
+   int nrc=0,p=1,s=0;
+
+   while(p<=x)
+
+   {
+
+       p*=10;
+
+       nrc++;
+
+   }
+
+   if(nrc%2==0)
+
+       x/=10;
+
+   while(x>0)
+
+   {
+
+       s+=x%10;
+
+       x/=100;
+
+   }
+
+   return s;
+
 }
-int n,i,j,lines=1,maxc,currc,nr,ind;
-int main()
+
+void init()
+
 {
-    freopen("cerc4.in","r",stdin);
-    freopen("cerc4.out","w",stdout);
-    scanf("%d",&n);
-    for(i=1;i<=n;i++)
-        scanf("%lf %lf %lf",&v[i].x,&v[i].y,&v[i].r);
-    for(i=1;i<=n;i++)
-        if(v[i].y!=0)
-            v[i]._tan=v[i].x/v[i].y;
-        else v[i]._tan=INF;
-    for(i=1;i<=n;i++)
-    {
-        double aux=sqrt(v[i].x*v[i].x+v[i].y*v[i].y);
-        v[i].first=aux-v[i].r;
-        v[i].last=aux+v[i].r;
-    }
-    sort(v+1,v+n+1,cmp);
-    maxc=1,nr=1,currc=1,ind=1;
-    for(i=2;i<=n;i++)
-    {
-        if(v[i]._tan!=v[i-1]._tan)
-        {
-            lines++;
-            currc=1;
-            if(maxc==currc)
-                nr++;
-            ind=i;
-        }
-        else if(v[i].first>v[ind].last)
-        {
-            currc++;
-            if(currc>maxc)
-                maxc=currc,nr=1;
-            else if(currc==maxc)
-                nr++;
-            ind=i;
-        }
-    }
-    printf("%d %d %d",lines,maxc,nr);
-    return 0;
+
+   int i;
+
+   ciur[0]=ciur[1]=1;
+
+   for(int i=4;i<=100001;i+=2)
+
+       ciur[i]=1;
+
+   for(i=3;i*i<=100001;i+=2)
+
+       if(ciur[i]==0)
+
+           for(int j=i*i;j<=100001;j+=2*i)
+
+               ciur[j]=1;
+
+}
+
+int main()
+
+{
+
+   init();
+
+   int k;
+
+   in>>n>>k;
+
+   if(k==1)
+
+   {
+
+       out<<"Toti copiii sunt obraznici!";
+
+       return 0;
+
+   }
+
+   for(int i=1;i<=n;i++)
+
+   {
+
+       in>>x;
+
+       if(ciur[x] && ciur[sum_cif_impare(x)])
+
+           v[++nr]=x;
+
+   }
+
+   if(nr==0)
+
+       out<<"Toti copiii sunt obraznici!";
+
+   else
+
+       for(int i=1;i<=nr;i++)
+
+           if(i%k!=0)
+
+               out<<v[i]<<" ";
+
+       return 0;
+
 }
