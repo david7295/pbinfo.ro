@@ -1,30 +1,25 @@
 #include <iostream>
 using namespace std;
+
 int main()
 {
-    int n,m,v[100][100],C=0;
-    cin>>n>>m;
-     for(int i=1;i<=n;i++)
-     for(int j=1;j<=m;j++)
-     {
-       cout<<"v["<<i<<"]["<<j<<"]=";
-       cin>>v[i][j];
-     }
-   for(int i=1;i<n;i++)
-     for(int j=i+1;j<=n;j++)
-     {    
-         bool ok=true;
-         int k=1;
-         while(k<=m && ok)
-         {
-             if(v[i][k]!=v[j][k] )
-                ok=false;
-             else
-                k++;
-         }
-         if(ok)
-            C++;
-     }
-     cout<<C;
-     return 0;
+    int n, m, a[100][100], persoane = 0;
+   
+    cin >> n >> m;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < m; j++)
+            cin >> a[i][j];
+   
+    //parcurgerea coloanelor
+    for (int j = 0; j < n; j++)
+    {
+        int factor_minim = a[0][j];
+        for (int i = 1; i < n; i++)
+            if (a[i][j] < factor_minim)
+                factor_minim = a[i][j];
+
+        persoane += factor_minim;
+    }
+
+    cout << persoane;
 }
