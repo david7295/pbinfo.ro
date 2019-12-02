@@ -1,115 +1,63 @@
-#include<bits/stdc++.h>
+#include <iostream>
 
-using namespace std;
+using namespace std;
 
-ifstream in("gradinita.in");
+int n,m,a[101][101];
 
-ofstream out("gradinita.out");
+unsigned long Count(unsigned long a);
 
-bool ciur[100001];
-
-int n,x,v[100001],nr;
-
-int sum_cif_impare(int x)
-
+int main()
 {
 
-   int nrc=0,p=1,s=0;
+   cin >> n >> m ;
 
-   while(p<=x)
+   for(int i=1;i<=n;i++)
+    for(int j=1;j<=m;j++)
+     cin >> a[i][j];
 
-   {
+   for(int i=1;i<=n;i++)
+    if(Count(a[i][1])<=2)
+     for(int j=1;j<=m/2;j++)
+      swap(a[i][j],a[i][m-j+1]);
 
-       p*=10;
+   for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
+         cout << a[i][j] << " ";
+        cout << endl;
+    }
 
-       nrc++;
 
-   }
 
-   if(nrc%2==0)
-
-       x/=10;
-
-   while(x>0)
-
-   {
-
-       s+=x%10;
-
-       x/=100;
-
-   }
-
-   return s;
+   return 0;
 
 }
 
-void init()
-
+unsigned long Count(unsigned long a)
 {
-
-   int i;
-
-   ciur[0]=ciur[1]=1;
-
-   for(int i=4;i<=100001;i+=2)
-
-       ciur[i]=1;
-
-   for(i=3;i*i<=100001;i+=2)
-
-       if(ciur[i]==0)
-
-           for(int j=i*i;j<=100001;j+=2*i)
-
-               ciur[j]=1;
-
-}
-
-int main()
-
-{
-
-   init();
-
-   int k;
-
-   in>>n>>k;
-
-   if(k==1)
-
-   {
-
-       out<<"Toti copiii sunt obraznici!";
-
-       return 0;
-
-   }
-
-   for(int i=1;i<=n;i++)
-
-   {
-
-       in>>x;
-
-       if(ciur[x] && ciur[sum_cif_impare(x)])
-
-           v[++nr]=x;
-
-   }
-
-   if(nr==0)
-
-       out<<"Toti copiii sunt obraznici!";
-
-   else
-
-       for(int i=1;i<=nr;i++)
-
-           if(i%k!=0)
-
-               out<<v[i]<<" ";
-
-       return 0;
-
+   unsigned long count = 1, k = 0, i;
+   if (a == 1 || a == 2)
+      return a;
+   while ((a & 1) == 0)
+   {
+      k++;
+      a >>= 1;
+   }
+   if (a == 1)
+      return k + 1;
+   else
+      count = k + 1;
+   for(i = 3; i*i <= a; i += 2)
+   {
+      k = 0;
+      while(a % i == 0)
+      {
+         k++;
+         a /= i;
+      }
+      count *= (k + 1);
+   }
+   if (a > 1)
+      count <<= 1;
+   return count;
 }
