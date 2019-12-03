@@ -1,23 +1,37 @@
-#include <iostream>
+#include "stdafx.h"
+#include <iostream>
 
-using namespace std;
+using namespace std;
 
-int putere(int a, int b) {
+bool cifre(int numar)
+{
+        int c = numar % 10;
 
-if (b == 1) return a;
+        while (numar > 0)
+        {
+               if (numar % 10 == c)
+                        numar /= 10;
+                else
+                        break;
+        }
 
-else return a * putere(a, b - 1);
-
+      return (numar == 0);
 }
 
-int main() {
 
-int a, b;
+void identice(int a, int b)
+{
+        for (int i = a; i <= b; i++)
+        {
+                  if (cifre(i))
+                        cout << i << " ";
+        }
+}
 
-cout << "Introduceti a,b :";
+int main()
+{
+        int a, b;
+        cin >> a >> b;
 
-cin >> a >> b;
-
-cout << endl << putere(a, b);
-
+        identice(a, b);
 }
