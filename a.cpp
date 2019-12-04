@@ -1,23 +1,24 @@
-#include <iostream>
-using namespace std;
-
-int main(){
-int a[200][200];
-int n,a1,r,i,j;
-cin>>a1>>r>>n;
-//formula generala pentru al nlea termen este an=a1+(n-1)*r 
-//in matrice, termenul al nlea va fi nr_coloane_parcurse*(nr_linii_total)+nr_linii_curente
-for(j=0;j<n;j++){
-for(i=0;i<n;i++){
-a[i][j]=a1+(j*n+i)*r;
+#include <iostream>
+using namespace std;
+int a [100][100],n,m,i,j,c,d,ok;
+int main ()
+{
+cin>>n>>m;
+for (i=1;i<=n;i++)
+for (j=1;j<=m;j++)
+cin>>a[i][j];
+for (i=1;i<=n;i++)
+for (j=1;j<=m;j++)
+if (i%2==0)
+{
+ok=1;
+if (a[i][j]==0||a[i][j]==1)
+ok=0;
+for (d=2;d<=a[i][j]/2;d++)
+if (a[i][j]%d==0)
+ok=0;
+if (ok)
+c++;
 }
-}
-for(i=0;i<n;i++){
-for(j=0;j<n;j++){
-cout<<a[i][j]<<" ";
-}
-cout<<endl;
-}
-
-return 0;
+cout<<c;
 }
