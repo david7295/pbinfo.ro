@@ -2,16 +2,16 @@
 using namespace std;
 
 int main() {
-  long long k, n, sol = 1;
-  cin >> k >> n;
-  if(k > n)
-    sol = 0;
-  else {
-    for(long long i = n - k + 1; i <= n; i++) {
-      sol = sol * i;
-      sol = sol % 224737;
+    int n, nr = 0, f = 5;
+    cin >> n;
+    while( f  <= n) {
+      int ff = f;
+      while( ff % 5 == 0) {
+        ff /= 5;
+        nr++;
+      }
+      f = f + 5;
     }
-  }
-  cout << sol;
-  return 0;
+    cout << nr;
+    return 0;
 }
