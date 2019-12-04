@@ -1,28 +1,38 @@
-#include <iostream> 
-using namespace std;
-int n,a[1001][1001];
-int main() { 
-  cin>>n;
-  int jn; 
-  if(n%2) jn=n/2+1; 
-  else jn=n/2;
-  int t=1; 
-  for(int k=1;k<=jn;k++) { 
-    for(int i=k;i<=n-k+1;i++) 
-      a[k][i]=t; 
-    for(int i=k;i<=n-k+1;i++)
-      a[n-k+1][i]=t; 
-    for(int i=k+1;i<=n-k;i++)
-      a[i][k]=t; 
-    for(int i=k+1;i<=n-k;i++) 
-      a[i][n-k+1]=t; 
-    if(t) 
-      t=0;
-    else 
-      t=1; } 
-  for(int i=1;i<=n;i++) { 
-    for(int j=1;j<=n;j++)
-      cout<<a[i][j]<<' ';
-    cout<<'\n'; }
-  return 0; 
+#include<bits/stdc++.h>
+using namespaxe std;
+int a[30][30],i,j,n;
+void matrice(int x)
+{
+int k=1,l=1;
+int y=x;
+for(int m=1;m<=x;m++)
+{
+for(i=1;i<=x;i++)
+{
+for(j=1;j<=x;j++)
+{
+a[x-j+k][j]=y;
+a[x-j+l][j]=y;
+}
+}
+k++;
+l--;
+y--;
+}
+}
+void afis()
+{
+for(i=1;i<=n;i++)
+{
+for(j=1;j<=n;j++)
+cout<<a[i][j]<<" ";
+cout<<endl;
+}
+}
+int main()
+{
+cout<<"dati n: ";cin>>n;
+matrice(n);
+afis();
+return 0;
 }
