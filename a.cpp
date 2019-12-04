@@ -1,20 +1,23 @@
-#include <iostream> 
-using namespace std; 
-int a[102][102], n;
-int main(){ 
-  cin >> n;
-  a[1][n/2 + 1] = a[n][n/2+1] = 1;
-  for(int i = 2 , j = n - 1 ; i <= j ; i ++, j --) { 
-    a[i][n/2+1] = a[i-1][n/2+1] + 1; 
-    a[j][n/2+1] = a[j+1][n/2+1] + 1; 
-      for(int k = a[i][n/2+1]-1 , p = 1 ; k > 0 ; k -- , p ++)
-        a[i][n/2+1-p] = a[i][n/2+1+p] = k; 
-    for(int k = a[j][n/2+1]-1 , p = 1 ; k > 0 ; k -- , p ++)
-      a[j][n/2+1-p] = a[j][n/2+1+p] = k; } 
-  for (int i = 1 ;i <= n ; ++i) { 
-    for(int j = 1 ; j <= n ; ++j)
-      cout << a[i][j] << " "; 
-    cout << endl; 
-  } 
-  return 0;
+#include <iostream>
+using namespace std;
+
+int main(){
+int a[200][200];
+int n,a1,r,i,j;
+cin>>a1>>r>>n;
+//formula generala pentru al nlea termen este an=a1+(n-1)*r 
+//in matrice, termenul al nlea va fi nr_coloane_parcurse*(nr_linii_total)+nr_linii_curente
+for(j=0;j<n;j++){
+for(i=0;i<n;i++){
+a[i][j]=a1+(j*n+i)*r;
+}
+}
+for(i=0;i<n;i++){
+for(j=0;j<n;j++){
+cout<<a[i][j]<<" ";
+}
+cout<<endl;
+}
+
+return 0;
 }
