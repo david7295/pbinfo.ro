@@ -1,37 +1,56 @@
-#include "stdafx.h"
-#include <iostream>
+#include <iostream>
 
-using namespace std;
+using namespace std;
 
-bool cifre(int numar)
+int main()
+
 {
-        int c = numar % 10;
 
-        while (numar > 0)
-        {
-               if (numar % 10 == c)
-                        numar /= 10;
-                else
-                        break;
-        }
+int n;
 
-      return (numar == 0);
+cin>>n;
+
+int M[100][100];
+
+for(int i=1; i<=n; i++)
+
+for(int j=1; j<=n; j++)
+
+{
+
+if(i==1 || i==n || j==1 || j==n)
+
+M[i][j]=i+j;
+
 }
 
 
-void identice(int a, int b)
+for(int j=n-1; j>1; j--)
+
+for(int i=2; i<=n-1; i++)
+
 {
-        for (int i = a; i <= b; i++)
-        {
-                  if (cifre(i))
-                        cout << i << " ";
-        }
+
+M[i][j]=M[i-1][j+1]+M[i][j+1]+M[i+1][j+1];
+
 }
 
-int main()
-{
-        int a, b;
-        cin >> a >> b;
 
-        identice(a, b);
+for(int i=1; i<=n; i++)
+
+{for(int j=1; j<=n; j++)
+
+{
+
+cout<<M[i][j]<<" ";
+
+}
+
+cout<<endl;
+
+}
+
+
+return 0;
+
 }
