@@ -2,37 +2,39 @@
 
 using namespace std;
 
-char ciur[1000000];
+int main()
 
-int main(){
+{
 
-   int n, m, nr = 0, i, j, k;
+   long long a, b, d, schimb, m, c;
 
-   cin >> n >> m;
+   cin >> a >> b;
 
-   ciur[1] = ciur[0] = 1;
+   if (a==b) schimb=0;
 
-   for (i = 2;i*i <= 1000000;i++)
+   else
 
-       if (ciur[i] == 0)
+   {
 
-        for (j = i*i;j <= 1000000;j += i)
+       if (a<b) { int t=a; a=b; b=t;}
 
-         ciur[j] = 1;
+       d=a; m=b;
 
-   for (i = 1;i <= n;i++)
+      while (m) {
 
-       for (j = 1;j <= m;j++){
+       c = d % m;
 
-        cin >> k;
+       d = m;
 
-        if (j%2 == 1 && ciur[k] == 0)
+       m = c;
 
-               nr++;
+   }
 
-    }
+       schimb=b/d+a/d-2;
 
-   cout << nr;
+   }
+
+   cout << schimb;
 
    return 0;
 
