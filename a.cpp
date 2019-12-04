@@ -1,55 +1,28 @@
-#include <iostream>
-
+#include <iostream> 
 using namespace std;
-
-short v[100], m[100][100], n, i, j;
-
-int main()
-
-{
-
-   cin >> n;
-
-   for (i=0; i<n; ++i)
-
-       cin >> v[i];
-
-   for (j=0; j<n; ++j)
-
-   {
-
-       if (j%2==0)
-
-       {
-
-           for (i=0; i<n; ++i)
-
-               m[i][j]=v[n-1-i];
-
-       }
-
-       else
-
-       {
-
-           for (i=0; i<n; ++i)
-
-               m[i][j]=v[i];
-
-       }
-
-   }
-
-   for (i=0; i<n; ++i)
-
-   {
-
-       for (j=0; j<n; ++j)
-
-           cout << m[i][j] << " ";
-
-       cout << endl;
-
-   }
-
+int n,a[1001][1001];
+int main() { 
+  cin>>n;
+  int jn; 
+  if(n%2) jn=n/2+1; 
+  else jn=n/2;
+  int t=1; 
+  for(int k=1;k<=jn;k++) { 
+    for(int i=k;i<=n-k+1;i++) 
+      a[k][i]=t; 
+    for(int i=k;i<=n-k+1;i++)
+      a[n-k+1][i]=t; 
+    for(int i=k+1;i<=n-k;i++)
+      a[i][k]=t; 
+    for(int i=k+1;i<=n-k;i++) 
+      a[i][n-k+1]=t; 
+    if(t) 
+      t=0;
+    else 
+      t=1; } 
+  for(int i=1;i<=n;i++) { 
+    for(int j=1;j<=n;j++)
+      cout<<a[i][j]<<' ';
+    cout<<'\n'; }
+  return 0; 
 }
