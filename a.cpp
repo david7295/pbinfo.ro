@@ -1,87 +1,39 @@
-#include <fstream>
-
 #include <iostream>
+
+#include <fstream>
 
 using namespace std;
 
-ifstream fin("ture.in");
+ifstream f("cod.in");
 
-ofstream fout("ture.out");
+ofstream g("cod.out");
 
- 
+int n,i,v[100],num;
 
-int n, v[101][101], suml[101], sumcol[101], k, maxi, sumeij[101][101];
+int main()
 
-void citire() {
+{
 
- int x;
+   f >> n;
 
- fin >> n;
+   for (i=1; i<=n; i++)
 
- for (int i = 1; i <= n; i++)
+   {
 
-   for (int j = 1; j <= n; j++) {
+       f >> num;
 
-     fin >> x;
-
-     suml[i] += x;
-
-     sumcol[j] += x;
-
-     v[i][j] = x;
+       ++v[num];
 
    }
 
-}
+   for (i=0; i<100; i++)
 
- 
+   {
 
-void calc_sume() {
-
- for (int i = 1; i <= n; i++)
-
-   for (int j = 1; j <= n; j++) {
-
-     sumeij[i][j] = suml[i] + sumcol[j] - 2 * v[i][j];
-
-     for (int ii = 1; ii <= i - 1; ii++)
-
-       for (int jj = 1; jj <= n; jj++)
-
-         if (ii != i && jj != j)
-
-           maxi =
-
-               max(sumeij[ii][jj] + sumeij[i][j] - v[ii][j] - v[i][jj], maxi);
-
-         else
-
-           maxi = max(sumeij[ii][jj] + sumeij[i][j] - sumcol[j], maxi);
-
-     for (int jj = 1; jj <= j - 1; jj++)
-
-       maxi = max(sumeij[i][jj] + sumeij[i][j] - suml[i], maxi);
+       if (v[i]%2==1) g << i;
 
    }
 
-}
-
- 
-
-void afisare() { fout << maxi; }
-
- 
-
-int main() {
-
- citire();
-
- calc_sume();
-
- afisare();
-
- 
-
- return 0;
+   return 0;
 
 }
