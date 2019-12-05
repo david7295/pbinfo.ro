@@ -1,39 +1,47 @@
 #include <iostream>
 
-#include <fstream>
-
 using namespace std;
 
-ifstream f("cod.in");
-
-ofstream g("cod.out");
-
-int n,i,v[100],num;
+int n, i, m[11], b, r, cif, num[11], r2, j;
 
 int main()
 
 {
 
-   f >> n;
+   cin >> n;
 
-   for (i=1; i<=n; i++)
-
-   {
-
-       f >> num;
-
-       ++v[num];
-
-   }
-
-   for (i=0; i<100; i++)
+   for (i=1; i<=n; ++i)
 
    {
 
-       if (v[i]%2==1) g << i;
+       cin >> m[i] >> b >> r;
+
+       r2=1;
+
+       for (j=1; j<m[i]; ++j)
+
+           r2=(r2*10)%b;
+
+       if (r>=r2) cif=r-r2;
+
+       else cif=b+r-r2;
+
+       num[i]=cif;
 
    }
 
-   return 0;
+   for (i=1; i<=n; ++i)
+
+   {
+
+       cout << 1;
+
+       for (j=1; j<=m[i]-2; ++j)
+
+           cout << 0;
+
+       cout << num[i] << endl;
+
+   }
 
 }
