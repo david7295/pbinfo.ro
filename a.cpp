@@ -1,20 +1,87 @@
-#include<iostream>
-#include<fstream>
+#include <iostream>
+
+#include <fstream>
+
 using namespace std;
- int main(){
-  ifstream in("max_suma.in");
-  ofstream out("max_suma.out");
-  int n,m,a[50],maxim,suma;
-  in>>n>>m;
-  for (int cont=1; cont<=n;cont++ ){ 
-    for  (int i=0; i<m; i++){      
-      in>>a[i];}
-  suma = 0;
-  maxim = a[0];
-  for (int i=0; i<m; i++){   
-    suma+= a[i];   
-  if (a[i]>maxim)     
-    maxim = a[i];
- }
- out<<suma<<" "<<maxim<<endl;}
+
+ifstream f("cifpagini.in");
+
+ofstream g("cifpagini.out");
+
+int n,p,v,S,x,t,k,a[1001],d,i,S1;
+
+int main()
+
+{
+
+   f>>n>>p>>v;
+
+   S+=p;
+
+   x=p+1;
+
+   while(k<=n-1)
+
+   {
+
+       if(x%2!=0){d=3;
+
+               t=1;
+
+               while(d*d<=x)
+
+               {if(x%d==0) t++;
+
+                 d++;}
+
+               if(t==1) {++k;
+
+                  a[k]=x;}}
+
+       x++;
+
+   }
+
+   for(i=1;i<=n-1;i++) S+=a[i];
+
+   if(v==1) g<<S;
+
+     else {p=1;
+
+          x=S;
+
+          k=0;
+
+           while(S)
+
+           {p*=10;
+
+             k++;
+
+            S/=10;
+
+           }
+
+           p/=10;
+
+           while(k)
+
+           {
+
+               S1+=k*(x-p+1);
+
+               k--;
+
+               x=p-1;
+
+               p/=10;
+
+               }
+
+           g<<S1;
+
+          }
+
+   return 0;
+
 }
