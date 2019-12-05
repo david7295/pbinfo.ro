@@ -1,11 +1,17 @@
-#include <iostream>
-using namespace std;
+#include <fstream>
 
-int main() {
-    int x, y, z;
-    cin >> x >> y >> z;
-    cout << y;
-    for(int i = 1; i < x; i++)
-      cout << z;
+using namespace std;
+ifstream cin(“xyz.in”);
+ofstream cout(“xyz.out”);
+
+int x,y,z,i;
+
+int main() { 
+    cin>>x>>y>>z;
+    cout<<y; 
+    for (i = 1; i < x; i ++) 
+        cout<<z;
+    cin.close(); 
+    cout.close(); 
     return 0;
 }
