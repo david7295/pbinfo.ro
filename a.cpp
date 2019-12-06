@@ -1,87 +1,32 @@
-#include <iostream>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <cassert>
+using namespace std;
+#define NN 1005
 
-#include <fstream>
+ifstream fin("plopi1.in");
+ofstream fout("plopi1.out");
 
-using namespace std;
+int n, a[NN], L[NN];
 
-ifstream f("cifpagini.in");
 
-ofstream g("cifpagini.out");
-
-int n,p,v,S,x,t,k,a[1001],d,i,S1;
-
-int main()
-
+int main(){
+assert(fin >> n );
+for(int i=1 ; i<=n ; ++i)
+assert(fin >> a[i]);
+L[n] = 1;
+for(int i=n-1 ; i>0 ; i--)
 {
-
-   f>>n>>p>>v;
-
-   S+=p;
-
-   x=p+1;
-
-   while(k<=n-1)
-
-   {
-
-       if(x%2!=0){d=3;
-
-               t=1;
-
-               while(d*d<=x)
-
-               {if(x%d==0) t++;
-
-                 d++;}
-
-               if(t==1) {++k;
-
-                  a[k]=x;}}
-
-       x++;
-
-   }
-
-   for(i=1;i<=n-1;i++) S+=a[i];
-
-   if(v==1) g<<S;
-
-     else {p=1;
-
-          x=S;
-
-          k=0;
-
-           while(S)
-
-           {p*=10;
-
-             k++;
-
-            S/=10;
-
-           }
-
-           p/=10;
-
-           while(k)
-
-           {
-
-               S1+=k*(x-p+1);
-
-               k--;
-
-               x=p-1;
-
-               p/=10;
-
-               }
-
-           g<<S1;
-
-          }
-
-   return 0;
-
+L[i] = 1;
+for(int j=i+1 ; j<=n; ++j)
+if(a[i]>a[j] && L[i]<L[j]+1)
+L[i] = L[j] + 1;
+}
+int pmax = 1;
+for(int i=1 ; i<=n ; ++i)
+if(L[pmax] <= L[i])
+pmax = i;
+fout << n - L[pmax] << endl;
+return 0;
 }
