@@ -1,32 +1,27 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
-using namespace std;
+using namespace std;
 
-int n,k,x,nr;
+int main() {
 
-int main()
-{
+   long long n;
 
-    cin >> n >> k;
+   int b;
 
-    for(int i=1;i<=n;i++)
-    {
-        cin >> x;
-        int c=1;
-        while(x!=0)
-        {
-            if(x%k>1)
-            {
-                c=0;
-                break;
-            }
-            x/=k;
-        }
-        if(c) nr++;
-    }
+   cout<<"n=";
 
-    cout << nr;
+   cin>>n;
 
-    return 0;
+   cout<<"b";
+
+   cin>>b;
+
+   long long masca=1;
+
+   masca = masca<<b;
+
+   n = n | masca;
+
+   cout<<"N="<<n<<endl;
 
 }
