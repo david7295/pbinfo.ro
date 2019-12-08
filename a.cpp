@@ -1,37 +1,20 @@
-#include <iostream>
-
-#include <fstream>
-
-using namespace std;
-
-int main()
-
+#include <iostream>
+using namespace std;
+int n, d, i;
+bool prim;
+int main()
 {
-
-   ifstream fin("numar4.in");
-
-   ofstream fout("numar4.out");
-
-   int n;
-
-   fin >> n;
-
-   int nr=0;
-
-   while (n)
-
-   {
-
-       if (n%2==0) nr+=4;
-
-       else nr+=5;
-
-       n/=10;
-
-   }
-
-   fout << nr;
-
-   return 0;
-
+    cin >> n;
+    for(i = 2; i <= n; i ++)
+    {
+        prim = true;
+        for(d = 2; d * d <= i; d ++)
+        if(i % d == 0)
+        {
+            prim = false;
+            break;
+        }
+        if(prim) cout << i << " ";
+    }
+    return 0;
 }
