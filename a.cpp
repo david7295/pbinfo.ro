@@ -2,26 +2,22 @@
 
 using namespace std;
 
-int main() {
+int main()
 
-   long long n;
+{
 
-   int b;
+int n,b;
 
-   cout<<"n=";
+long long int x;
 
-   cin>>n;
+cin>>n;
 
-   cout<<"b";
+for(int i = 0; i < n;i++){
 
-   cin>>b;
+cin >> x >> b;
 
-   long long masca=1;
+cout << ((x & (1<<b))>>b) <<"\n";
 
-   masca = masca<<b;
-
-   n = n | masca;
-
-   cout<<"N="<<n<<endl;
+}
 
 }
