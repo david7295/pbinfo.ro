@@ -1,107 +1,55 @@
 #include <iostream>
 
-#include <string>
-
 using namespace std;
+
+int n,i,x,y,suma_x,suma_y,nr,copie_y;
 
 int main()
 
 {
 
-char pattern[256], modelul[256], nr[3], sir[50], text[100];
+   cin>>n;
 
-int i, j, numar, paranteze=0, p1, p2, pnr, x;
+   cin>>x;
 
-cout<<"pattern:"; cin>>pattern;
+   for(i=2; i<=n; i++)
 
-for(i=0;i<strlen(pattern);i++)
+   {
 
- if(pattern[i]=='[' || pattern[i]==']')
+       cin>>y;
 
-  paranteze++;
+       suma_x=suma_y=0;
 
-while(paranteze){
+       copie_y=y;
 
- p1=0; p2=0;
+       while(y)
 
- for(i=0;i<strlen(pattern);i++)
+       {
 
-  if(pattern[i]=='['){
+           suma_y+=y%10;
 
-   p1++;
+           y/=10;
 
-   if(p1==paranteze/2){
+       }
 
-    p1=i; break;
+       while(x)
+
+       {
+
+           suma_x+=x%10;
+
+           x/=10;
+
+       }
+
+       if(suma_x==suma_y)nr++;
+
+       x=copie_y;
 
    }
 
-  }
+   cout<<nr;
 
- for(i=p1;i<=strlen(pattern);i++)
-
-  if(pattern[i]==']'){
-
-   p2=i; break;
-
-  }
-
- i=p1-1;
-
- while(pattern[i]>='0' && pattern[i]<='9' && i>0)
-
-  i--;
-
- if(i==0) pnr=0;
-
- else pnr=i+1;
-
- x=0;
-
- if(i==0) i=-1;
-
- for(j=i+1;j<p1;j++){
-
-  nr[x]=pattern[j]; x++;}
-
- nr[x]='\0';
-
- numar=atoi(nr);
-
- x=0;
-
- for(i=p1+1;i<p2;i++){
-
-  sir[x]=pattern[i]; x++;
-
- }
-
- sir[x]='\0';
-
- numar--;
-
- strcpy(text,pattern+p2+1);
-
- while(numar){
-
-  numar--;
-
-  strcpy(pattern+p2,sir);
-
-  p2=p2+strlen(sir);
-
- }
-
- strcpy(pattern+p2,text);
-
- strcpy(pattern+pnr,pattern+p1+1);
-
- paranteze=paranteze-2;
-
-}
-
-cout<<pattern;
-
-return 0;
+   return 0;
 
 }
