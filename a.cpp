@@ -1,20 +1,32 @@
-#include <iostream>
+#include <bits/stdc++.h>
+
 using namespace std;
-int n, d, i;
-bool prim;
+
+int n,k,x,nr;
+
 int main()
 {
-    cin >> n;
-    for(i = 2; i <= n; i ++)
+
+    cin >> n >> k;
+
+    for(int i=1;i<=n;i++)
     {
-        prim = true;
-        for(d = 2; d * d <= i; d ++)
-        if(i % d == 0)
+        cin >> x;
+        int c=1;
+        while(x!=0)
         {
-            prim = false;
-            break;
+            if(x%k>1)
+            {
+                c=0;
+                break;
+            }
+            x/=k;
         }
-        if(prim) cout << i << " ";
+        if(c) nr++;
     }
+
+    cout << nr;
+
     return 0;
+
 }
