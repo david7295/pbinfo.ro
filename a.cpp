@@ -1,49 +1,43 @@
-#include <iostream>
-
-using namespace std;
-
-int n, S, i, j, p[1002], imin, imax, M, ping, dif, difmax;
-
-int main()
+void Prescurtat(char s[])
 
 {
 
-   cin >> n >> S;
+   char w[100], *p, sep[]=" ", c1[]="COLEGIUL", c2[]="LICEUL", c3[]="NATIONAL", c4[]="TEORETIC";
 
-   for (i=1; i<=n; ++i)
+   int n;
 
-       cin >> p[i];
+     p=strtok(s,sep); w[0]='\0';
 
-   difmax=p[2]-p[1]; imin=1; imax=2;
-
-   for (i=1; i<n; ++i)
+   while (p)
 
    {
 
-       for (j=i+1; j<=n; ++j)
+       n=strlen(p);
+
+       if (p[n-1]!='.') strcat(w,p);
+
+       else
 
        {
 
-           dif=p[j]-p[i];
+           p[n-1]='\0';
 
-           if (dif>difmax)
+           if (strstr(c1,p)) strcat(w,c1);
 
-           {
+           if (strstr(c2,p)) strcat(w,c2);
 
-               difmax=dif;
+           if (strstr(c3,p)) strcat(w,c3);
 
-               imin=i; imax=j;
-
-           }
+           if (strstr(c4,p)) strcat(w,c4);
 
        }
 
+       p=strtok(NULL, sep);
+
+       if (p) strcat(w, " ");
+
    }
 
-   ping=S/p[imin];
-
-   M=S%p[imin] + ping*p[imax];
-
-   cout << M;
+   strcpy(s,w);
 
 }
