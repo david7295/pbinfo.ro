@@ -1,45 +1,23 @@
 #include <iostream>
 
-#include <fstream>
-
 using namespace std;
-
-ifstream f("lungime.in");
-
-ofstream g("lungime.out");
-
-int i, n, L, num, vc[100], primaap[100], lung;
 
 int main()
 
 {
 
-   f >> n;
+   int N; cin >> N;
 
-   for (i=1; i<=n; ++i)
+   for (int i = 1; i<= N; i++)
 
    {
 
-       f >> num;
+       unsigned long long x; cin  >> x;
 
-       if (vc[num]==0)
-
-       {
-
-           vc[num]=1; primaap[num]=i;        }
-
-       else
-
-       {
-
-           lung=i-primaap[num]+1;
-
-           if (lung>L) L=lung;
-
-       }
+       cout << x%7 << '\n';
 
    }
 
-   g << L;
+   return 0;
 
 }
