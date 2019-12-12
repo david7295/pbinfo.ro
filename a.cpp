@@ -1,43 +1,39 @@
-void Prescurtat(char s[])
+#include <iostream>
+
+#include <fstream>
+
+using namespace std;
+
+ifstream f("lungime1.in");
+
+ofstream g("lungime1.out");
+
+int n, L=1, i, num, len, a[100001], ind[100001];
+
+int main()
 
 {
 
-   char w[100], *p, sep[]=" ", c1[]="COLEGIUL", c2[]="LICEUL", c3[]="NATIONAL", c4[]="TEORETIC";
+   f >> n;
 
-   int n;
 
-     p=strtok(s,sep); w[0]='\0';
-
-   while (p)
+   for (i=1; i<=n; ++i)
 
    {
 
-       n=strlen(p);
+       f >> num;
 
-       if (p[n-1]!='.') strcat(w,p);
+       if (ind[num]==0 ) {ind[num]=i;}
 
-       else
 
-       {
+       len=i-ind[num]+1;
 
-           p[n-1]='\0';
+       ++a[num];
 
-           if (strstr(c1,p)) strcat(w,c1);
-
-           if (strstr(c2,p)) strcat(w,c2);
-
-           if (strstr(c3,p)) strcat(w,c3);
-
-           if (strstr(c4,p)) strcat(w,c4);
-
-       }
-
-       p=strtok(NULL, sep);
-
-       if (p) strcat(w, " ");
+       if (len>L) {L=len; }
 
    }
 
-   strcpy(s,w);
+   g << L;
 
 }
