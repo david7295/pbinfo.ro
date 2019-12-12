@@ -4,11 +4,11 @@
 
 using namespace std;
 
-ifstream f("lungime1.in");
+ifstream f("lungime.in");
 
-ofstream g("lungime1.out");
+ofstream g("lungime.out");
 
-int n, L=1, i, num, len, a[100001], ind[100001];
+int i, n, L, num, vc[100], primaap[100], lung;
 
 int main()
 
@@ -16,21 +16,27 @@ int main()
 
    f >> n;
 
-
    for (i=1; i<=n; ++i)
 
    {
 
        f >> num;
 
-       if (ind[num]==0 ) {ind[num]=i;}
+       if (vc[num]==0)
 
+       {
 
-       len=i-ind[num]+1;
+           vc[num]=1; primaap[num]=i;        }
 
-       ++a[num];
+       else
 
-       if (len>L) {L=len; }
+       {
+
+           lung=i-primaap[num]+1;
+
+           if (lung>L) L=lung;
+
+       }
 
    }
 
