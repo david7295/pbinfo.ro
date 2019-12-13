@@ -1,53 +1,51 @@
-#include <iostream>
-#include <cstring>
-#include <cstdio>
-#include <cstdlib>
-#include <cctype>
+#include <fstream>
 
 using namespace std;
-int i,contor=0,contor2=0,k=0;
-char a;
-string condensat,necondensat;
-int main()
-{
-    cin>>condensat;
-     for(i=0;i<condensat.size();i++)
-     {
-         if(condensat[i]=='(')
-            contor++;
-         if(condensat[i]==')')
-            contor++;
-     }
-     int pozitii[contor];
-     for(i=0;i<condensat.size();i++)
-     {
-         if(condensat[i]=='(')
-         {
-             pozitii[contor2]=i;
-             contor2++;
-         }
-         if(condensat[i]==')')
-         {
-             pozitii[contor2]=i;
-             contor2++;
-         }
-     }
-     for(i=0;i<contor/2;i++)
-     {
-         if(isdigit(condensat[pozitii[k+1]+1]))
-         {
-             string a=condensat.substr(pozitii[k+1]+1,1);
-             for(int j=0;j<atoi(a.c_str());j++)
-             {
-                 necondensat+=condensat.substr(pozitii[k]+1,pozitii[k+1]-pozitii[k]-1);
-             }
-         }
-         else
-         {
-             necondensat+=condensat.substr(pozitii[k]+1,pozitii[k+1]-pozitii[k]-1);
-         }
-         k+=2;
-     }
-     cout<<necondensat;
-    return 0;
+
+int v[100001];
+
+int main(){
+
+int n;
+
+   ifstream fin("ursulet.in");
+
+   ofstream fout("ursulet.out");
+
+   
+
+   fin >> n;
+
+   for(int i = 1; i <= n; i++){
+
+    fin >> v[i];
+
+   }
+
+   fin.close();
+
+   int max = -1, mb = 0, me = 0, b = 0, e = 0, s = 0;
+
+   for(int i = 1; i <= n; i++){
+
+       if(s < 0) {s = v[i];b = i;e = i;}
+
+       else {s += v[i]; e = i;}
+
+       if(s > max){
+
+        max = s;
+
+           mb = b;
+
+           me = e;
+
+       }
+
+   }
+
+   fout << max << '\n' << mb << ' ' << me;
+
+   fout.close();
+
 }
