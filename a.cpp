@@ -2,50 +2,44 @@
 
 using namespace std;
 
-int v[100001];
+int f[1000000];
 
 int main(){
 
-int n;
+int n,x, m= 0;
 
-   ifstream fin("ursulet.in");
+ifstream fin("mmult.in");
 
-   ofstream fout("ursulet.out");
+ofstream fout("mmult.out");
 
-   
+fin>>n;
 
-   fin >> n;
+for(int i = 0; i < n; i++){
 
-   for(int i = 1; i <= n; i++){
+fin >> x;
 
-    fin >> v[i];
+if(x > m) m = x;
 
-   }
+f[x]++;
 
-   fin.close();
+}
 
-   int max = -1, mb = 0, me = 0, b = 0, e = 0, s = 0;
+fin.close();
 
-   for(int i = 1; i <= n; i++){
+int r = f[1];
 
-       if(s < 0) {s = v[i];b = i;e = i;}
+int prev = f[1];
 
-       else {s += v[i]; e = i;}
+for(int i = 2; i <= m; i++){
 
-       if(s > max){
+if(f[i] > prev){r = -1; break;}
 
-        max = s;
+prev = f[i];
 
-           mb = b;
+}
 
-           me = e;
+fout << r;
 
-       }
-
-   }
-
-   fout << max << '\n' << mb << ' ' << me;
-
-   fout.close();
+fout.close();
 
 }
