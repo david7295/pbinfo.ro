@@ -1,36 +1,31 @@
-#include <bits/stdc++.h>
-using namespace std;
-int v[100005], n, x, y, nr = 1, i, p, k, lmax;
-int main()
-{
-   ifstream f("sir6.in");
-   ofstream g("sir6.out");
-   f >> p >> n;
-   if(n == 1) lmax = 1;
-   f >> y;
-   v[++ k] = y;
-   for(i = 2; i <= n; i ++)
-     {
-         f >> x;
-         if(x == y)
-         {
-             nr ++;
-             if(nr > lmax) lmax = nr;
-         }
-          else
-         {
-              v[++ k] = nr;
-              v[++ k] = x;
-              nr = 1;
-         }
-         y = x;
-     }
-     v[++ k] = nr;
-     if(p == 1) g << lmax;
-     if(p == 2)
-     {
-         for(i = 1; i <= k; i ++)
-          g << v[i] << " ";
-     }
-    return 0;
+#include <iostream>
+using namespace std;
+int main() {
+  int n,Z,A[201][201],S=0;
+  cin>>n>>Z;
+  for(int i=1;i<=n;i++) 
+    for(int j=1;j<=n;j++) 
+      cin>>A[i][j];
+  if(Z==1)
+    for(int i=1;i<=n;i++)
+      for(int j=1;j<=n;j++)
+        if(i<j&&i+j<n+1)
+          S+=A[i][j];
+  if(Z==2) 
+    for(int i=1;i<=n;i++) 
+      for(int j=1;j<=n;j++)
+        if(i<j&&i+j>n+1)
+          S+=A[i][j];
+  if(Z==3)
+    for(int i=1;i<=n;i++)
+      for(int j=1;j<=n;j++)
+        if(i>j&&i+j>n+1) 
+          S+=A[i][j];
+  if(Z==4)
+    for(int i=1;i<=n;i++)
+      for(int j=1;j<=n;j++)
+        if(i>j&&i+j<n+1)
+          S+=A[i][j];
+  cout<<S; 
+  return 0;
 }
