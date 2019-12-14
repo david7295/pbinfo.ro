@@ -1,28 +1,23 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cmath>
 using namespace std;
-int n, i, t, aux, v[100005];
-int main()
-{
-    cin >> n;
-    v[0] = 1;
-    v[1] = 1;
-    n = n * (n-1) / 2;
-    for( ; n; -- n)
-    {
-        t = 0;
-        for(i = 1; i <= v[0]; i ++)
-        {
-            aux = v[i] * 3 + t;
-            v[i] = aux % 10;
-            t = aux / 10;
-        }
-        while(t)
-        {
-            v[ ++v[0] ] = t % 10;
-            t = t / 10;
-        }
-    }
-    for(i = v[0]; i; -- i)
-        cout << v[i];
-    return 0;
+
+long int factorial(int n){
+long int i,fact=1;
+for(i=2;i<=n;i++){
+fact=fact*i;
+}
+return fact;
+}
+int main(){
+long int n,p,i,k=1,r;
+cin>>n>>p;
+int v[n+1];
+if(n%p==0){
+cout<<(pow(n/p,p))%100019;
+}
+else if((n+1)%p==0){
+cout<<(pow(n/p+1,p-1)*factorial(n/p))%100019;
+}
+return 0;
 }
