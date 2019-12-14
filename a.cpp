@@ -1,36 +1,47 @@
-#include<cstdio>
-#define oo 0x3f3f3f3f
+#include <iostream>
+
+#include <bitset>
+
+#include <fstream>
+
 using namespace std;
 
-int n, x, bestSum, sumSoFar, Begin, End, i, idx;
+int b[100001];
+
+int n, i, j, secv, secvmax, nr1, nrswap,bit, rep;
 
 int main()
+
 {
-    FILE *fin, *fout;
-    fin = fopen("secvsummax.in","r");
-    fout = fopen("secvsummax.out","w");
-    fscanf(fin,"%d",&n);
-    sumSoFar = 0;
-    bestSum = -oo;
-    Begin = End = idx = 1;
-    for(i=1; i<=n; i++)
-    {
-        fscanf(fin,"%d",&x);
-        if(sumSoFar < 0)
-        {
-            sumSoFar = x;
-            idx = i;
-        }
-        else sumSoFar += x;
-        if(sumSoFar > bestSum)
-        {
-            bestSum = sumSoFar;
-            Begin = idx;
-            End = i;
-        }
-    }
-    fprintf(fout,"%d %d\n",Begin,End);
-    fclose(fin);
-    fclose(fout);
-    return 0;
+
+  cin >> n;
+
+  for (i=0; i<n; ++i)
+
+  {
+
+      cin >> b[i];
+
+      nr1+=b[i];
+
+  }
+
+  for (j=0; j<nr1; ++j) secv+=b[j];
+
+  secvmax=secv;
+
+  for (i=nr1; i<n; ++i)
+
+  {
+
+      secv=secv-b[i-nr1]+b[i];
+
+      if (secv>secvmax) secvmax=secv;
+
+  }
+
+  nrswap=nr1-secvmax;
+
+  cout << nrswap;
+
 }
