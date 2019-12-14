@@ -1,41 +1,39 @@
 #include <iostream>
 
-#include <fstream>
-
 using namespace std;
 
-ifstream f("sumesecv.in");
-
-ofstream g("sumesecv.out");
-
-int v[101], n, i, j, m, s, k, b;
+long long v[100001], n, i, j, m, s, k, b, smax;
 
 int main()
 
 {
 
-   f >> n;
+   cin >> n;
 
    for (i=1; i<=n; ++i)
 
-       f >> v[i];
+       cin >> v[i];
 
-   f >> m;
+   for (i=2; i<=n; ++i)
+
+           v[i]=v[i]+v[i-1];
+
+   cin >> m;
 
    for (k=1; k<=m; ++k)
 
    {
 
-       f >> i >> j;
+       cin >> i >> j;
 
-       s=0;
+       if (i>j) { swap(i,j);}
 
-       for (b=i; b<=j; ++b)
+       s=v[j]-v[i-1];
 
-           s=s+v[b];
-
-       g << s << " ";
+       if (s>smax) smax=s;
 
    }
+
+   cout << smax;
 
 }
