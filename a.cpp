@@ -1,30 +1,26 @@
-#include <iostream>
-#include <fstream>
-using namespace std;
+#include <iostream>
 
-int main(){
-int L,H,X,Y,latime,inaltime,nr_patrate=0;
-ifstream fip("patrate1.in");
-ofstream fop("patrate1.out");
-fip>>L>>H>>X>>Y;
-latime=X/L;
-inaltime=Y/H;
-while(latime>0||inaltime>0){
-if(latime>0&&inaltime>0){
-latime--;
-inaltime--;
-nr_patrate++;
+using namespace std;
+
+const int MAX_N = 10000;
+
+int n, x, y;
+bool apartine[1 + MAX_N] ;
+
+void genereaza(int b) {
+  if (b <= n && !apartine[b]) {
+    apartine[b] = true;
+    genereaza(b + x);
+    genereaza(b + y);
+  }
 }
-else if(latime>0){
-latime--;
-nr_patrate++;
-}
-else if(inaltime>0){
-inaltime--;
-nr_patrate++;
-}
-}
-nr_patrate++;
-fop<<nr_patrate;
-return 0;
+
+int main() {
+  int a;
+  cin >> n >> a >> x >> y;
+  genereaza(a);
+  for (int i = 0; i <= n; i++)
+    if (apartine[i])
+      cout << i << ' ';
+  return 0;
 }
