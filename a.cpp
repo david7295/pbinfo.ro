@@ -1,17 +1,41 @@
 #include <iostream>
+
+#include <fstream>
+
 using namespace std;
-int main(){  
-  int n,k,x,nrelimp=0,c=1;
-  cin >> n >> k;   
-  for (int i = 1; i<=n; i++) {  
-    cin >> x;  
-    if (x%2)      
-      nrelimp++;   
-    if (nrelimp > k)  { 
-      c++;    
-      nrelimp = 1;   
-    }   
-  }  
-  cout << c;
-  return 0;
+
+ifstream f("sumesecv.in");
+
+ofstream g("sumesecv.out");
+
+int v[101], n, i, j, m, s, k, b;
+
+int main()
+
+{
+
+   f >> n;
+
+   for (i=1; i<=n; ++i)
+
+       f >> v[i];
+
+   f >> m;
+
+   for (k=1; k<=m; ++k)
+
+   {
+
+       f >> i >> j;
+
+       s=0;
+
+       for (b=i; b<=j; ++b)
+
+           s=s+v[b];
+
+       g << s << " ";
+
+   }
+
 }
