@@ -1,26 +1,36 @@
-#include <iostream>
-using namespace std;
+#include<cstdio>
+#define oo 0x3f3f3f3f
+using namespace std;
 
-int main(){
+int n, x, bestSum, sumSoFar, Begin, End, i, idx;
 
-int n,m,st,dr,X,i;
-cout<<"Introduceti lungimea vectorului si nr de operatii: ";
-cin>>n>>m;
-int v[n+1];
-for(i=1;i<=n;i++){
-v[i]=0;
-}
-cout<<"Acum introduceti perechile stanga,dreapta,valoare aditionala X\n";
-while(m>0){
-cin>>st>>dr>>X;
-for(i=st;i<=dr;i++){
-v[i]=v[i]+X;
-}
-m--;
-}
-cout<<"Vectorul dupa operatii: \n";
-for(i=1;i<=n;i++){
-cout<<v[i]<<" ";
-}
-return 0;
+int main()
+{
+    FILE *fin, *fout;
+    fin = fopen("secvsummax.in","r");
+    fout = fopen("secvsummax.out","w");
+    fscanf(fin,"%d",&n);
+    sumSoFar = 0;
+    bestSum = -oo;
+    Begin = End = idx = 1;
+    for(i=1; i<=n; i++)
+    {
+        fscanf(fin,"%d",&x);
+        if(sumSoFar < 0)
+        {
+            sumSoFar = x;
+            idx = i;
+        }
+        else sumSoFar += x;
+        if(sumSoFar > bestSum)
+        {
+            bestSum = sumSoFar;
+            Begin = idx;
+            End = i;
+        }
+    }
+    fprintf(fout,"%d %d\n",Begin,End);
+    fclose(fin);
+    fclose(fout);
+    return 0;
 }
