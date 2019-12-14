@@ -1,39 +1,26 @@
-#include <iostream>
+#include <iostream>
+using namespace std;
 
-using namespace std;
+int main(){
 
-long long v[100001], n, i, j, m, s, k, b, smax;
-
-int main()
-
-{
-
-   cin >> n;
-
-   for (i=1; i<=n; ++i)
-
-       cin >> v[i];
-
-   for (i=2; i<=n; ++i)
-
-           v[i]=v[i]+v[i-1];
-
-   cin >> m;
-
-   for (k=1; k<=m; ++k)
-
-   {
-
-       cin >> i >> j;
-
-       if (i>j) { swap(i,j);}
-
-       s=v[j]-v[i-1];
-
-       if (s>smax) smax=s;
-
-   }
-
-   cout << smax;
-
+int n,m,st,dr,X,i;
+cout<<"Introduceti lungimea vectorului si nr de operatii: ";
+cin>>n>>m;
+int v[n+1];
+for(i=1;i<=n;i++){
+v[i]=0;
+}
+cout<<"Acum introduceti perechile stanga,dreapta,valoare aditionala X\n";
+while(m>0){
+cin>>st>>dr>>X;
+for(i=st;i<=dr;i++){
+v[i]=v[i]+X;
+}
+m--;
+}
+cout<<"Vectorul dupa operatii: \n";
+for(i=1;i<=n;i++){
+cout<<v[i]<<" ";
+}
+return 0;
 }
