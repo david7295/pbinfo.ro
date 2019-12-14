@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -6,124 +6,70 @@ int main()
 
 {
 
-   int n = 19, nr = 3;  //citeste din fisier N si NR
+ifstream fin("key.in");
 
-   //Citeste cele N numere de pe linia 2
+ofstream fout("key.out");
 
-   int v[n] = {1, 0, -1, 0, -1, 1, 0, -1, 1, 1, -1, 1, 0, 1, -1, 1, 0, 1, -1};
+int p, n, sum = 0, v[4]{}, cost;
 
-   int ap[100];
+string mk, s;
 
-   
+fin >> p >> mk >> n;
 
-   //initializam elementele din vectorul de numarare cu 0
+do
 
-   for(int j=0;j<100;j++)
+{
 
-   {
+ fin >> s >> cost;
 
-       ap[j] =0;
+ if(s == mk)
 
-   }
+  ++v[3];
 
-   //transformam din binare in zecimale
+ else if(s[0] == mk[0] && s[1] == mk[1] ||
 
-   string nrTemp="";
+   s[0] == mk[0] && s[2] == mk[2] ||
 
-   for(int i = 0;i<n;i++)
+   s[1] == mk[1] && s[2] == mk[2])
 
-   {
+ {
 
-       if(v[i] != -1)
+  ++v[2];
 
-           nrTemp+=v[i];
+  sum += cost / 3;
 
-       else
+ }
 
-       {
+ else if(s[0] == mk[0] || s[1] == mk[1] || s[2] == mk[2])
 
-           
+ {
 
-           int cnt = nrTemp.length()-1;
+  ++v[1];
 
-           int nr = 0;
+  sum += cost / 3 * 2;
 
-           int pow = 1;
+ }
 
-           
+ else
 
-           for(int z = nrTemp.length()-1;z>=0;z--)
+ {
 
-           {
+  ++v[0];
 
-               pow = 1;
+  sum += cost;
 
-               for(int j =0;j<cnt-z;j++)
+ }
 
-                       pow*=2;
+} while(--n);
 
-                       
+if(p == 1)
 
-               nr+=(int)(nrTemp[z]) * pow;
+ fout << v[0] << ' ' << v[1] << ' ' << v[2] << ' ' << v[3];
 
-           }
+else if(sum == 0)
 
-           ap[nr] ++;
+ fout << "GRATIS";
 
-           nrTemp="";
-
-       }
-
-   }
-
-   
-
-   //vedem care este numarul maxim de aparitii
-
-   int maxAparitie=0;
-
-   
-
-   for(int j=100;j>=0;j--)
-
-       {
-
-          if(maxAparitie < ap[j])
-
-               maxAparitie = ap[j];
-
-       }
-
-   
-
-   //Afisam primele nr numere descrescator dupa nr de aparitie si descrescator daca au acelasi nr de aparitie
-
-   int cnt=0;
-
-   for(int i = maxAparitie;i>=1 && cnt<nr;i--)
-
-  {
-
-       for(int j=99;j>=0 && cnt<nr;j--)
-
-       {
-
-          if(ap[j] == i)
-
-          {
-
-               cout<<j<<" "<<ap[j]<<endl;
-
-               cnt++;
-
-          }
-
-       }
-
-   }
-
-   
-
-   return 0;
+else fout << sum;
 
 }
