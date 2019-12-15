@@ -1,24 +1,34 @@
-#include<iostream>
-#include<fstream>
+#include <bits/stdc++.h>
+#define nmax 11111130
+using namespace std;
+long long i, j, n, k, x, k1;
+int v[nmax/9];
+bool w[nmax];
+struct nod
+{
+   int xx;
+   int yy;
+} pr[100000];
+int main()
+{
+    cin >> n;
+    w[0] = w[1] = true;
+    for(i = 2; i <= n/2; i ++)
+      if(!w[i])
+        {
+            v[++ k] = i;
+            for(j = i * i; j <= n; j = i + j)
+              w[j] = true;
+        }
+    for(i = 2; i <= k; i ++)
+      {
+          x = n - v[i];
+          if(!w[x]) pr[++ k1].xx = v[i], pr[k1].yy = x;
+      }
+   for(i = 1; i <= k1; i ++)
+    cout << pr[i].xx << " " << pr[i].yy << "\n";
+   for(i = k1; i >= 1; i --)
+    cout << pr[i].yy << " " << pr[i].xx << "\n";
 
-using namespace std;
-
-ifstream in("max_suma.in");
-ofstream out("max_suma.out");
-
-int main() {
-  int n,m,a[50],maxim,suma;
-  in>>n>>m;
-  for (int cont=1; cont<=n;cont++ ){ 
-    for  (int i=0; i<m; i++){      
-      in>>a[i];}
-  suma = 0;
-  maxim = a[0];
-  for (int i=0; i<m; i++){   
-    suma+= a[i];   
-  if (a[i]>maxim)     
-    maxim = a[i];
- }
- out<<suma<<" "<<maxim<<endl;
-  }
+   return 0;
 }
