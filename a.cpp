@@ -1,44 +1,34 @@
 #include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <string>
-#include <math.h>
-
 using namespace std;
-
-long i, n, t, c, copii=0, total=0, tmax=0, tmin=100, diferenta;
-
-int main(){
-    ifstream filein;
-    filein.open("dans.in");
-
-// citeste numarul de trupe
-    filein >> n;
-
-    ofstream fileout;
-    fileout.open("dans.out");
-
-// citeste date (timp, copii)
-    for(i = 1; i <= n; i++){
-        filein >> t >> c;
-        copii=copii+c;
-        total=total+t;
-        if(t>tmax)tmax=t;
-        if(t<tmin)tmin=t;
-
-        }
-
-    diferenta=sqrt((90-total)*(90-total));
-
-//afiseaza rezultate
-    if(total>90){
-        fileout << "NU" << endl;
-    }
-    else fileout << "DA" << endl;
-    fileout << diferenta << endl;
-    fileout << copii << endl;
-    fileout << tmax << " " << tmin;
-
-filein.close();
-fileout.close();
+int a,b,x;
+unsigned long long int y,z,numarator,numitor;
+int main()
+{
+cin>>a>>b;
+int vi,vf;
+if(b%a==0)
+vi=b/a-1,vf=3*(b/a);
+else
+vi=(int)(b/a)-1,vf=(int)(3*(b/a+1));
+int ok=1;
+for(x=vi;x<=vf;++x)
+for(z=x;z<=30000;++z)
+{
+numarator=b*x*z;
+numitor=a*x*z-b*z-b*x;
+if(numitor>0&&numarator%numitor==0)
+{
+y=numarator/numitor;
+if(y>=z)
+{
+ok=0;
+cout<<x<<' '<<z<<' '<<y<<'\n';
+}
+else
+break;
+}
+}
+if(ok)
+cout<<"NU ARE SOLUTII";
+return 0;
 }
