@@ -1,57 +1,44 @@
-#include <bits/stdc++.h>
-
- 
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <math.h>
 
 using namespace std;
 
-ifstream fin("memory009.in");
+long i, n, t, c, copii=0, total=0, tmax=0, tmin=100, diferenta;
 
-ofstream fout("memory009.out");
+int main(){
+    ifstream filein;
+    filein.open("dans.in");
 
-int n, m, nr;
+// citeste numarul de trupe
+    filein >> n;
 
-short int a[31];
+    ofstream fileout;
+    fileout.open("dans.out");
 
- 
+// citeste date (timp, copii)
+    for(i = 1; i <= n; i++){
+        filein >> t >> c;
+        copii=copii+c;
+        total=total+t;
+        if(t>tmax)tmax=t;
+        if(t<tmin)tmin=t;
 
-int main()
+        }
 
-{
+    diferenta=sqrt((90-total)*(90-total));
 
-   int i;
+//afiseaza rezultate
+    if(total>90){
+        fileout << "NU" << endl;
+    }
+    else fileout << "DA" << endl;
+    fileout << diferenta << endl;
+    fileout << copii << endl;
+    fileout << tmax << " " << tmin;
 
-   fin>>n>>m;
-
-   for(i=1;i<=n;i++)
-
-   {
-
-       fin>>nr;
-
-       a[nr]=1;
-
-   }
-
-   for(i=1;i<=m;i++)
-
-   {
-
-       fin>>nr;
-
-       if(a[nr]==1)
-
-           a[nr]=2;
-
- 
-
-   }
-
-   for(i=0;i<31;i++)
-
-       if(a[i]==2)
-
-           fout<<i<<" ";
-
-   return 0;
-
+filein.close();
+fileout.close();
 }
