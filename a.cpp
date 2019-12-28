@@ -1,34 +1,39 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-int a,b,x;
-unsigned long long int y,z,numarator,numitor;
+inline int Prim(int x)
+{
+    int i;
+    if(x<=1)return 0;
+    if(x==2)return 1;
+    if(x%2==0)return 0;
+    for(i=3;i*i<=x;i++)
+        if(x%i==0)return 0;
+    return 1;
+}
+inline int Verificare(int x)
+{
+    int i,mx=0;
+    if(Prim(x)==1)
+        return x;
+    for(i=2;i*i<x;i++)
+        if(x%i==0 and Prim(i)==1)
+        {
+            mx=max(mx,i);
+            if(Prim(x/i)==1)
+                mx=max(mx,x/i);
+        }
+        if(i*i==x and Prim(i)==1)
+            mx=max(mx,i);
+    return mx;
+}
 int main()
 {
-cin>>a>>b;
-int vi,vf;
-if(b%a==0)
-vi=b/a-1,vf=3*(b/a);
-else
-vi=(int)(b/a)-1,vf=(int)(3*(b/a+1));
-int ok=1;
-for(x=vi;x<=vf;++x)
-for(z=x;z<=30000;++z)
-{
-numarator=b*x*z;
-numitor=a*x*z-b*z-b*x;
-if(numitor>0&&numarator%numitor==0)
-{
-y=numarator/numitor;
-if(y>=z)
-{
-ok=0;
-cout<<x<<' '<<z<<' '<<y<<'\n';
-}
-else
-break;
-}
-}
-if(ok)
-cout<<"NU ARE SOLUTII";
-return 0;
+    int i,x,n,sol=0;
+    cin>>n;
+    for(i=1;i<=n;i++)
+    {
+        cin>>x;
+        sol+=Verificare(x);
+    }
+    cout<<sol<<"\n";
 }
