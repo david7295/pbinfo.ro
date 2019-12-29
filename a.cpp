@@ -1,39 +1,201 @@
-#include <bits/stdc++.h>
+#include <iostream>
+
+#include <stack>
+
 using namespace std;
-inline int Prim(int x)
-{
-    int i;
-    if(x<=1)return 0;
-    if(x==2)return 1;
-    if(x%2==0)return 0;
-    for(i=3;i*i<=x;i++)
-        if(x%i==0)return 0;
-    return 1;
-}
-inline int Verificare(int x)
-{
-    int i,mx=0;
-    if(Prim(x)==1)
-        return x;
-    for(i=2;i*i<x;i++)
-        if(x%i==0 and Prim(i)==1)
-        {
-            mx=max(mx,i);
-            if(Prim(x/i)==1)
-                mx=max(mx,x/i);
-        }
-        if(i*i==x and Prim(i)==1)
-            mx=max(mx,i);
-    return mx;
-}
-int main()
-{
-    int i,x,n,sol=0;
-    cin>>n;
-    for(i=1;i<=n;i++)
-    {
-        cin>>x;
-        sol+=Verificare(x);
-    }
-    cout<<sol<<"\n";
+
+struct punct{
+
+   int i,j;
+
+};
+
+int main() {
+
+   int n;
+
+   int a[100][100];
+
+   stack<punct> stiva;
+
+   cout << "n=";
+
+   cin >> n;
+
+   for (int i = 0; i < n; i++)
+
+       for (int j = 0; j < n; j++) {
+
+           cout << "a[" << i << "][" << j << "]=";
+
+           cin >> a[i][j];
+
+       }
+
+   cout << "Matricea initiala:" << endl;
+
+   for (int i = 0; i < n; i++) {
+
+       for (int j = 0; j < n; j++)
+
+           cout << a[i][j] << " ";
+
+       cout << endl;
+
+   }
+
+   int k=2;
+
+   bool sem=true;
+
+   for(int i=0; i<n && sem; i++)
+
+       for(int j=0; j<n && sem; j++)
+
+           if(a[i][j]==1)
+
+           {
+
+               struct punct p;
+
+               p.i=i;
+
+               p.j=j;
+
+               stiva.push(p);
+
+               cout<<"!!!"<<i<<" "<<j<<endl;
+
+               sem= false;
+
+           }
+
+   sem=true;
+
+   while(sem)
+
+   {
+
+       sem = false;
+
+       while(!stiva.empty())
+
+       {
+
+           struct punct p = stiva.top();
+
+           a[p.i][p.j]=k;
+
+           struct punct p2;
+
+           stiva.pop();
+
+           if(p.i>=0 && p.i<n && p.j>=0 && p.j<n)
+
+           {
+
+               if(a[p.i][p.j+1]==1 && p.j+1<n)
+
+               {
+
+                   a[p.i][p.j+1] = k;
+
+                   p2.i=p.i;
+
+                   p2.j=p.j+1;
+
+                   stiva.push(p2);
+
+               }
+
+               if(a[p.i][p.j-1]==1 && p.j-1>=0)
+
+               {
+
+                   a[p.i][p.j-1] = k;
+
+                   p2.i=p.i;
+
+                   p2.j=p.j-1;
+
+                   stiva.push(p2);
+
+               }
+
+               if(a[p.i+1][p.j]==1 && p.i+1<n)
+
+               {
+
+                   a[p.i+1][p.j] =k;
+
+                   p2.i=p.i+1;
+
+                   p2.j=p.j;
+
+                   stiva.push(p2);
+
+               }
+
+               if(a[p.i-1][p.j]==1 && p.i-1>=0)
+
+               {
+
+                   a[p.i-1][p.j] =k;
+
+                   p2.i=p.i-1;
+
+                   p2.j=p.j;
+
+                   stiva.push(p2);
+
+               }
+
+           }
+
+       }
+
+       bool sem2=true;
+
+       for(int i=0; i<n && sem2; i++)
+
+           for(int j=0; j<n && sem2; j++)
+
+               if(a[i][j]==1)
+
+               {
+
+                   struct punct p;
+
+                   p.i=i;
+
+                   p.j=j;
+
+                   stiva.push(p);
+
+                   sem2 = false;
+
+                   sem = true;
+
+                   k++;
+
+               }
+
+   }
+
+   cout << "Matricea finala:" << endl;
+
+   for (int i = 0; i < n; i++) {
+
+       for (int j = 0; j < n; j++)
+
+           cout << a[i][j] << " ";
+
+       cout << endl;
+
+   }
+
+   cout<<"Numarul de grupuri este: "<<k-1<<endl;
+
+   return 0;
+
 }
